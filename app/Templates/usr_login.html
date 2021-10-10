@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block contenido_1 %}
+<template>
+    <v-card class="d-flex align-center pa-2" elevation=15 width="350">
+      <v-card-title>Acceso a la Aplicación</v-card-title>    
+          <form name="FormularioLogin" @submit.prevent="submit">
+
+              <v-text-field
+                v-model="user_name"
+                :counter="25"
+                :error-messages="errors"
+                solo
+                type="email"
+                label="Nombre de Usuario"
+                id="user_name"
+                required
+                prepend-inner-icon="mdi-account"
+              ></v-text-field>
+
+              <v-text-field
+                v-model="usrpassword"
+                :error-messages="errors"
+                solo
+                type="password"
+                label="Clave de Acceso"
+                required
+                prepend-inner-icon="mdi-lock"
+              ></v-text-field>
+              <v-img src="{{ url_for('static', filename='img/ver.png') }}" width=50 height=50 onmouseover="verClave();" onmouseout="ocultarClave()"></v-img>
+     
+            <v-btn
+              class="mr-4"
+              type="submit"
+              :disabled="invalid"
+            >
+              Acceder
+            </v-btn>
+            <v-btn @click="clear">
+              Salir
+            </v-btn>
+          </form>
+     
+    </v-card>
+ </template>
+<script>
+    export default {
+      data: () => ({
+        user_name: '',
+        usrpassword: '',
+      }),
+  
+      methods: {
+        submit () {
+          this.$refs.observer.validate()
+        },
+        clear () {
+          this.name = ''
+          this.email = ''
+          this.checkbox = null
+          this.$refs.observer.reset()
+        },
+      },
+    }
+  </script>
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen en quantumsdata.co, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block contenido_1 %}
+<template>
+    <v-card class="d-flex align-center pa-2" elevation=15 width="500">
+          <form name="FormularioLogin" @submit.prevent="submit">
+
+              <v-text-field
+                v-model="user_name"
+                :counter="25"
+                :error-messages="errors"
+                solo
+                type="email"
+                label="Nombre de Usuario"
+                id="user_name"
+                required
+                prepend-inner-icon="mdi-account"
+              ></v-text-field>
+
+
+              <v-text-field
+                v-model="usrpassword"
+                :error-messages="errors"
+                solo
+                type="password"
+                label="Clave de Acceso"
+                required
+                prepend-inner-icon="mdi-lock"
+              ></v-text-field>
+
+
+              <v-checkbox
+                v-model="checkbox"
+                :error-messages="errors"
+                value="1"
+                label="Option"
+                type="checkbox"
+                required
+              ></v-checkbox>
+
+      
+            <v-btn
+              class="mr-4"
+              type="submit"
+              :disabled="invalid"
+            >
+              Acceder
+            </v-btn>
+            <v-btn @click="clear">
+              Salir
+            </v-btn>
+          </form>
+     
+    </v-card>
+ </template>
+<script>
+    export default {
+      data: () => ({
+        name: 'aaaaaaa',
+        email: '',
+        checkbox: null,
+      }),
+  
+      methods: {
+        submit () {
+          this.$refs.observer.validate()
+        },
+        clear () {
+          this.name = ''
+          this.email = ''
+          this.checkbox = null
+          this.$refs.observer.reset()
+        },
+      },
+    }
+  </script>
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen en quantumsdata.co, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
