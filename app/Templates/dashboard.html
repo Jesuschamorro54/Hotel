@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+
+
+{% block contenido_1 %}
+<v-card class="d-flex align-center pa-2" flat height="250px" elevation=15>
+    <v-card-title>DashBoard Principal</v-card-title>
+    <v-card-text>
+        <v-container fluid>
+            <v-row class="d-flex align-center pt-3" justify="space-around" no-gutters>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                    <v-card class="px-2 py-2" max-width="315">
+                        <v-card-actions>
+                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded @click="adm_habitaciones">Habitaciones</v-btn>
+                        </v-card-actions>
+                    </v-card>   
+                </v-col>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                    <v-card class="px-2 py-2" max-width="315">
+                        <v-card-actions>
+                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded @click="adm_reservas">Reservas</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>  
+            </v-row>
+        </v-container>
+        <v-container fluid>
+            <v-row class="d-flex align-center mx-0 pt-1" justify="space-around" no-gutters>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                    <v-card class="px-2 py-2" max-width="315">
+                        <v-card-actions>
+                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded @click="adm_seguridad">Seguridad</v-btn>
+                        </v-card-actions>
+                    </v-card>   
+                </v-col>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                    <v-card class="px-2 py-2" max-width="315">
+                        <v-card-actions>
+                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded @click="adm_comentarios">Comentarios y Calificaciones</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>  
+            </v-row>
+        </v-container>
+
+    </v-card-text>
+</v-card>
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen en quantumsdata.co, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
