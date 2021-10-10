@@ -12,8 +12,6 @@ function validar()
 
     console.log(userNameInput.value + "-"+passWordInput.value+"-"+correoInput.value);
 
-
-
     if(userNameInput.value.length == 0 || userNameInput.value.length < 8)
     {
         //alert("El nombre de usuario debe tener mínimo 8 caracteres.");
@@ -39,20 +37,14 @@ function validar()
         swErrores=true;
     }
 
-
     if( swErrores==true)
     {
         return false;
     }
     else{
         return true;
-    }
-
-
-    
-
+    }  
 }
-
 
 function verClave()
 {
@@ -88,4 +80,36 @@ function ocultarVerClave()
         passWordInput.type="text";
     }
 }
- 
+
+
+function verClave_Log()
+{
+    console.log('Mostrar clave');
+
+    var passWordInput = document.formulariologin.usrpassword;
+    passWordInput.type="text";
+}
+
+function ocultarClave_Log()
+{
+    console.log('Ocultar clave');
+    var passWordInput = document.formulariologin.usrpassword;
+    passWordInput.type="password";
+}
+
+function ocultarVerClave_Log()
+{
+    var passWordInput = document.formulariologin.usrpassword;
+    var tipo = passWordInput.type;
+    console.log(tipo);
+    if(tipo=="text")
+    {
+        passWordInput.type="password";
+    }
+
+    if(tipo == "password")
+    {
+        passWordInput.type="text";
+    }
+}
+var userloggedIn = true
