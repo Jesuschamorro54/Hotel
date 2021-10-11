@@ -13,3 +13,7 @@ def dashboard():
 @main.route('/adm_seguridad/')
 def adm_seguridad():
     return render_template('adm_seguridad.html')
+
+@main.route('/admin_users/')
+def admin_users():
+    return render_template('admin_users.html')
