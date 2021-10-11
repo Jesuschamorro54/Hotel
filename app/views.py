@@ -13,3 +13,8 @@ def dashboard():
 @main.route('/adm_seguridad/')
 def adm_seguridad():
     return render_template('adm_seguridad.html')
+
+
+@main.route('/habitaciones/')
+def habitaciones():
+    return render_template('habitaciones.html')
