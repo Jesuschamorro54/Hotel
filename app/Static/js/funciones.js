@@ -50,14 +50,14 @@ function verClave()
 {
     console.log('Mostrar clave');
 
-    var passWordInput = document.FormularioRegistro.usrpassword;
+    var passWordInput = document.formularioregistro.usrpassword;
     passWordInput.type="text";
 }
 
 function ocultarClave()
 {
     console.log('Ocultar clave');
-    var passWordInput = document.FormularioRegistro.usrpassword;
+    var passWordInput = document.rormularioregistro.usrpassword;
     passWordInput.type="password";
 
     
@@ -65,7 +65,7 @@ function ocultarClave()
 
 function ocultarVerClave()
 {
-    var passWordInput = document.FormularioRegistro.usrpassword;
+    var passWordInput = document.formularioregistro.usrpassword;
     var tipo = passWordInput.type;
 
     console.log(tipo);

@@ -3,79 +3,88 @@
 {% block titulo %} Centara Grand Hotel {% endblock %}
 {% block tit_bar %} Centara Grand Hotel {% endblock %}
 {% block contenido_1 %}
-<template>
-    <v-card class="d-flex align-center pa-2" elevation=15 width="500">
-          <form name="FormularioLogin" @submit.prevent="submit">
 
-              <v-text-field
-                v-model="user_name"
-                :counter="25"
-                :error-messages="errors"
+<v-container fluid>
+  <v-row class="align-center pa-2" justify="center">
+    <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+      <v-card class="align-center pa-2" elevation=15 width="350">
+        <v-card-title>Acceso a la Aplicación</v-card-title>    
+          <form name="formularioregistro" @submit="submit" method="POST">
+            <v-text-field
+              name="user_name"
+              :counter="25"
+              solo
+              type="text"
+              label="Nombre del Usuario"
+              id="user_name"
+              required
+              prepend-inner-icon="mdi-account"
+              clearable
+            ></v-text-field>
+            <v-text-field
+              name="user_lastname"
+              :counter="25"
+              solo
+              type="text"
+              label="Apellido del Usuario"
+              id="user_lastname"
+              required
+              prepend-inner-icon="mdi-account"
+              clearable
+              ></v-text-field>
+            <v-text-field
+                name="email"
+                :counter="30"
                 solo
                 type="email"
-                label="Nombre de Usuario"
-                id="user_name"
+                label="Correo del Usuario"
+                id="email"
                 required
                 prepend-inner-icon="mdi-account"
+                clearable
               ></v-text-field>
 
-
               <v-text-field
-                v-model="usrpassword"
-                :error-messages="errors"
+                name="usrpassword"
                 solo
                 type="password"
                 label="Clave de Acceso"
                 required
-                prepend-inner-icon="mdi-lock"
-              ></v-text-field>
-
+                prepend-inner-icon="mdi-lock"           
+              >
+                <template v-slot:append-outer>
+                  <v-tooltip
+                    bottom
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on" onmouseover="verClave_Log();" onmouseout="ocultarClave_Log()">
+                        mdi-eye
+                      </v-icon>
+                    </template>
+                    Ver la Clave
+                  </v-tooltip>
+                </template>
+              
+              </v-text-field>
 
               <v-checkbox
-                v-model="checkbox"
-                :error-messages="errors"
-                value="1"
-                label="Option"
-                type="checkbox"
-                required
-              ></v-checkbox>
+              name="usr_checkbox"
+              value="1"
+              label="Aceptacion Politicas y Tratamiento de datos"
+              type="checkbox"
+              required
+            ></v-checkbox>
 
-      
-            <v-btn
-              class="mr-4"
-              type="submit"
-              :disabled="invalid"
-            >
-              Acceder
-            </v-btn>
-            <v-btn @click="clear">
-              Salir
-            </v-btn>
+            <v-divider class="py-3"></v-divider>
+
+            <v-btn class="mr-4" type="submit">Acceder</v-btn>
+            <v-btn  href="/">Salir</v-btn>
           </form>
-     
-    </v-card>
- </template>
-<script>
-    export default {
-      data: () => ({
-        name: 'aaaaaaa',
-        email: '',
-        checkbox: null,
-      }),
-  
-      methods: {
-        submit () {
-          this.$refs.observer.validate()
-        },
-        clear () {
-          this.name = ''
-          this.email = ''
-          this.checkbox = null
-          this.$refs.observer.reset()
-        },
-      },
-    }
-  </script>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+
 
 {% endblock %}
 {% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen en quantumsdata.co, son propiedad de sus respectivos dueños. {% endblock %}

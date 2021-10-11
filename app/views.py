@@ -10,10 +10,10 @@ def index():
 def login():
     if(request.method == 'POST'):
 
-        user_name= request.form['user_name']
-        usrpassword = request.form['usrpassword']
+        usr_email= request.form['usr_email']
+        usr_password = request.form['usrpassword']
 
-        if(user_name =='ricagome@mail.com' and usrpassword =='1234'):
+        if(usr_email =='ricagome@mail.com' and usr_password =='1234'):
 
             return render_template('dashboard.html')
 
@@ -21,6 +21,18 @@ def login():
 
 @main.route('/usr_registro/')
 def registro():
+    if(request.method == 'POST'):
+
+        usr_name       = request.form['usr_name']
+        usr_lastname   = request.form['usr_lastname']
+        usr_email      = request.form['usr_email']
+        usr_password   = request.form['usrpassword']
+        usr_checkbox   = request.form['usr_checkbox']
+
+        if(usr_checkbox == '0'):
+
+            return render_template('usr_login.html')
+
     return render_template('usr_registro.html')
 
 @main.route('/dashboard/')

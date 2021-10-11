@@ -11,12 +11,12 @@
         <v-card-title>Acceso a la Aplicación</v-card-title>    
           <form name="formulariologin" @submit="submit" method="POST">
               <v-text-field
-                name="user_name"
+                name="usr_email"
                 :counter="25"
                 solo
                 type="email"
                 label="Nombre de Usuario"
-                id="user_name"
+                id="usr_email"
                 required
                 prepend-inner-icon="mdi-account"
                 clearable
@@ -44,7 +44,7 @@
                 </template>
               
               </v-text-field>
-
+            <v-divider class="mx-4"></v-divider>
             <v-btn class="mr-4" type="submit">Acceder</v-btn>
             <v-btn href="/">Salir</v-btn>
           </form>
