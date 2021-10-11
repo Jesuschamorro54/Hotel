@@ -1,0 +1,42 @@
+h1
+{
+    text-align: center;
+    color:black;
+}
+
+form
+{
+    width: 280px;
+    padding: 0px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: #ccc;
+}
+
+form input
+{
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 8px 10px;
+    display: inline-block;
+}
+
+button
+{
+    text-align:center;
+    font-weight: bold;
+}
+
+#primeracaj
+{
+    height: 80%;
+    width: 60%;
+    background-color: #ccc;
+    margin: auto;
+    border-radius: 10px;
+}
+h2
+{
+    text-align: left;
+    margin-top: auto;
+}
