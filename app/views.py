@@ -10,8 +10,8 @@ def index():
 def login():
     if(request.method == 'POST'):
 
-        usr_email= request.form['usr_email']
-        usr_password = request.form['usrpassword']
+        usr_email = request.form['usr_email']
+        usr_password = request.form['usr_password']
 
         if(usr_email =='ricagome@mail.com' and usr_password =='1234'):
 
@@ -19,17 +19,17 @@ def login():
 
     return render_template('usr_login.html')
 
-@main.route('/usr_registro/')
+@main.route('/usr_registro/', methods=['GET', 'POST'])
 def registro():
     if(request.method == 'POST'):
 
-        usr_name       = request.form['usr_name']
-        usr_lastname   = request.form['usr_lastname']
-        usr_email      = request.form['usr_email']
-        usr_password   = request.form['usrpassword']
-        usr_checkbox   = request.form['usr_checkbox']
+        usr_name = request.form['usr_name']
+        usr_lastname = request.form['usr_lastname']
+        usr_email = request.form['usr_email']
+        usr_password = request.form['usr_password']
+        usr_checkbox = request.form['usr_checkbox']
 
-        if(usr_checkbox == '0'):
+        if(usr_checkbox =='1'):
 
             return render_template('usr_login.html')
 
@@ -50,3 +50,7 @@ def adm_habitaciones():
 @main.route('/adm_reservas/')
 def adm_reservas():
     return render_template('adm_reservas.html')
+
+@main.route('/adm_comentarios/')
+def adm_comentarios():
+    return render_template('adm_comentarios.html')

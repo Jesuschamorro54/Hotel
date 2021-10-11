@@ -50,14 +50,14 @@ function verClave()
 {
     console.log('Mostrar clave');
 
-    var passWordInput = document.formularioregistro.usrpassword;
+    var passWordInput = document.formularioregistro.usr_password;
     passWordInput.type="text";
 }
 
 function ocultarClave()
 {
     console.log('Ocultar clave');
-    var passWordInput = document.rormularioregistro.usrpassword;
+    var passWordInput = document.rormularioregistro.usr_password;
     passWordInput.type="password";
 
     
@@ -65,7 +65,7 @@ function ocultarClave()
 
 function ocultarVerClave()
 {
-    var passWordInput = document.formularioregistro.usrpassword;
+    var passWordInput = document.formularioregistro.usr_password;
     var tipo = passWordInput.type;
 
     console.log(tipo);
@@ -86,20 +86,20 @@ function verClave_Log()
 {
     console.log('Mostrar clave');
 
-    var passWordInput = document.formulariologin.usrpassword;
+    var passWordInput = document.formulariologin.usr_password;
     passWordInput.type="text";
 }
 
 function ocultarClave_Log()
 {
     console.log('Ocultar clave');
-    var passWordInput = document.formulariologin.usrpassword;
+    var passWordInput = document.formulariologin.usr_password;
     passWordInput.type="password";
 }
 
 function ocultarVerClave_Log()
 {
-    var passWordInput = document.formulariologin.usrpassword;
+    var passWordInput = document.formulariologin.usr_password;
     var tipo = passWordInput.type;
     console.log(tipo);
     if(tipo=="text")

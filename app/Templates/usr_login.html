@@ -9,7 +9,7 @@
     <v-col cols="12" sm="6" md="4" class="px-2 py-2">
       <v-card class="align-center pa-2" elevation=15 width="350">
         <v-card-title>Acceso a la Aplicación</v-card-title>    
-          <form name="formulariologin" @submit="submit" method="POST">
+          <form name="formulariologin" submit="submit" method="POST">
               <v-text-field
                 name="usr_email"
                 :counter="25"
@@ -23,7 +23,7 @@
               ></v-text-field>
 
               <v-text-field
-                name="usrpassword"
+                name="usr_password"
                 solo
                 type="password"
                 label="Clave de Acceso"
@@ -44,9 +44,9 @@
                 </template>
               
               </v-text-field>
-            <v-divider class="mx-4"></v-divider>
-            <v-btn class="mr-4" type="submit">Acceder</v-btn>
-            <v-btn href="/">Salir</v-btn>
+              <v-divider class="py-3"></v-divider>
+            <v-btn class="mr-4" type="submit" title="Acceder a la aplicación">Acceder</v-btn>
+            <v-btn title="Salir del modulo" href="/">Salir</v-btn>
           </form>
       </v-card>
     </v-col>
@@ -55,5 +55,5 @@
 
 
 {% endblock %}
-{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen en quantumsdata.co, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
 {% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
