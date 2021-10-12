@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html lang="es">
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="es-419">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <script src="{{ url_for('static', filename='js/funciones.js') }}"></script>
     <title>{% block titulo %} {% endblock %}</title>
   </head>
   <body>
-      <div id="app">
+      <div id="app_ht">
         <v-app>
           <v-app-bar app color="#00000" dark elevate-on-scroll elevation=5 src="https://picsum.photos/1920/1080?random">
             <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
             <v-toolbar-title class="xs-4" shrink-on-scroll>{% block tit_bar %} {% endblock %}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn class="pd-2 ml-4 xs" elevation="8" rounded outlined to="login_main" @click="dial_reg = true">
+            <v-btn class="pd-2 ml-4 xs" elevation="8" rounded outlined title="Acceder" href="/usr_login" @click="dial_reg = true">
               <v-icon class="md-2" left>mdi-account-circle</v-icon>
               {% block btn_login %} {% endblock %}
             </v-btn>
     
-            <v-btn v-if="userloggedIn == true" class="error pd-2 ml-4 xs" elevation="8" rounded @click.prevent="signOut">
+            <v-btn v-if="userloggedIn == true" class="error pd-2 ml-4 xs" elevation="8" title="Salir" rounded @click.prevent="signOut">
               <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
               {% block btn_exit %} {% endblock %}      
             </v-btn>
             
-            <v-btn v-else class="success pd-2 ml-4 xs" elevation="8" rounded to="register_main" @click="dial_reg = true">
+            <v-btn v-else class="success pd-2 ml-4 xs" elevation="8" rounded title="Registrar Usuario" href="/usr_registro" @click="dial_reg = true">
               <v-icon class="md-2" left>mdi-account-plus</v-icon>
               {% block btn_signin %} {% endblock %}       
             </v-btn>
@@ -116,7 +115,7 @@
       <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
       <script>
         new Vue({
-          el: '#app',
+          el: '#app_ht',
           vuetify: new Vuetify(),
         })
       </script>
@@ -126,6 +125,8 @@
             drawer: null,
             dial_reg: false,
             error: null,
+            email: '',
+            usr_name: '',
             userloggedIn: true,
           }),
         }
