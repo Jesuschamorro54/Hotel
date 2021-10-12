@@ -18,3 +18,7 @@ def adm_seguridad():
 @main.route('/habitaciones/')
 def habitaciones():
     return render_template('habitaciones.html')
+
+@main.route('/comments/')
+def comments():
+    return render_template('comentarios.html')
