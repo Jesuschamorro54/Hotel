@@ -43,6 +43,15 @@ def dashboard():
 def adm_seguridad():
     return render_template('adm_seguridad.html')
 
+
+@main.route('/habitaciones/')
+def habitaciones():
+    return render_template('habitaciones.html')
+
+@main.route('/comments/')
+def comments():
+    return render_template('comentarios.html')
+
 @main.route('/adm_habitaciones/')
 def adm_habitaciones():
     return render_template('adm_habitaciones.html')
@@ -54,3 +63,4 @@ def adm_reservas():
 @main.route('/adm_comentarios/')
 def adm_comentarios():
     return render_template('adm_comentarios.html')
+
