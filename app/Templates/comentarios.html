@@ -3,7 +3,7 @@
 <head>  
     
     <script src="JS_adm_admin.js"> </script>
-    <link rel="stylesheet" type="text/css" href="comentarios.css"/>
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static',filename='styles/comentarios.css') }}">
     <title>Comentarios</title> 
     <meta charset="UTF-8"> 
     
@@ -15,7 +15,7 @@
     <b class="Que_es" href="" title="Que_es">¿QUE ES?</b>
     <g class="como_se_usa" href="" title="como_se_usa">¿COMO SE USA?</g>
     <u class="soporte" href="" title="soporte">SOPORTE</u>
-    <i class="salir" href="" title="salir">SALIR<img src="Buscador.png" width="30" height="30"/></i>
+    <i class="salir" href="" title="salir">SALIR<img src="{{ url_for('static',filename='img/buscador.png')}}" width="30" height="30"/></i>
      
     <form name="formRegistro" onsubmit="return validar()"> 
         <p>MODULO DE COMENTARIOS Y CALIFICACIONES</p>
