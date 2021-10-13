@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+
+
+{% block contenido_1 %}
+<v-card class="d-flex align-center pa-2" height="250px" elevation=15> 
+    <v-card-text>
+         <v-container fluid>
+            <v-row class="d-flex align-center pt-3" justify="space-around" no-gutters>
+                <v-col class="px-2 py-2">
+                    <v-card class="px-2 py-2">
+                        <v-card-title>Adminsitracion Habitaciones</v-card-title>
+                        <v-card-actions>
+                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_nuevo" title="Nuevo Registro">Nuevo</v-btn>
+                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_editar" title="Editar Registro">Editar</v-btn>
+                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_eliminar" title="Eliminar Registro">Eliminar</v-btn>
+                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_salir" href="/dashboard" title="Salir Modulo">Salir</v-btn>
+                        </v-card-actions>
+                    </v-card>   
+                </v-col>
+            </v-row>
+        </v-container>
+
+    </v-card-text>
+</v-card>
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
