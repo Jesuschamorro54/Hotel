@@ -64,3 +64,10 @@ def adm_reservas():
 def adm_comentarios():
     return render_template('adm_comentarios.html')
 
+@main.route('/pruehab/')
+def pruehab():
+    return render_template('pruehab.html')
+
+@main.route('/elemento/')
+def elemento():
+    return render_template('elemento.html')

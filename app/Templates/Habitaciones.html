@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"type="text/css" href="{{ url_for('static',filename='styles/Habitaciones.css') }}">
+        <link rel="stylesheet"type="text/css" href="{{ url_for('static',filename='Styles/Habitaciones.css') }}">
         <title>Habitaciones</title> 
     </head>
     <body>
@@ -18,7 +18,7 @@
         <div id="primeracaj">
              <table>
                  <tr>
-                    <td><img src="{{ url_for('static',filename='img/1965.jpg')}}" width="250" height="160"></td>
+                    <td><img href="{{ url_for('static', filename='img/1965.jpg') }}" width="250" height="160"></td>
                     <td><h2>Habitación1</h2>La habitación consta de un baño interno, cama doble, dos muebles de noche y un minibar.</td>
                     <td><input type="submit" id="boton_reser1" name="boton_reser1" value="Reserva"></p></td>
                  </tr>

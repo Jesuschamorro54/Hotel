@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+
+
+{% block contenido_1 %}
+
+    <v-text-field name="usr_email" :counter="25" solo type="email" label="Busqueda de habitacion" id="usr_email" required clearable></v-text-field>
+
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
