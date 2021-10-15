@@ -6,7 +6,7 @@ Este proyecto, desarrollado para MinTic, tiene como objetivo crear una aplicaci�
 * [Base de datos](#base-de-datos)
 * [Run](#run)
 
->### BASE DE DATOS
+### BASE DE DATOS
 Se implementa el manejador de bases de datos [Mysql](https://www.mysql.com), el cual puede realizar la descarga desde la pagina oficial que se encuenta en el link. O también puede intentar descargar con:
 * [Windows (x86, 32-bit), MSI Installer](https://dev.mysql.com/downloads/file/?id=506568)
 
@@ -14,7 +14,7 @@ Se implementa el manejador de bases de datos [Mysql](https://www.mysql.com), el 
 
 #### [DDL de la base de datos](#)
 
->### Run
+### Run
 Instale en su equipo el framework `flask` con el cual podrá correr en su ip personal la página web. Para ello ejecute en el `promt comand`:
 
 ***Nota:*** *Es esencial que tenga instalado el gestor de paquetes `pip` con el cual se realizará la instalación. [Install](https://pip.pypa.io/en/stable/installation/#)*
