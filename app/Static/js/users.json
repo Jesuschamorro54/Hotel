@@ -1,0 +1,30 @@
+[
+    {
+        "nombre": "Jesus chamorro",
+        "id": 1456,
+        "email": "jesusfeli54@gmail.com",
+        "rol": "Moderador",
+        "image": "https://www.pngkey.com/png/full/493-4930661_user-icono-mi-cuenta-png.png"
+    },
+    {
+        "nombre": "Juanito pinto",
+        "id": 1352,
+        "email": "juanitopinto@gmail.com",
+        "rol": "admin",
+        "image": "https://www.pngkey.com/png/full/493-4930661_user-icono-mi-cuenta-png.png"
+    },
+    {
+        "nombre": "Carlitos Carpa",
+        "id": 1458,
+        "email": "Carlitoscarpa@gmail.com",
+        "rol": "free",
+        "image": "https://www.pngkey.com/png/full/493-4930661_user-icono-mi-cuenta-png.png"
+    },
+    {
+        "nombre": "Daniel Zambrano",
+        "id": 1,
+        "email": "Danielzambrano@gmail.com",
+        "rol": "free",
+        "image": "https://www.pngkey.com/png/full/493-4930661_user-icono-mi-cuenta-png.png"
+    }
+]
