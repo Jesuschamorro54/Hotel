@@ -51,31 +51,32 @@
                                 </h3>
                                 <h4 class="subheading white--text">
                                     <!--Contenerdor externo-->
-                                    <v-card class="d-flex align-center pa-2" height="250px" width = "520px" elevation=15> 
+                                    <v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
                                         <v-card-text>
+                                          <v-card-actions>
+                                            <v-btn color="gray" title="Añadir nuevo usuario">Añadir +</v-btn>
+                                          </v-card-actions>
                                              <v-container>
                                                 <v-row class="d-flex align-center pt-3" justify="space-around">
                                                     <v-col class="px-2 py-2">
                                                         <!--Contenerdor interno-->
-                                                        <v-card class="px-2 py-2">
+                                                        <v-card class="px-2 py-2" height="100px">
                                                             <v-row class="d-flex align-center pt-3" justify="space-around">
-                                                                <v-col class="text-h4 white--text font-weight-bold">
-                                                                    <v-text-field
-                                                                        name="search"
-                                                                        append-icon="mdi-magnify"
-                                                                        label="Buscar usuarios"
-                                                                        single-line
-                                                                        hide-details
-                                                                    ></v-text-field>
+                                                                  <v-col class="text-h4 white--text font-weight-bold">
+                                                                      <v-text-field
+                                                                          id="search"
+                                                                          append-icon="mdi-magnify"
+                                                                          label="Buscar usuarios"
+                                                                      ></v-text-field>
+                                                                  </v-col>
+                                                                  <v-col class="text-h4 white--text font-weight-bold">
+                                                                    <v-card-actions>
+                                                                      <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
+                                                                      <v-btn color="gray" text text title="Buscar" onclick= clear_all()>Clear</v-btn>                                                                      
+                                                                      <v-btn elevation=8 color="green" onclick= get_data() >Mostrar todos</v-btn>
+                                                                    </v-card-actions>
                                                                 </v-col>
                                                             </v-row>
-                                                            <v-card-title></v-card-title>
-                                                            <v-card-actions>
-                                                                <v-btn color="gray" text title="Añadir nuevo usuario">Añadir</v-btn>
-                                                                <v-btn color="gray" text title="Editar usuarios">Editar</v-btn>
-                                                                <v-btn color="red" text title="Eliminar usuarios">Eliminar</v-btn>
-                                                                <v-btn id= "show" color="gray" onclick= get_data() >Mostrar todos</v-btn>
-                                                            </v-card-actions>
                                                         </v-card>   
                                                     </v-col>
                                                 </v-row>
@@ -135,16 +136,16 @@
             <v-footer dark padless elevation="5">
               <v-card flat tile class="indigo lighten-1 white--text text-center flex">
                 <v-card-text>
-                  <v-btn href="https://www.facebook.com/quantumsdata" title="Facebook" class="mx-4 white--text" icon>
+                  <v-btn href="https://www.facebook.com" title="Facebook" class="mx-4 white--text" icon>
                     <v-icon size="24px">mdi-facebook</v-icon>
                   </v-btn>
-                  <v-btn href="https://twitter.com/quantumsdata" title="Twitter" class="mx-4 white--text" icon>
+                  <v-btn href="https://twitter.com/" title="Twitter" class="mx-4 white--text" icon>
                     <v-icon size="24px">mdi-twitter</v-icon>
                   </v-btn>
-                  <v-btn href="https://www.linkedin.com/company/quantumsdata" title="LinkedIn" class="mx-4 white--text" icon>
+                  <v-btn href="https://www.linkedin.com/" title="LinkedIn" class="mx-4 white--text" icon>
                     <v-icon size="24px">mdi-linkedin</v-icon>
                   </v-btn>
-                  <v-btn href="https://www.instagram.com/quantumsdata" title="Instagram" class="mx-4 white--text" icon>
+                  <v-btn href="https://www.instagram.com/" title="Instagram" class="mx-4 white--text" icon>
                     <v-icon size="24px">mdi-instagram</v-icon>
                   </v-btn>
                 </v-card-text>
@@ -174,31 +175,3 @@
         </script>
     </body>
 </html>
-
-<!--
-<v-card class="d-flex align-center pa-2" height="250px" elevation=15> 
-    <v-card-text>
-         <v-container fluid>
-            <v-row class="d-flex align-center pt-3" justify="space-around" no-gutters>
-                <v-col class="px-2 py-2">
-                    <v-card class="px-2 py-2">
-                        <v-row class="d-flex align-center">
-                            <v-col cols="1" sm="4" md="3">
-                                <v-text-field name="search" append-icon="mdi-magnify" label="Buscar usuario" single-line hide-details></v-text-field>
-                            </v-col>
-                        </v-row>
-                        <v-card-title></v-card-title>
-                        <v-card-actions>
-                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_nuevo" title="Nuevo Registro">Nuevo</v-btn>
-                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_editar" title="Editar Registro">Editar</v-btn>
-                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_eliminar" title="Eliminar Registro">Eliminar</v-btn>
-                            <v-btn color="grey light-2" elevation="10" rounded @click="btn_salir" href="/dashboard" title="Salir Modulo">Salir</v-btn>
-                        </v-card-actions>
-                    </v-card>   
-                </v-col>
-            </v-row>
-        </v-container>
-
-    </v-card-text>
-</v-card>
--->
