@@ -25,41 +25,49 @@ function get_one(){
                 if (seeker.toLowerCase() == item.nombre.toLowerCase() || seeker == String(item.id) || seeker == item.email){
                     res.innerHTML +=`
                     <div class="col">
-                        <div class="mx-auto v-card v-sheet theme--light" style="max-width: 344px;">
-                            <div class="v-image v-responsive black--text align-end theme--light" style="height: 200px;">
-                                <div class="v-responsive__sizer" style="padding-bottom: 52.0312%;"></div>
-                                <div class="v-image__image v-image__image--cover">
-                                    <div>
-                                      <img class="img_logo" src="${item.image}">
-                                    </div>
-                                    <style>
-                                      .img_logo{
-                                        width: 60%;
-                                        margin-left: 66px;
-                                      }
-                                    </style>
+                    <div class="mx-auto v-card v-sheet theme--light" style="max-width: 344px;">
+                        <div class="v-image v-responsive black--text align-end theme--light" style="height: 200px;">
+                            <div class="v-responsive__sizer" style="padding-bottom: 52.0312%;"></div>
+                            <div class="v-image__image v-image__image--cover">
+                                <div>
+                                  <img class="img_logo" src="${item.image}">
                                 </div>
-                            </div>
-                            <div class="v-responsive__content" style="width: 1280px;">
-                                <div class="v-card__title">${item.nombre}</div>
-                            </div>
-                            <div class="v-card__subtitle pb-0">
-                                Id: ${item.id}
-                            </div>
-                            <div class="v-card__text text--primary">
-                              <div>Email: ${item.email}</div> 
-                              <div>Rol: ${item.rol}</div> 
-                            </div>
-                            <div class="v-card__actions">
-                              <button type="button" class="v-btn v-btn--text theme--light v-size--default green--text" title="Editar" onclick = edit(${item.id})>
-                                <span class="v-btn__content">Editar</span>
-                              </button>
-                              <button type="button" class="v-btn v-btn--text theme--light v-size--default red--text" title="Eliminar" onclick = edit(${item.id})>
-                                <span class="v-btn__content">Eliminar</span>
-                              </button>
+                                <style>
+                                  .img_logo{
+                                    width: 60%;
+                                    margin-left: 66px;
+                                  }
+                                </style>
                             </div>
                         </div>
+                        <div class="v-responsive__content" style="width: 1280px;">
+                            <div>
+                                <input  class="v-card__title name="email" padding = "5px" id="email" type="text" value = "${item.nombre}" style="left: 60px; right: auto; padding-left: 8px;">
+                            </div>
+                        </div>
+                        <div class="v-card__subtitle pb-0">
+                            Id: ${item.id}
+                        </div>
+                        <div class="v-card__text text--primary">
+                          <div>
+                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Email: </label>
+                            <input name="email" padding = "5px" id="email" type="text" value = "${item.email}" style="width: 100% left: 60px; right: auto; padding-left: 8px;">
+                          </div>
+                          <div>
+                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Rol: </label>
+                            <input name="email" padding = "5px" id="email" type="text" value = "${item.rol}" style="left: 60px; right: auto; padding-left: 8px;">
+                          </div>  
+                        </div>
+                        <div class="v-card__actions">
+                          <button type="button" class="v-btn v-btn--text theme--light v-size--default green--text" title="Editar" onclick = edit(${item.id})>
+                            <span class="v-btn__content">Editar</span>
+                          </button>
+                          <button type="button" class="v-btn v-btn--text theme--light v-size--default red--text" title="Eliminar" onclick = edit(${item.id})>
+                            <span class="v-btn__content">Eliminar</span>
+                          </button>
+                        </div>
                     </div>
+                </div>
                     `
                 }
             }
@@ -97,14 +105,22 @@ function get_data(){
                             </div>
                         </div>
                         <div class="v-responsive__content" style="width: 1280px;">
-                            <div class="v-card__title">${item.nombre}</div>
+                            <div>
+                                <input  class="v-card__title name="email" padding = "5px" id="email" type="text" value = "${item.nombre}" style="left: 60px; right: auto; padding-left: 8px;">
+                            </div>
                         </div>
                         <div class="v-card__subtitle pb-0">
                             Id: ${item.id}
                         </div>
                         <div class="v-card__text text--primary">
-                          <div>Email: ${item.email}</div> 
-                          <div>Rol: ${item.rol}</div> 
+                          <div>
+                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Email: </label>
+                            <input name="email" padding = "5px" id="email" type="text" value = "${item.email}" style="width: 100% left: 60px; right: auto; padding-left: 8px;">
+                          </div>
+                          <div>
+                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Rol: </label>
+                            <input name="email" padding = "5px" id="email" type="text" value = "${item.rol}" style="left: 60px; right: auto; padding-left: 8px;">
+                          </div>  
                         </div>
                         <div class="v-card__actions">
                           <button type="button" class="v-btn v-btn--text theme--light v-size--default green--text" title="Editar" onclick = edit(${item.id})>
@@ -137,41 +153,49 @@ function edit(id){
                 if (!search(item.id, users_edited)){
                     res.innerHTML +=`
                     <div class="col">
-                        <div class="mx-auto v-card v-sheet theme--light" style="max-width: 344px;">
-                            <div class="v-image v-responsive black--text align-end theme--light" style="height: 200px;">
-                                <div class="v-responsive__sizer" style="padding-bottom: 52.0312%;"></div>
-                                <div class="v-image__image v-image__image--cover">
-                                    <div>
-                                      <img class="img_logo" src="${item.image}">
-                                    </div>
-                                    <style>
-                                      .img_logo{
-                                        width: 60%;
-                                        margin-left: 66px;
-                                      }
-                                    </style>
+                    <div class="mx-auto v-card v-sheet theme--light" style="max-width: 344px;">
+                        <div class="v-image v-responsive black--text align-end theme--light" style="height: 200px;">
+                            <div class="v-responsive__sizer" style="padding-bottom: 52.0312%;"></div>
+                            <div class="v-image__image v-image__image--cover">
+                                <div>
+                                  <img class="img_logo" src="${item.image}">
                                 </div>
-                            </div>
-                            <div class="v-responsive__content" style="width: 1280px;">
-                                <div class="v-card__title">${item.nombre}</div>
-                            </div>
-                            <div class="v-card__subtitle pb-0">
-                                Id: ${item.id}
-                            </div>
-                            <div class="v-card__text text--primary">
-                              <div>Email: ${item.email}</div> 
-                              <div>Rol: ${item.rol}</div> 
-                            </div>
-                            <div class="v-card__actions">
-                                <button type="button" class="v-btn v-btn--text theme--light v-size--default green--text" title="Editar" onclick = edit(${item.id})>
-                                    <span class="v-btn__content">Editar</span>
-                                </button>
-                                <button type="button" class="v-btn v-btn--text theme--light v-size--default red--text" title="Eliminar" onclick = edit(${item.id})>
-                                    <span class="v-btn__content">Eliminar</span>
-                                </button>
+                                <style>
+                                  .img_logo{
+                                    width: 60%;
+                                    margin-left: 66px;
+                                  }
+                                </style>
                             </div>
                         </div>
+                        <div class="v-responsive__content" style="width: 1280px;">
+                            <div>
+                                <input  class="v-card__title name="email" padding = "5px" id="email" type="text" value = "${item.nombre}" style="left: 60px; right: auto; padding-left: 8px;">
+                            </div>
+                        </div>
+                        <div class="v-card__subtitle pb-0">
+                            Id: ${item.id}
+                        </div>
+                        <div class="v-card__text text--primary">
+                          <div>
+                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Email: </label>
+                            <input name="email" padding = "5px" id="email" type="text" value = "${item.email}" style="width: 100% left: 60px; right: auto; padding-left: 8px;">
+                          </div>
+                          <div>
+                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Rol: </label>
+                            <input name="email" padding = "5px" id="email" type="text" value = "${item.rol}" style="left: 60px; right: auto; padding-left: 8px;">
+                          </div>  
+                        </div>
+                        <div class="v-card__actions">
+                          <button type="button" class="v-btn v-btn--text theme--light v-size--default green--text" title="Editar" onclick = edit(${item.id})>
+                            <span class="v-btn__content">Editar</span>
+                          </button>
+                          <button type="button" class="v-btn v-btn--text theme--light v-size--default red--text" title="Eliminar" onclick = edit(${item.id})>
+                            <span class="v-btn__content">Eliminar</span>
+                          </button>
+                        </div>
                     </div>
+                </div>
                     `
                 }
             }
