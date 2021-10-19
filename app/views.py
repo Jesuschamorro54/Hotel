@@ -89,7 +89,7 @@ def adm_comentarios():
 @main.route('/adm_users/')
 @login_required
 def admin_users():
-    return render_template('/adm_users.html')
+    return render_template('adm_users.html')
 
 @main.route('/logout/')
 def logout():
