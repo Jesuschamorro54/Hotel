@@ -1,8 +1,8 @@
 import functools
 from flask import Flask, render_template, blueprints, request, send_file, redirect, url_for,session, flash, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from markupsafe import escape
+import controlador_hotel
 
 salt = "misiontic2022Grupo1"
 
@@ -26,18 +26,25 @@ def login_required(view):
 @main.route('/usr_login/', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
-
+        
         usr_email = request.form['usr_email']
         usr_password = request.form['usr_password']
+        #db = get_db()
 
-        if(usr_email =='ricagome@mail.com' and usr_password =='1234'):
-            session['usr_email'] = 'ricagome@mail.com' #user[2]
-            session['nombre'] = 'Ricardo Gomez' #user[1]
-            session['id'] = '1' #user[0]
-            session['role'] = 'otro'
-            session['acc'] = True
-            return redirect(url_for('main.dashboard'))
+        user = "1234"
+        if user is not None:
+            usr_password = usr_password + usr_email
+            sw = check_password_hash(user[4], usr_password)
 
+            if(usr_email =='ricagome@mail.com' and usr_password =='1234'):
+                session['usr_email'] = 'ricagome@mail.com' #user[2]
+                session['nombre'] = 'Ricardo Gomez' #user[1]
+                session['id'] = '1' #user[0]
+                session['role'] = 'otro'
+                session['acc'] = True
+                return redirect(url_for('main.dashboard'))
+
+        return render_template('usr_login.html')
     return render_template('usr_login.html')
 
 @main.route('/usr_registro/', methods=['GET', 'POST'])
@@ -51,6 +58,12 @@ def registro():
         usr_checkbox = request.form['usr_checkbox']
 
         if(usr_checkbox =='1'):
+
+            #agregar SLAT
+            usr_password = usr_password + usr_email
+            #usr_password = generate_password_hash(usr_password)
+
+            controlador_hotel.insertar_user(usr_name+' '+usr_lastname, usr_email, usr_password)
 
             return redirect(url_for('main.login'))
 
