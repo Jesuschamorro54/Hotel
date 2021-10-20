@@ -71,22 +71,22 @@ def habitaciones():
 def comments():
     return render_template('comentarios.html')
 
-@main.route('/adm_habitaciones/')
+@main.route('/adm/adm_habitaciones/')
 @login_required
 def adm_habitaciones():
     return render_template('adm_habitaciones.html')
 
-@main.route('/adm_reservas/')
+@main.route('/adm/adm_reservas/')
 @login_required
 def adm_reservas():
     return render_template('adm_reservas.html')
 
-@main.route('/adm_comentarios/')
+@main.route('/adm/adm_comentarios/')
 @login_required
 def adm_comentarios():
     return render_template('adm_comentarios.html')
     
-@main.route('/adm_users/')
+@main.route('/adm/adm_users/')
 @login_required
 def admin_users():
     return render_template('adm_users.html')
