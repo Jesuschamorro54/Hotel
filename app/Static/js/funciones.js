@@ -57,7 +57,7 @@ function verClave()
 function ocultarClave()
 {
     console.log('Ocultar clave');
-    var passWordInput = document.rormularioregistro.usr_password;
+    var passWordInput = document.formularioregistro.usr_password;
     passWordInput.type="password";
 
     
