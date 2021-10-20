@@ -81,32 +81,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `hotel`.`payments`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hotel`.`payments` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL DEFAULT NULL,
-  `reservation` INT NULL DEFAULT NULL,
-  `referencia` VARCHAR(100) NULL DEFAULT NULL,
-  `valor` DOUBLE NULL DEFAULT NULL,
-  `request` DATETIME NULL DEFAULT NULL,
-  `expiration` DATETIME NULL DEFAULT NULL,
-  `state` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `user_id` (`user_id` ASC) VISIBLE,
-  INDEX `reservation` (`reservation` ASC) VISIBLE,
-  CONSTRAINT `payments_ibfk_1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `hotel`.`users` (`id`),
-  CONSTRAINT `payments_ibfk_2`
-    FOREIGN KEY (`reservation`)
-    REFERENCES `hotel`.`rooms` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
 -- Table `hotel`.`reservas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hotel`.`reservas` (
@@ -130,6 +104,33 @@ CREATE TABLE IF NOT EXISTS `hotel`.`reservas` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `hotel`.`payments`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hotel`.`payments` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NULL DEFAULT NULL,
+  `reservation` INT NULL DEFAULT NULL,
+  `referencia` VARCHAR(100) NULL DEFAULT NULL,
+  `valor` DOUBLE NULL DEFAULT NULL,
+  `request` DATETIME NULL DEFAULT NULL,
+  `expiration` DATETIME NULL DEFAULT NULL,
+  `state` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user_id` (`user_id` ASC) VISIBLE,
+  INDEX `reservation` (`reservation` ASC) VISIBLE,
+  CONSTRAINT `payments_ibfk_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `hotel`.`users` (`id`),
+  CONSTRAINT `payments_ibfk_2`
+    FOREIGN KEY (`reservation`)
+    REFERENCES `hotel`.`reservas` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
