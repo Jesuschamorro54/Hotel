@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=D:\desarrollo\tudata\flask\hotel"
+set "VIRTUAL_ENV=D:\desarrollo\tudata\flask\Hotel\app"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
