@@ -108,5 +108,3 @@ def admin_users():
 def logout():
    session.clear()
    return redirect(url_for('main.index'))
-
-
