@@ -4,9 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from markupsafe import escape
 import controlador_hotel
 
-salt = "misiontic2022Grupo1"
-
-main= blueprints.Blueprint('main', __name__)
+main = blueprints.Blueprint('main', __name__)
 
 @main.route('/')
 def index():   
@@ -25,17 +23,16 @@ def login_required(view):
 def login():
     if request.method == 'POST':
         
-        usr_email = request.form['usr_email']
-        usr_password = request.form['usr_password']
+        usr_email = escape(request.form['usr_email'])
+        usr_password = escape(request.form['usr_password'])
         
         info_user = controlador_hotel.obtener_user(usr_email)
-        print(info_user)
         
         if info_user is not None:
             usr_password = usr_password + usr_email
-            sw = check_password_hash(info_user[3], usr_password)
+            vpw = check_password_hash(info_user[3], usr_password)
 
-            if(sw):
+            if(vpw):
                 session['id'] = info_user[0]
                 session['usr_name'] = info_user[1]
                 session['usr_email'] = info_user[2]
@@ -50,11 +47,11 @@ def login():
 @main.route('/usr_registro/', methods=['GET', 'POST'])
 def registro():
     if(request.method == 'POST'):
-        usr_name = request.form['usr_name']
-        usr_lastname = request.form['usr_lastname']
-        usr_email = request.form['usr_email']
-        usr_password = request.form['usr_password']
-        usr_checkbox = request.form['usr_checkbox']
+        usr_name = escape(request.form['usr_name'])
+        usr_lastname = escape(request.form['usr_lastname'])
+        usr_email = escape(request.form['usr_email'])
+        usr_password = escape(request.form['usr_password'])
+        usr_checkbox = escape(request.form['usr_checkbox'])
  
         if(usr_checkbox =='1'):
             #agregar SLAT
