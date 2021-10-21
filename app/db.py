@@ -1,5 +1,5 @@
 import pymysql
-#import MySQLdb
+from flask import g
 
 class DataBase:
     # DB es un diccionario que contine los datos para crear la conexion
@@ -13,16 +13,6 @@ class DataBase:
             connection = pymysql.connect(host=db["host"], user=db["user"], passwd=db["password"], db=db["db"])
             cursor = connection.cursor() # se crea el cursor de datos mysql 
             print("Connection established")
+            return connection, cursor
         except Exception as e:
-            connection = pymysql.connect(host=db["host"], user=db["user"], passwd=db["password"], db=db["db"])
-            cursor = connection.cursor() # se crea el cursor de datos mysql 
             print("Error connecting to database", e)
-        return cursor
-
-d = {
-    "host": "localhost",
-    "user": "root",
-    "password": "Xricagomex0126.",
-    "db": "hotel"
-}
-Dbase = DataBase.connect(d)
