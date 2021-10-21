@@ -1,5 +1,4 @@
 import pymysql
-from flask import g
 
 class DataBase:
     # DB es un diccionario que contine los datos para crear la conexion

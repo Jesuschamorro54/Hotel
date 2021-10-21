@@ -4,7 +4,7 @@ from db import DataBase
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "20023006",
+        "password": "Xricagomex0126.",
         "db": "hotel"
 }
 
@@ -24,4 +24,14 @@ def insertar_user(nombre, email, password):
     conexion.close()
 
 
-insertar_user("enrique", "enrique@gmail.com", "hola123") # -> Inserción de prueba
+#insertar_user("enrique", "enrique@gmail.com", "hola123") # -> Inserción de prueba
+
+def obtener_user(email):
+    conexion, cursor = DataBase.connect(d)
+    info_user = None
+    with cursor:
+        cursor.execute(
+            "SELECT id, nombre, email, password, rol FROM users WHERE email = %s", (email,))
+        info_user = cursor.fetchone()
+    conexion.close()
+    return info_user

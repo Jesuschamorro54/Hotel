@@ -9,8 +9,7 @@ salt = "misiontic2022Grupo1"
 main= blueprints.Blueprint('main', __name__)
 
 @main.route('/')
-def index():
-    
+def index():   
     return render_template('index.html')
 
 def login_required(view):
@@ -19,54 +18,51 @@ def login_required(view):
     def wraped_view(**kwargs):
         if 'usr_email' not in session:
             return redirect(url_for('main.login'))
-        return view(**kwargs)
-    
+        return view(**kwargs)   
     return wraped_view
 
 @main.route('/usr_login/', methods=['GET', 'POST'])
 def login():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         
         usr_email = request.form['usr_email']
         usr_password = request.form['usr_password']
-        #db = get_db()
-
-        user = "1234"
-        if user is not None:
+        
+        info_user = controlador_hotel.obtener_user(usr_email)
+        print(info_user)
+        
+        if info_user is not None:
             usr_password = usr_password + usr_email
-            sw = check_password_hash(user[4], usr_password)
+            sw = check_password_hash(info_user[3], usr_password)
 
-            if(usr_email =='ricagome@mail.com' and usr_password =='1234'):
-                session['usr_email'] = 'ricagome@mail.com' #user[2]
-                session['nombre'] = 'Ricardo Gomez' #user[1]
-                session['id'] = '1' #user[0]
-                session['role'] = 'otro'
+            if(sw):
+                session['id'] = info_user[0]
+                session['usr_name'] = info_user[1]
+                session['usr_email'] = info_user[2]
+                session['usr_role'] = info_user[4]
                 session['acc'] = True
                 return redirect(url_for('main.dashboard'))
-
+        
         return render_template('usr_login.html')
+
     return render_template('usr_login.html')
 
 @main.route('/usr_registro/', methods=['GET', 'POST'])
 def registro():
     if(request.method == 'POST'):
-
         usr_name = request.form['usr_name']
         usr_lastname = request.form['usr_lastname']
         usr_email = request.form['usr_email']
         usr_password = request.form['usr_password']
         usr_checkbox = request.form['usr_checkbox']
-
+ 
         if(usr_checkbox =='1'):
-
             #agregar SLAT
             usr_password = usr_password + usr_email
-            #usr_password = generate_password_hash(usr_password)
-
+            usr_password = generate_password_hash(usr_password)
             controlador_hotel.insertar_user(usr_name+' '+usr_lastname, usr_email, usr_password)
-
             return redirect(url_for('main.login'))
-
+    
     return render_template('usr_registro.html')
 
 @main.route('/dashboard/')
