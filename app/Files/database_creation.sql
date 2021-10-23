@@ -22,13 +22,13 @@ USE `hotel` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hotel`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  `nombre` VARCHAR(200) NULL DEFAULT NULL,
   `email` VARCHAR(70) NULL DEFAULT NULL,
-  `password` VARCHAR(50) NULL DEFAULT NULL,
+  `password` VARCHAR(250) NULL DEFAULT NULL,
   `image` TEXT NULL DEFAULT NULL,
   `fuente` ENUM('facebook', 'google') NULL DEFAULT NULL,
   `rol` ENUM('free', 'moderador', 'admin') NULL DEFAULT NULL,
-  `city` VARCHAR(100) NULL DEFAULT NULL,
+  `city` VARCHAR(200) NULL DEFAULT NULL,
   `state` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
