@@ -4,7 +4,7 @@ function validar()
 {
     var userNameInput = document.formularioregistro.usr_name;
     var passWordInput = document.formularioregistro.usr_password;
-    var correoInput = document.formularioReristro.usr_mail;
+    var correoInput = document.formularioregistro.usr_email;
 
     var formato_email = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
 
@@ -112,4 +112,7 @@ function ocultarVerClave_Log()
         passWordInput.type="text";
     }
 }
-var userloggedIn = true
+
+drawer = null
+error = null
+

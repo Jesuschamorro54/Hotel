@@ -6,7 +6,7 @@ from db import DataBase
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "20023006",
+        "password": "Xricagomex0126.",
         "db": "hotel"
 }
 
@@ -24,6 +24,7 @@ def insertar_user(nombre, email, password):
                   
     conexion.commit()
     conexion.close()
+
 
 # TRAER TODOS LOS DATOS DE UNA TABLA
 def consultar(table):
@@ -87,6 +88,7 @@ def find(parameter, tp, table):
 
     return container
 
+
 # ELIMINAR UN REGISTRO
 def eliminar(id, table):
     print("Eliminando usuario")
@@ -99,3 +101,16 @@ def eliminar(id, table):
                   
     conexion.commit()
     conexion.close()
+
+
+# OBTENER UN USUARIO POR EMAIL
+def obtener_user(usr_email):
+    conexion, cursor = DataBase.connect(d)
+    info_user = None
+    with cursor:
+        sql = f"SELECT id, nombre, email, password, rol FROM users WHERE email = '{usr_email}'"
+        cursor.execute(sql)
+        info_user = cursor.fetchone()
+    conexion.close()
+    return info_user
+
