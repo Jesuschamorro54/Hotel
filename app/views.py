@@ -3,6 +3,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from markupsafe import escape
 import functools
 import controlador_hotel
+import json
 
 main = blueprints.Blueprint('main', __name__)
 
@@ -42,6 +43,7 @@ def login():
         return render_template('usr_login.html')
 
     return render_template('usr_login.html')
+    
 
 @main.context_processor
 def login_acc():
@@ -91,36 +93,49 @@ def admin_required(f):
 @main.route('/dashboard/')
 @login_required
 def dashboard():
-    #is_rol = session.get('usr_rol')
-    is_rol = 'admin'
+    is_rol = session.get('usr_rol')
+    # is_rol = 'admin'
     g.is_admin = True if is_rol=='admin'else False
     g.is_moder = True if is_rol=='moderador' else False
     g.is_free = True if is_rol=='free' else False
     return render_template('dashboard.html')
 
-@main.route('/adm/adm_habitaciones/')
+
+@main.route('/habitaciones/')
+@login_required
+def habitaciones():
+    return render_template('habitaciones.html')
+
+@main.route('/comments/')
+@login_required
+def comments():
+    return render_template('comentarios.html')
+
+@main.route('/adm/habitaciones/')
 @login_required
 @admin_required
 def adm_habitaciones():
-    return render_template('/adm/adm_habitaciones.html')
+    rooms = controlador_hotel.consultar('rooms')
+    return render_template('/adm/habitaciones.html', rooms_list = rooms)
 
-@main.route('/adm/adm_reservas/')
+@main.route('/adm/reservas/')
 @login_required
 @admin_required
 def adm_reservas():
-    return render_template('/adm/adm_reservas.html')
+    return render_template('/adm/reservas.html')
 
-@main.route('/adm/adm_comentarios/')
+@main.route('/adm/comentarios/')
 @login_required
 @admin_required
 def adm_comentarios():
-    return render_template('/adm/adm_comentarios.html')
+    return render_template('/adm/comentarios.html')
     
-@main.route('/adm/adm_users/')
+@main.route('/adm/users/')
 @login_required
 @admin_required
 def admin_users():
-    return render_template('/adm/adm_users.html')
+    users = controlador_hotel.consultar('users')
+    return render_template('/adm/users.html', users_list=users)
 
 @main.route('/error/')
 @login_required
@@ -136,3 +151,38 @@ def page_not_found(error):
 def logout():
    session.clear()
    return redirect(url_for('main.index'))
+
+#  -------------------  METODOS DE GESTION --------------------------- #
+@main.route('/eliminar/', methods = ['GET', 'POST'])
+@login_required
+def eliminar():
+    data = request.get_json(force=True)
+    controlador_hotel.eliminar(int(data["id"]), data["table"] )
+
+    users = controlador_hotel.consultar('users')
+    lista = []
+    for user in users:
+        dic = {
+            'id': user[0] ,
+            'nombre': user[1],
+            'email': user[3]
+        }
+        lista.append(dic)
+
+    print(lista)
+
+    return jsonify({
+        'status': 'OK',
+        'user': lista   
+    })
+
+@main.route('/search/', methods = ['GET', 'POST'])
+@login_required
+def search():
+    data = request.get_json(force=True)
+    users = controlador_hotel.find(data["parameter"], data["search"], data["table"])
+
+    return jsonify({
+        'status': 'OK',
+        'user': 'none'   
+    })
