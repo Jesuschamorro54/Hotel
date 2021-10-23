@@ -15,8 +15,8 @@
       <v-col>
         <p></p>
       </v-col>
-      <v-col class="align-center text-h4 white--text font-weight-bold">
-        <p class="align-center">El Mejor Hotel de la Ciudad</p>
+      <v-col class="text-center text-h4 white--text font-weight-bold">
+        <p class="text-center">El Mejor Hotel de la Ciudad</p>
       </v-col>
       <v-col>
         <v-card class="pa-2" height="180px" width="320px" elevation=24>
@@ -33,7 +33,7 @@
       </v-col>
     </v-row>
   </v-container>
-  </template>
+</template>
 {% endblock %}
 
 {% block contenido_2 %}
@@ -54,13 +54,13 @@
         </v-img>
 
         <v-card-subtitle class="pb-0">
-          Number 10
+          Podras contar con 5 salones
         </v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>Whitehaven Beach</div>
+          <div>Amplios y bien dotados</div>
 
-          <div>Whitsunday Island, Whitsunday Islands</div>
+          <div>Acceso a vido streaming, video bind, sonido, area de snaks, sillas comodas</div>
         </v-card-text>
 
         <v-card-actions>
@@ -77,13 +77,13 @@
         </v-img>
 
         <v-card-subtitle class="pb-0">
-          Number 10
+          Podras disfrutar de 40 habitaciones, 10 Suites y 2 Platino
         </v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>Whitehaven Beach</div>
+          <div>Todas las habitaciones poseen todos los servicios</div>
 
-          <div>Whitsunday Island, Whitsunday Islands</div>
+          <div>Hay multipes acomodaciones, doble, sencilla, familias, para eventos especiales</div>
         </v-card-text>
 
         <v-card-actions>
@@ -100,13 +100,13 @@
         </v-img>
 
         <v-card-subtitle class="pb-0">
-          Number 10
+          Disponemos de 2 hermosas playas y piscinas
         </v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>Whitehaven Beach</div>
+          <div>La apertura esta de 7 am y cierre 6 pm</div>
 
-          <div>Whitsunday Island, Whitsunday Islands</div>
+          <div>Para eventos especiales solo hay que programarlos</div>
         </v-card-text>
 
         <v-card-actions>
@@ -173,22 +173,22 @@
         <v-card-text>
           <v-container class="grey lighten-5 body-2" fluid>
             <v-row class="mx-0" justify="space-around" no-gutters></v-row>     
-              <v-row no-gutters>
-                <v-col>
+              <v-row justify="space-around">
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
                   <v-card class="px-2 py-2" max-width="300">
                     <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
                     <div class="grey--text ms-4"> Calificación 4.5 (413)</div>
                   </v-card>
                   
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
                   <v-card class="px-2 py-2" max-width="300">
                     <v-card-actions>
                       <v-btn color="amber darken-4" width="250" click="reserve" title="Realice su Reserva">Realice su Reserva</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
                   <v-card class="px-2 py-2" tile max-width="300">
                     <v-card-actions>
                       <v-btn color="green darken-2 white--text" width="250" click="comentarios" title="Busque Comentarios">Comentarios</v-btn>

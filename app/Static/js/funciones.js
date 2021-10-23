@@ -112,4 +112,5 @@ function ocultarVerClave_Log()
         passWordInput.type="text";
     }
 }
-var userloggedIn = true
+drawer = null
+error = null
