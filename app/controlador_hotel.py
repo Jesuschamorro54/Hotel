@@ -6,7 +6,7 @@ from db import DataBase
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "Xricagomex0126.",
+        "password": "20023006",
         "db": "hotel"
 }
 
@@ -97,7 +97,7 @@ def eliminar(id, table):
         sql = f"UPDATE {table} SET state = -1 WHERE (id = {id});"
 
         # Enviar un mensaje si la inserción fue exitosa
-        print("Eliminación exitosa!") if cursor.execute(sql) else ("Error en la Eliminación")
+        print(f"Eliminación exitosa!: user_id: {id}") if cursor.execute(sql) else ("Error en la Eliminación")
                   
     conexion.commit()
     conexion.close()

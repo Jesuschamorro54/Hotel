@@ -93,8 +93,8 @@ def admin_required(f):
 @main.route('/dashboard/')
 @login_required
 def dashboard():
-    #is_rol = session.get('usr_rol')
-    is_rol = 'admin'
+    is_rol = session.get('usr_rol')
+    # is_rol = 'admin'
     g.is_admin = True if is_rol=='admin'else False
     g.is_moder = True if is_rol=='moderador' else False
     g.is_free = True if is_rol=='free' else False
@@ -159,7 +159,7 @@ def eliminar():
     data = request.get_json(force=True)
     controlador_hotel.eliminar(int(data["id"]), data["table"] )
 
-    users = controlador_hotel.consultar_usuarios()
+    users = controlador_hotel.consultar('users')
     lista = []
     for user in users:
         dic = {

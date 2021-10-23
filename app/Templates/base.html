@@ -29,7 +29,13 @@
 
           <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
             <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
-            {{session['usr_name']}} --- {% block btn_exit %} {% endblock %}      
+            {% block btn_exit %} {% endblock %}      
+          </v-btn>
+
+          
+          <v-btn class="error pd-2 ml-4" elevation="8" disabled rounded>
+            <v-icon class="md-2" left>mdi-account-circle</v-icon>
+            {{session['usr_name']}}  
           </v-btn>
 
           {% else %}
