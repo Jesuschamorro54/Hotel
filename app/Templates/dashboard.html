@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block titulo %} Centara Grand Hotel {% endblock %}
-{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block titulo %} Dashboard {% endblock %}
+{% block tit_bar %} DASHBOARD {% endblock %}
 {% block btn_login %} Acceso {% endblock %}
 {% block btn_signin %} Registro {% endblock %}
 {% block btn_dashboard %} DashBoard {% endblock %}
@@ -9,47 +9,30 @@
 {% block btn_exit %} Salir {% endblock %}
 
 {% block contenido_1 %}
-<v-card class="d-flex align-center pa-2" flat height="250px" elevation=15>
-    <v-card-title>DashBoard Principal</v-card-title>
-    <v-card-text>
-        <v-container fluid>
-            <v-row class="d-flex align-center pt-3" justify="space-around" no-gutters>
-                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
-                    <v-card class="px-2 py-2" max-width="315">
-                        <v-card-actions>
-                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded href="/adm/adm_habitaciones" title="Administrar Habitaciones">Habitaciones</v-btn>
-                        </v-card-actions>
-                    </v-card>   
-                </v-col>
-                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
-                    <v-card class="px-2 py-2" max-width="315">
-                        <v-card-actions>
-                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded href="/adm/adm_reservas" title="Administrar Reservas">Reservas</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-col>  
-            </v-row>
-        </v-container>
-        <v-container fluid>
-            <v-row class="d-flex align-center mx-0 pt-1" justify="space-around" no-gutters>
-                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
-                    <v-card class="px-2 py-2" max-width="315">
-                        <v-card-actions>
-                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded href="/adm/adm_users" title="Administrar Seguridad">Seguridad</v-btn>
-                        </v-card-actions>
-                    </v-card>   
-                </v-col>
-                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
-                    <v-card class="px-2 py-2" max-width="315">
-                        <v-card-actions>
-                            <v-btn color="grey light-2" height="60" width="280" elevation="10" rounded href="/adm/adm_comentarios" title="Administrar Comentarios">Comentarios y Calificaciones</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-col>  
-            </v-row>
-        </v-container>
-
-    </v-card-text>
+<v-card class="d-flex align-center pa-2" flat wwidth = "100px" height="250px" elevation=15 style="block-size: auto;">
+    <v-card-title>Control de administracion</v-card-title>
+    <v-card class="mx-auto" elevation = 0>
+        <v-row class="d-flex " justify="space-around" no-gutters>
+            <v-col class="text-h4 white--text font-weight-bold">
+                <v-card-actions>
+                    <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" padding= "10px" width="280" elevation="10" href="/adm/habitaciones" title="Administrar Habitaciones"><v-icon>mdi-bed-empty</v-icon>Habitaciones</v-btn>
+                </v-card-actions>
+                <v-card-actions>
+                    <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/reservas" title="Administrar Reservas"><v-icon>mdi-room-service</v-icon>Reservas</v-btn>
+                </v-card-actions>
+            </v-col>
+            <v-divider vertical></v-divider>
+            <v-col class="text-h4 white--text font-weight-bold">
+                <v-card-actions>
+                    <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/users" title="Administrar Seguridad"><v-icon>mdi-account-lock</v-icon>Seguridad</v-btn>
+                </v-card-actions>
+                <v-card-actions>
+                    <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/comentarios" title="Administrar Comentarios"><v-icon>mdi-comment-text-multiple-outline</v-icon>Comentarios</v-btn>
+                </v-card-actions>
+                </v-card>
+            </v-col>  
+        </v-row>
+    </v-card>
 </v-card>
 {% endblock %}
 {% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}

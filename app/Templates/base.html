@@ -128,10 +128,17 @@
       <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
       <script src="{{ url_for('static', filename='js/responses.js') }}"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script>
-        new Vue({
+        hot = new Vue({
           el: '#app_ht',
           vuetify: new Vuetify(),
+          data(){
+            return {
+              dialog_delete: false,
+              dialog_edit: false,
+            }
+          },
         })
       </script>
   </body>
