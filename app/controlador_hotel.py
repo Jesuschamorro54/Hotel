@@ -23,15 +23,14 @@ def insertar_user(nombre, email, password):
     conexion.commit()
     conexion.close()
 
-
 #insertar_user("enrique", "enrique@gmail.com", "hola123") # -> Inserción de prueba
 
-def obtener_user(email):
+def obtener_user(usr_email):
     conexion, cursor = DataBase.connect(d)
     info_user = None
     with cursor:
-        cursor.execute(
-            "SELECT id, nombre, email, password, rol FROM users WHERE email = %s", (email,))
+        sql = f"SELECT id, nombre, email, password, rol FROM users WHERE email = '{usr_email}'"
+        cursor.execute(sql)
         info_user = cursor.fetchone()
     conexion.close()
     return info_user

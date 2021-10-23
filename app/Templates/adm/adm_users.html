@@ -9,38 +9,40 @@
 {% block btn_exit %} Salir {% endblock %}
 
 {% block contenido_1 %}
-<v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
-    <v-card-text>
-      <v-card-actions>
-        <v-btn color="gray" title="Añadir nuevo usuario">Añadir +</v-btn>
-      </v-card-actions>
-         <v-container>
-            <v-row class="d-flex align-center pt-3" justify="space-around">
-                <v-col class="px-2 py-2">
-                    <!--Contenerdor interno-->
-                    <v-card class="px-2 py-2" height="100px">
-                        <v-row class="d-flex align-center pt-3" justify="space-around">
-                              <v-col class="text-h4 white--text font-weight-bold">
-                                  <v-text-field
-                                      id="search"
-                                      append-icon="mdi-magnify"
-                                      label="Buscar usuarios"
-                                  ></v-text-field>
-                              </v-col>
-                              <v-col class="text-h4 white--text font-weight-bold">
-                                <v-card-actions>
-                                  <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
-                                  <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
-                                  <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
-                                </v-card-actions>
-                            </v-col>
-                        </v-row>
-                    </v-card>   
-                </v-col>
-            </v-row>
-        </v-container>
-    </v-card-text>
-</v-card>
+<v-container fluid>
+    <v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
+        <v-card-text>
+        <v-card-actions>
+            <v-btn color="gray" title="Añadir nuevo usuario">Añadir +</v-btn>
+        </v-card-actions>
+            <v-container>
+                <v-row class="d-flex align-center pt-3" justify="space-around">
+                    <v-col class="px-2 py-2">
+                        <!--Contenerdor interno-->
+                        <v-card class="px-2 py-2" height="100px">
+                            <v-row class="d-flex align-center pt-3" justify="space-around">
+                                <v-col class="text-h4 white--text font-weight-bold">
+                                    <v-text-field
+                                        id="search"
+                                        append-icon="mdi-magnify"
+                                        label="Buscar usuarios"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col class="text-h4 white--text font-weight-bold">
+                                    <v-card-actions>
+                                    <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
+                                    <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
+                                    <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
+                                    </v-card-actions>
+                                </v-col>
+                            </v-row>
+                        </v-card>   
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-card-text>
+    </v-card>
+</v-container>
 {% endblock %}
 {% block contenido_2 %}
 <template>

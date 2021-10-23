@@ -10,32 +10,33 @@
 
 {% block contenido_1 %}
 <template>
-  <v-row class="d-flex align-center" justify="space-around">
-    <v-col>
-      <p></p>
-    </v-col>
-    <v-col class="text-h4 white--text font-weight-bold">
-      <p>El Mejor Hotel de la Ciudad</p>
-    </v-col>
-    <v-col>
-      <v-card class="pa-2" flat height="180px" width="320px" elevation=24>
-        <v-card-text align="left">
-          <p class="text-subtitle-1 font-weight-bold">Consultar disponibilidad para tu estadia en la ciudad</p>
-        </v-card-text>
-        <v-toolbar dense floating>
-          <v-text-field name="fecha_busqueda" type="date" label="Fecha Busqueda" id="fecha_busqueda" title="Buscar Disponibilidad" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
-          <v-btn icon title="Buscar">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </v-toolbar>
-      </v-card>
-    </v-col>
-  </v-row>
-</template>
+  <v-container fluid>
+    <v-row class="d-flex align-center" justify="space-around" no-gutters>
+      <v-col>
+        <p></p>
+      </v-col>
+      <v-col class="align-center text-h4 white--text font-weight-bold">
+        <p class="align-center">El Mejor Hotel de la Ciudad</p>
+      </v-col>
+      <v-col>
+        <v-card class="pa-2" height="180px" width="320px" elevation=24>
+          <v-card-text align="left">
+            <p class="text-subtitle-1 font-weight-bold">Consultar disponibilidad para tu estadia en la ciudad</p>
+          </v-card-text>
+          <v-toolbar dense floating>
+            <v-text-field name="fecha_busqueda" type="date" label="Fecha Busqueda" id="fecha_busqueda" title="Buscar Disponibilidad" prepend-icon="mdi-magnify" hide-details clearable></v-text-field>
+            <v-btn icon title="Buscar">
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </v-toolbar>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+  </template>
 {% endblock %}
 
 {% block contenido_2 %}
-
 <template>
   <v-row>
     <v-divider></v-divider>
@@ -120,7 +121,6 @@
     <v-divider></v-divider>
   </v-row>
 </template>
-
 {% endblock %}
 
 {% block contenido_3 %}
