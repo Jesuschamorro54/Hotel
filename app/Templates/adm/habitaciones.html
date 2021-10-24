@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Administrador de habitaciones {% endblock %}
+{% block tit_bar %} Administrar habitaciones {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_dashboard %} DashBoard {% endblock %}
+{% block btn_about %} Acerca de {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+
+{% block contenido_1 %}
+<v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
+    <v-card-text>
+         <v-container>
+            <v-row class="d-flex align-center pt-3" justify="space-around">
+                <v-col class="px-2 py-2">
+                    <!--Contenerdor interno-->
+                    <v-card class="px-2 py-2" height="100px">
+                        <v-row class="d-flex align-center pt-3" justify="space-around">
+                              <v-col class="text-h4 white--text font-weight-bold">
+                                  <v-text-field
+                                      id="search"
+                                      append-icon="mdi-magnify"
+                                      label="Buscar habitacion"
+                                  ></v-text-field>
+                              </v-col>
+                              <v-col class="text-h4 white--text font-weight-bold">
+                                <v-card-actions>
+                                    <input type="hidden" id="table" value="rooms">
+                                  <v-btn color="gray" text text title="Buscar" onclick=search() >Buscar</v-btn>
+                                  <v-btn color="gray" text text title="clear" onclick=clear_all()>Clear</v-btn>                                                                      
+                                  <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todas</v-btn>
+                                </v-card-actions>
+                            </v-col>
+                        </v-row>
+                    </v-card>   
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-card-text>
+</v-card>
+{% endblock %}
+{% block contenido_2 %}
+<template>
+    <!--Linea separador-->
+    <v-row>
+        <v-divider></v-divider> 
+    </v-row>
+    <v-row>
+        <h3><br></h3>
+    </v-row>
+
+    <!--Titulo-->
+    <v-row class="d-flex align-center" justify="space-around"> 
+        <h2 class="justify">Habitaciones</h2> 
+    </v-row>
+
+    <!--Contenedor de datos-->
+    <v-row id= "content" class="d-flex align-center" justify="space-around">
+        {% for room in rooms_list %}
+        <v-col>
+            <v-card class="mx-auto" width="300">
+                <v-card class = "mx-auto" height="250px" style="padding: 5px; block-size: auto;" elevation = 0>
+                    <v-img class="black--text align-end" src="{{room[4]}}">
+                    </v-img>
+                </v-card>
+                <v-divider></v-divider>
+                <v-card-title style="padding: 2px 10px;">{{room[1]}}</v-card-title>
+                <v-divider></v-divider>
+            
+                <v-card-subtitle class="pb-0" style="padding: 2px 15px;">
+                  Id: {{room[0]}}
+                </v-card-subtitle>
+            
+                <v-card-text class="text--primary">
+                  <div><b>Precio: </b>${{room[5]}}</div>
+                  <div><b>Calificacion: </b>{{room[3]}}</div>
+                  <div><b>Description: </b>{{room[2]}}</div>
+                </v-card-text>            
+                <v-card-actions  style="padding: 15px">
+                    <form style="margin: 10px 1px;">
+                        <template>
+                            <v-row justify="center">
+                              <v-dialog v-model="dialog_edit" persistent max-width="600px" >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn color="green"dark text v-bind="attrs" v-on="on">Editar</v-btn>
+                                </template>
+                                <v-card>
+                                  <v-card-title>
+                                    <span class="text-h5">Datos</span>
+                                  </v-card-title>
+                                  <v-card-text>
+                                    <v-container>
+                                      <v-row>
+                                        <v-col cols="12">
+                                          <v-text-field id="name{{room[0]}}" label="Name*" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                          <v-text-field id="email{{room[0]}}" label="Email*" required ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6">
+                                          <v-autocomplete
+                                            :items="['free', 'moderador', 'admin']"
+                                            label="Rol"
+                                            multiple
+                                            id="rol{{room[0]}}"
+                                          ></v-autocomplete>
+                                        </v-col>
+                                      </v-row>
+                                    </v-container>
+                                    <small>Edicion de usuarios {{room[0]}}</small>
+                                  </v-card-text>
+                                  <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="red darken-1" text @click="dialog_edit = false" > Cerrar </v-btn>
+                                    <v-btn color="blue darken-1" text onclick=edit() @click="dialog_edit = false" > Guardar </v-btn>
+                                  </v-card-actions>
+                                </v-card>
+                              </v-dialog>
+                            </v-row>
+                        </template>
+                    </form>
+                    <form style="margin: 10px 15px;">
+                        <template>
+                            <v-row justify="center">
+                              <v-dialog v-model="dialog_delete" persistent max-width="290">
+                                    <template v-slot:activator="{ on, attrs }">
+                                      <v-btn color="red" dark text v-bind="attrs" v-on="on">Eliminar</v-btn>
+                                    </template>
+                                    <v-card>
+                                      <v-card-title class="text-h5"> Eliminar </v-card-title>
+                                      <v-card-text>¿Está seguro que desea eliminar el usuario?</v-card-text>
+                                      <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="red darken-1" text @click="dialog_delete = false">Cancelar</v-btn>
+                                        <v-btn color="green darken-1" text onclick=eliminar()  @click="dialog_delete = false">Aceptar</v-btn>
+                                      </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-row>
+                        </template>
+                    </form>
+                      <input type="hidden" id="id" value="{{room[0]}}">
+                      <input type="hidden" id="route" value="/adm/habitaciones/">
+                </v-card-actions>
+            </v-card>
+        </v-col>
+        {% endfor %}
+    </v-row>
+        <v-row>
+            <v-divider></v-divider>
+        </v-row>
+</template> 
+
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
