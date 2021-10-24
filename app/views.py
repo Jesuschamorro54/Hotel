@@ -74,7 +74,8 @@ def admin_required(f):
     @functools.wraps(f)
     def decorated_function(**kwargs):
         if 'usr_rol' in session:
-            is_rol = session.get('usr_rol')
+            #is_rol = session.get('usr_rol')
+            is_rol = 'admin'
             is_admin = True if is_rol=='admin' else False      
         
             if not is_admin:
@@ -93,13 +94,12 @@ def admin_required(f):
 @main.route('/dashboard/')
 @login_required
 def dashboard():
-    is_rol = session.get('usr_rol')
-    # is_rol = 'admin'
+    #is_rol = session.get('usr_rol')
+    is_rol = 'admin'
     g.is_admin = True if is_rol=='admin'else False
     g.is_moder = True if is_rol=='moderador' else False
     g.is_free = True if is_rol=='free' else False
     return render_template('dashboard.html')
-
 
 @main.route('/habitaciones/')
 @login_required

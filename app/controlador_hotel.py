@@ -6,7 +6,7 @@ from db import DataBase
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "20023006",
+        "password": "Xricagomex0126.",
         "db": "hotel"
 }
 
