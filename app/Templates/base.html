@@ -10,120 +10,126 @@
     <title>{% block titulo %} {% endblock %}</title>
   </head>
   <body>
-      <div id="app_ht">
-        <v-app>
-          <v-app-bar app color="#00000" dark elevate-on-scroll elevation=5>
-            <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
-            <v-toolbar-title class="xs-4" shrink-on-scroll>{% block tit_bar %} {% endblock %}</v-toolbar-title>
-            <v-spacer></v-spacer>
-            {% if session['acc'] != True %}
-            <v-btn class="pd-2 ml-4 xs" elevation="8" rounded outlined title="Acceder" href="/usr_login">
-              <v-icon class="md-2" left>mdi-account-circle</v-icon>
-              {% block btn_login %} {% endblock %}
-            </v-btn>
+    <v-app id="app_ht">
+      <v-container fluid>
+      <v-app-bar app color="#00000" dark elevate-on-scroll elevation=5>
+        <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
+          <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          {% if is_login %}
+          <v-btn class="orange pd-2 ml-4" elevation="8" rounded title="DashBoard" href="/dashboard">
+            <v-icon class="md-2" left>mdi-cards-variant</v-icon>
+            {% block btn_dashboard %} {% endblock %}     
+          </v-btn>
 
-            <v-btn class="success pd-2 ml-4 xs" elevation="8" rounded title="Registrar Usuario" href="/usr_registro">
-              <v-icon class="md-2" left>mdi-account-plus</v-icon>
-              {% block btn_signin %} {% endblock %}       
-            </v-btn>
-            {% endif %} 
+          <v-btn class="orange pd-2 ml-4" elevation="8" rounded title="Acerca de" href="/">
+            <v-icon class="md-2" left>mdi-help-circle</v-icon>
+            {% block btn_about %} {% endblock %}     
+          </v-btn>
 
-            {% if session['acc'] == True %}
-            <v-btn class="orange pd-2 ml-4 xs" elevation="8" rounded title="DashBoard" href="/dashboard">
-              <v-icon class="md-2" left>mdi-cards-variant</v-icon>
-              {% block btn_dashboard %} {% endblock %}     
-            </v-btn>
+          <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
+            <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
+            {% block btn_exit %} {% endblock %}      
+          </v-btn>
 
-            <v-btn class="orange pd-2 ml-4 xs" elevation="8" rounded title="About" href="/">
-              <v-icon class="md-2" left>mdi-help-circle</v-icon>
-              {% block btn_about %} {% endblock %}     
-            </v-btn>
+          
+          <v-btn class="error pd-2 ml-4" elevation="8" disabled rounded>
+            <v-icon class="md-2" left>mdi-account-circle</v-icon>
+            {{session['usr_name']}}  
+          </v-btn>
 
-            <v-btn class="error pd-2 ml-4 xs" elevation="8" title="Salir" rounded href="{{url_for('main.logout')}}">
-              <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
-              {% block btn_exit %} {% endblock %}      
-            </v-btn>
-            {% endif %}
-          </v-app-bar>
+          {% else %}
 
-          <v-main class="pt-0">
-            <v-container fluid>
-              <v-parallax height="700" src="{{ url_for('static', filename='img/portada.jpg') }}">
-              <v-row class="d-flex align-center" justify="center">
-                <v-col class="text-center" cols="12">
-                  <h1 class="text-h2 font-weight-bold black--text mb-4">
-                    Centara Grand Hotel 
-                  </h1>
-                  <h3 class="subheading white--text">
-                    <div>
-                      Tu Hotel en la Costa
-                    </div>
-                  </h3>
-                  <h4 class="subheading white--text">
-                    Decanso sin Limites
-                    {% block contenido_1 %}
-      
-                    {% endblock %}
-                  </h4>
-                </v-col>
-              </v-row>
-              </v-parallax>
+          <v-btn class="pd-2 ml-4" elevation="8" rounded outlined title="Acceder" href="/usr_login">
+            <v-icon class="md-2" left>mdi-account-circle</v-icon>
+            {% block btn_login %} {% endblock %}
+          </v-btn>
 
-            </v-container>
-            <v-container fluid>
-              {% block contenido_2 %}
-      
+          <v-btn class="success pd-2 ml-4" elevation="8" rounded title="Registrar Usuario" href="/usr_registro">
+            <v-icon class="md-2" left>mdi-account-plus</v-icon>
+            {% block btn_signin %} {% endblock %}       
+          </v-btn>
+
+          {% endif %}
+      </v-app-bar>
+    </v-container>
+      <v-main class="pt-0">
+        <v-container fluid>
+          <v-parallax height="700" src="{{ url_for('static', filename='img/portada.jpg') }}">
+          <v-row class="d-flex align-center" justify="center">
+            <v-col class="text-center" cols="12">
+              <h1 class="text-h2 font-weight-bold black--text mb-4">
+                Centara Grand Hotel 
+              </h1>
+              <h3 class="subheading white--text">
+                <div>
+                  Tu Hotel en la Costa
+                </div>
+              </h3>
+              <h4 class="subheading white--text">
+                Decanso sin Limites
+              </h4>
+              {% block contenido_1 %}
+  
               {% endblock %}
-            </v-container>
-            <v-container fluid>
-              {% block contenido_3 %}
-      
-              {% endblock %}
-            </v-container>
+            </v-col>
+          </v-row>
+          </v-parallax>
+        </v-container>
+        <v-container fluid>
+          {% block contenido_2 %}
+  
+          {% endblock %}
+        </v-container>
+        <v-container fluid>
+          {% block contenido_3 %}
+  
+          {% endblock %}
+        </v-container>
 
-            <v-container fluid>
-              {% block contenido_4 %}
-      
-              {% endblock %}
-            </v-container>
+        <v-container fluid>
+          {% block contenido_4 %}
+  
+          {% endblock %}
+        </v-container>
 
-            <v-container fluid>
-              {% block contenido_5 %}
-      
-              {% endblock %}
-            </v-container>
+        <v-container fluid>
+          {% block contenido_5 %}
+  
+          {% endblock %}
+        </v-container>
 
-          </v-main>
-          <v-footer dark padless elevation="5">
-            <v-card flat tile class="indigo lighten-1 white--text text-center flex">
-              <v-card-text>
-                <v-btn href="https://www.facebook.com/quantumsdata" title="Facebook" class="mx-4 white--text" icon>
-                  <v-icon size="24px">mdi-facebook</v-icon>
-                </v-btn>
-                <v-btn href="https://twitter.com/quantumsdata" title="Twitter" class="mx-4 white--text" icon>
-                  <v-icon size="24px">mdi-twitter</v-icon>
-                </v-btn>
-                <v-btn href="https://www.linkedin.com/company/quantumsdata" title="LinkedIn" class="mx-4 white--text" icon>
-                  <v-icon size="24px">mdi-linkedin</v-icon>
-                </v-btn>
-                <v-btn href="https://www.instagram.com/quantumsdata" title="Instagram" class="mx-4 white--text" icon>
-                  <v-icon size="24px">mdi-instagram</v-icon>
-                </v-btn>
-              </v-card-text>
-        
-              <v-card-text class="white--text pt-0">
-                {% block text_footer_01 %} {% endblock %}
-              </v-card-text>
-        
-              <v-divider></v-divider>
-        
-              <v-card-text class="white--text">
-                2021 — <strong>{% block text_footer_02 %} {% endblock %}</strong>
-              </v-card-text>
-            </v-card>
-          </v-footer>
-        </v-app>
-      </div>
+      </v-main>
+      <v-footer dark padless elevation="5">
+        <v-card flat tile class="indigo lighten-1 white--text text-center flex">
+          <v-card-text>
+            <v-btn href="https://www.facebook.com/quantumsdata" title="Facebook" class="mx-4 white--text" icon>
+              <v-icon size="24px">mdi-facebook</v-icon>
+            </v-btn>
+            <v-btn href="https://twitter.com/quantumsdata" title="Twitter" class="mx-4 white--text" icon>
+              <v-icon size="24px">mdi-twitter</v-icon>
+            </v-btn>
+            <v-btn href="https://www.linkedin.com/company/quantumsdata" title="LinkedIn" class="mx-4 white--text" icon>
+              <v-icon size="24px">mdi-linkedin</v-icon>
+            </v-btn>
+            <v-btn href="https://www.instagram.com/quantumsdata" title="Instagram" class="mx-4 white--text" icon>
+              <v-icon size="24px">mdi-instagram</v-icon>
+            </v-btn>
+          </v-card-text>
+    
+          <v-card-text class="white--text pt-0">
+            {% block text_footer_01 %} {% endblock %}
+          </v-card-text>
+    
+          <v-divider></v-divider>
+    
+          <v-card-text class="white--text">
+            2021 — <strong>{% block text_footer_02 %} {% endblock %}</strong>
+          </v-card-text>
+        </v-card>
+      </v-footer>
+    </v-app>
+
 
       <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
@@ -132,6 +138,8 @@
       <script>
         hot = new Vue({
           el: '#app_ht',
+          drawer: null,
+          dial_reg: false,
           vuetify: new Vuetify(),
           data(){
             return {

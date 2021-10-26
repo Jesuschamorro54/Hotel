@@ -25,6 +25,7 @@ def insertar_user(nombre, email, password):
     conexion.commit()
     conexion.close()
 
+
 # TRAER TODOS LOS DATOS DE UNA TABLA
 def consultar(table):
     sql = ""
@@ -87,6 +88,7 @@ def find(parameter, tp, table):
 
     return container
 
+
 # ELIMINAR UN REGISTRO
 def eliminar(id, table):
     print("Eliminando usuario")
@@ -95,7 +97,20 @@ def eliminar(id, table):
         sql = f"UPDATE {table} SET state = -1 WHERE (id = {id});"
 
         # Enviar un mensaje si la inserción fue exitosa
-        print("Eliminación exitosa!") if cursor.execute(sql) else ("Error en la Eliminación")
+        print(f"Eliminación exitosa!: user_id: {id}") if cursor.execute(sql) else ("Error en la Eliminación")
                   
     conexion.commit()
     conexion.close()
+
+
+# OBTENER UN USUARIO POR EMAIL
+def obtener_user(usr_email):
+    conexion, cursor = DataBase.connect(d)
+    info_user = None
+    with cursor:
+        sql = f"SELECT id, nombre, email, password, rol FROM users WHERE email = '{usr_email}'"
+        cursor.execute(sql)
+        info_user = cursor.fetchone()
+    conexion.close()
+    return info_user
+
