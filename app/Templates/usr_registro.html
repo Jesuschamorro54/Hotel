@@ -19,6 +19,7 @@
               id="usr_name"
               required
               prepend-inner-icon="mdi-account"
+              title="Digitar el Nombre del Usuario"
               clearable
             ></v-text-field>
             <v-text-field
@@ -30,6 +31,7 @@
               id="usr_lastname"
               required
               prepend-inner-icon="mdi-account"
+              title="Digitar el Apellido del Usuario"
               clearable
             ></v-text-field>
             <v-text-field
@@ -41,6 +43,7 @@
                 id="usr_email"
                 required
                 prepend-inner-icon="mdi-account"
+                title="Digitar el Correo del Usuario"
                 clearable
             ></v-text-field>
             <v-text-field
@@ -49,7 +52,8 @@
               type="password"
               label="Clave de Acceso"
               required
-              prepend-inner-icon="mdi-lock"           
+              prepend-inner-icon="mdi-lock"
+              title="Digitar la clave del Usuario"       
             >
                 <template v-slot:append-outer>
                   <v-tooltip
@@ -67,9 +71,10 @@
             <v-checkbox
             name="usr_checkbox"
             value="1"
-            label="Aceptacion Politicas y Tratamiento de datos"
+            label="Aceptacion Politicas y Tratamiento de Datos"
             type="checkbox"
             required
+            title="Aceptacion Politicas y Tratamiento de Datos"
             ></v-checkbox>
 
             <v-divider class="py-3"></v-divider>

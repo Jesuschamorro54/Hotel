@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block titulo %} Centara Grand Hotel {% endblock %}
-{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block titulo %} Centara Grand Hotel - Administrador de reservas {% endblock %}
+{% block tit_bar %} Administrar reservas {% endblock %}
 {% block btn_login %} Acceso {% endblock %}
 {% block btn_signin %} Registro {% endblock %}
 {% block btn_dashboard %} DashBoard {% endblock %}
@@ -11,9 +11,6 @@
 {% block contenido_1 %}
 <v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
     <v-card-text>
-      <v-card-actions>
-        <v-btn color="gray" title="Añadir nuevo usuario">Añadir +</v-btn>
-      </v-card-actions>
          <v-container>
             <v-row class="d-flex align-center pt-3" justify="space-around">
                 <v-col class="px-2 py-2">
@@ -24,14 +21,14 @@
                                   <v-text-field
                                       id="search"
                                       append-icon="mdi-magnify"
-                                      label="Buscar usuarios"
+                                      label="Buscar id de la reserva"
                                   ></v-text-field>
                               </v-col>
                               <v-col class="text-h4 white--text font-weight-bold">
                                 <v-card-actions>
                                   <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
                                   <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
-                                  <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
+                                  <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todas</v-btn>
                                 </v-card-actions>
                             </v-col>
                         </v-row>
@@ -54,7 +51,7 @@
 
     <!--Titulo-->
     <v-row class="d-flex align-center" justify="space-around"> 
-        <h2 class="justify">Usuarios</h2> 
+        <h2 class="justify">Reservas</h2> 
     </v-row>
 
     <!--Contenedor de datos-->
@@ -64,7 +61,6 @@
             <v-divider></v-divider>
         </v-row>
 </template> 
-
 
 {% endblock %}
 {% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
