@@ -6,7 +6,7 @@ from db import DataBase
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "20023006",
+        "password": "Xricagomex0126.",
         "db": "hotel"
 }
 
@@ -61,6 +61,15 @@ def consultar(table):
 
 # BUSCAR UN REGISTRO UN REGISTRO
 def find(parameter, tp, table):
+
+    """
+    parameter: Es el parametro por el que se va a buscar, ya sea id, nombre, description, fecha o email, etc.
+    #--------------------------------------------------------------------------------------------------------
+    tp: Es el tipo de ese parametro, recibe str o number
+    #--------------------------------------------------------------------------------------------------------
+    table: Es la tabla que se va a consultar
+    """
+
     conexion, cursor = DataBase.connect(d)
     conexion.begin()
     sql = ""
@@ -78,15 +87,27 @@ def find(parameter, tp, table):
             elif tp == 'str':
                 sql = f"select id, numero, descriptions, calification, image, price, enabled from {table} WHERE numero = {parameter}"
     # comments -----
+        elif table == 'comments':
+            pass # CODIGO DE ESTE CONDICIONAL
+
+    # reservas -----
+        elif table == 'reservas':
+            pass # CODIGO DE ESTE CONDICIONAL
+
+    # payments -----
+        elif table == 'payments':
+            pass # CODIGO DE ESTE CONDICIONAL
+
+    #---------------------Ejecutar el sql-------------------------
         if sql != '':
             cursor.execute(sql)
             container = cursor.fetchone()
             print(f"|R-DB - {table}|: ", container)
         else:
-            print("---|SQL NULL|---")
+            print("---|SQL NULL|---") # Muestra esto por consola si el sql queda nulo
             container = ""
 
-    return container
+    return container  # Retorna los datos que se buscan
 
 
 # ELIMINAR UN REGISTRO
@@ -94,7 +115,26 @@ def eliminar(id, table):
     print("Eliminando usuario")
     conexion, cursor = DataBase.connect(d)
     with cursor:
-        sql = f"UPDATE {table} SET state = -1 WHERE (id = {id});"
+    
+    # users -----
+        if table == 'users':
+            sql = f"UPDATE {table} SET state = -1 WHERE (id = {id});"
+
+    # rooms -----
+        elif table == 'rooms':
+            pass # CODIGO DE ESTE CONDICIONAL
+
+    # comments -----
+        elif table == 'comments':
+            pass # CODIGO DE ESTE CONDICIONAL
+
+    # reservas -----
+        elif table == 'reservas':
+            pass # CODIGO DE ESTE CONDICIONAL
+
+    # payments -----
+        elif table == 'payments':
+            pass # CODIGO DE ESTE CONDICIONAL
 
         # Enviar un mensaje si la inserción fue exitosa
         print(f"Eliminación exitosa!: user_id: {id}") if cursor.execute(sql) else ("Error en la Eliminación")
