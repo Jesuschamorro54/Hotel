@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Habitación {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_dashboard %} DashBoard {% endblock %}
+{% block btn_about %} Acerca de {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+
+{% block contenido_3 %}
+<template>
+  <v-row>
+    <v-divider></v-divider>
+   </v-row>
+  
+  <v-row class="d-flex align-center pt-5" justify="space-around">
+    <h2 class="justify">Habitación</h2>
+  </v-row>
+
+    <v-card loading="loading" class="mx-auto my-12" max-width="900">
+      <template slot="progress">
+        <v-progress-linear color="deep-purple" height="10" indeterminate title="Procesando"></v-progress-linear>
+      </template>
+      <v-row class="d-flex align-center py-2 pl-3 pr-2" justify="space-around" no-gutters>
+        <v-col>
+          <v-img position="center center" height="250" width="550" src="{{ url_for('static', filename='img/habitacion_01.jpg') }}"></v-img>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <p class="text-subtitle-1 font-weight-bold pl-2">Caracteristicas</p>
+            <v-container class="grey lighten-5">
+              <v-row no-gutters>
+                <v-col >
+                  <v-card class="pa-2" outlined tile max-width="200">
+                    <div class="caption">* Cama doble</div>
+                    <div class="caption">* Mini Bar</div>
+                    <div class="caption">* Baño / Bañera</div>
+                    <div class="caption">* Balcon</div>
+                  </v-card>
+                </v-col>
+                <v-col>
+                  <v-card class="pa-2" outlined tile max-width="200">
+                    <div class="caption">* Room Service</div>
+                    <div class="caption">* Mini Split</div>
+                    <div class="caption">* Television</div>
+                    <div class="caption">* Wifi</div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+
+        </v-col>
+      </v-row>
+      
+      <v-card-title>Reserva Tu Habitación</v-card-title>
+        <v-card-text>
+          <v-container class="grey lighten-5 body-2" fluid>
+            <v-row class="mx-0" justify="space-around" no-gutters></v-row>     
+              <v-row justify="space-around">
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                  <v-card class="px-2 py-2" max-width="300">
+                    <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+                    <div class="grey--text ms-4"> Calificación 4.5 (413)</div>
+                  </v-card>
+                  
+                </v-col>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                  <v-card class="px-2 py-2" max-width="300">
+                    <v-card-actions>
+                      <v-btn color="amber darken-4" width="250" click="reserve" title="Realice su Reserva">Realice su Reserva</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+                <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+                  <v-card class="px-2 py-2" tile max-width="300">
+                    <v-card-actions>
+                      <v-btn color="green darken-2 white--text" width="250" click="comentarios" title="Busque Comentarios">Comentarios</v-btn>
+                    </v-card-actions> 
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-row>  
+          </v-container>
+      
+          <v-row justify="space-around" no-gutters>
+            <v-col>
+              <div class="my-4 text-subtitle-1 font-weight-bold">$ 160,000 • Habitación, Diario</div>
+            </v-col>
+          
+            <v-col>
+              <v-container fluid>
+                <v-row justify="space-around" no-gutters>
+                  <v-col cols="12">
+                       <v-toolbar dense floating>
+                      <v-text-field name="fecha_inicio" type="date" label="Fecha de Inicio" id="fecha_inicio" title="Fecha Llegada" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
+                      </v-toolbar>
+                  </v-col>
+                </v-row>
+              </v-container>
+              <v-container fluid>
+                <v-row justify="space-around" no-gutters>
+                  <v-col cols="12">
+                      <v-toolbar dense floating>
+                      <v-text-field name="fecha_fin" type="date" label="Fecha Partida" id="fecha_fin" title="Fecha Partida" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
+                      </v-toolbar>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-col>
+
+            <v-col>
+                <template>
+                  <v-container fluid>
+                    <v-row justify="space-around" no-gutters>
+                      <v-col cols="12">
+                        <v-combobox
+                          name="cantidad_adultos"
+                          :items=[1,2,3,4,5,6,7]
+                          label="Adultos"
+                          clearable
+                          dense
+                          filled
+                          solo
+                        ></v-combobox>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </template>
+                <template>
+                  <v-container fluid>
+                    <v-row justify="space-around" no-gutters>
+                      <v-col cols="12">
+                        <v-combobox
+                          name="cantidad_menores"
+                          :items=[1,2,3,4,5,6]
+                          label="Niños"
+                          clearable
+                          dense
+                          filled
+                          solo
+                        ></v-combobox>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </template>
+  
+            </v-col>
+          </v-row>
+
+          <v-row justify="space-around" no-gutters class="mx-0">
+            <div>La habitación incluye desayuno americano, se reciben varios medios de pago</div>
+          </v-row>
+        </v-card-text>
+  
+      <v-divider class="mx-4"></v-divider>
+  
+      
+      <v-row class="mx-0" justify="space-around" no-gutters>
+        <v-card-title>Esta disponible</v-card-title>
+        <v-card-actions>
+          <v-btn color="amber darken-4" width="250" click="reserve" title="Realice su Reserva">Realice su Reserva</v-btn>
+        </v-card-actions>
+      </v-row>
+    </v-card>
+</template>
+{% endblock %}
+
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
