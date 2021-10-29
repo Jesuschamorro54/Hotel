@@ -12,30 +12,24 @@
   <body onload="params()">
     <v-app id="app_ht">
       <v-container fluid>
-        <v-app-bar app color="#00000" dark elevate-on-scroll elevation=5>
+        <v-app-bar app color="#00000" dark elevate-on-scroll elevation=10> 
           <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
-            <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %}</v-toolbar-title>
+            <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %} {% block tit_usr %} {% endblock %} {{session['usr_name']}} </v-toolbar-title>
             <v-spacer></v-spacer>
             {% if is_login %}
-            <v-btn class="orange pd-2 ml-4" elevation="8" rounded title="DashBoard" href="/dashboard">
+            <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="DashBoard" href="/dashboard">
               <v-icon class="md-2" left>mdi-cards-variant</v-icon>
-              {% block btn_dashboard %}Dasboard {% endblock %}     
+              {% block btn_dashboard %} {% endblock %}     
             </v-btn>
   
-            <v-btn class="orange pd-2 ml-4" elevation="8" rounded title="Acerca de" href="/">
+            <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="/">
               <v-icon class="md-2" left>mdi-help-circle</v-icon>
-              {% block btn_about %}Acerda de {% endblock %}     
+              {% block btn_about %} {% endblock %}     
             </v-btn>
   
             <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
               <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
-              {% block btn_exit %}Salir {% endblock %}      
-            </v-btn>
-  
-            
-            <v-btn class="error pd-2 ml-4" elevation="8" disabled rounded>
-              <v-icon class="md-2" left>mdi-account-circle</v-icon>
-              {{session['usr_name']}}  
+              {% block btn_exit %} {% endblock %}      
             </v-btn>
   
             {% else %}
@@ -52,7 +46,7 @@
   
             {% endif %}
         </v-app-bar>
-      </v-container>
+        </v-container>
 
 
       <v-main class="pt-0">
