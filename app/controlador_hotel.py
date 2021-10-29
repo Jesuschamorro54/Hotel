@@ -37,13 +37,16 @@ def consultar(table):
             sql = f"select id, nombre, email, rol, image from {table} WHERE state = 1"
 # comments -----
         elif table == "comments":
-            sql = f"select id, nombre, email, rol, image from {table} WHERE state = 1"
+            sql = f"select id, user_id, room_id, descriptions, likes, state, fecha from {table} WHERE state = 1"
+# comments generales-----
+        elif table == "general_comments":
+            sql = f"select user_id, nombre,room_id, descriptions, likes, state, fecha from {table} WHERE state = 1"
 # reservas -----
         elif table == "reservas":
-            sql = f"select id, nombre, email, rol, image from {table} WHERE state = 1"
+            sql = f"select id, user_id, room_id, descriptions ,solicitado, date_inico, date_final, state from {table} WHERE state = 1"
 # rooms -----
         elif table == "rooms":
-            sql = f"select id, numero, descriptions, calification, image, price, enabled from {table}"
+            sql = f"select id, numero, descriptions, calification, image, price, enabled from {table} WHERE state = 1 and enabled = 1"
 # payments -----
         elif table == "payments":
             sql = f"select id, nombre, email, rol, image from {table} WHERE state = 1"
@@ -59,7 +62,7 @@ def consultar(table):
     return container
 
 
-# BUSCAR UN REGISTRO UN REGISTRO
+# BUSCAR UN REGISTRO
 def find(parameter, tp, table):
 
     """
@@ -154,3 +157,41 @@ def obtener_user(usr_email):
     conexion.close()
     return info_user
 
+# INSERTAR DATOS DE UNA TABLA
+def addreg(parameters,table):
+    sql = ""
+    conexion, cursor = DataBase.connect(d)
+    with cursor:
+        conexion.begin()
+# users -----
+        if table == "users":
+            sql = f"""INSERT INTO {table}(nombre, email, password, image, fuente, rol, city, state) 
+        VALUES ({parameters})"""
+# comments -----
+        elif table == "comments":
+            sql = f"""INSERT INTO {table}(user_id, room_id, descriptions, likes, state, fecha) 
+        VALUES ({parameters})"""
+# reservas -----
+        elif table == "reservas":
+            sql = f"""INSERT INTO {table}(user_id, room_id, descriptions ,solicitado, date_inico, date_final, state, q_adults, q_childrens, q_days) 
+        VALUES ({parameters})"""
+# rooms -----
+        elif table == "rooms":
+             sql = f"""INSERT INTO {table}(numero, descriptions, calification, image, price, enabled) 
+        VALUES ({parameters})"""
+# payments -----
+        elif table == "payments":
+            sql = f"""INSERT INTO {table}(nombre, email, rol, image) 
+        VALUES ({parameters})"""
+
+        if sql != '':
+            cursor.execute(sql)
+            container = cursor.fetchall()
+            print(f"|R-DB - {table}|: ", container)
+            # Enviar un mensaje si la inserción fue exitosa
+            print("Inserción exitosa!") if cursor.execute(sql) else ("Error en la inserción")
+        else:
+            print("---|SQL NULL|---")
+            container = ""
+
+    return container

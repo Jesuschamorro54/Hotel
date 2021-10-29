@@ -8,8 +8,16 @@ import json
 main = blueprints.Blueprint('main', __name__)
 
 @main.route('/')
-def index():   
-    return render_template('index.html')
+def index():
+    comments = []
+    for id in controlador_hotel.consultar('general_comments'):
+        comments.append(list(id))
+    #print(comments) 
+    rooms = []
+    for id in controlador_hotel.consultar('rooms'):
+        rooms.append(list(id))
+    #print(rooms) 
+    return render_template('index.html', rooms_list = rooms, comments_list = comments)
 
 def login_required(view):
     @functools.wraps(view)
@@ -109,7 +117,10 @@ def habitaciones():
 @main.route('/comments/')
 @login_required
 def comments():
-    return render_template('comentarios.html')
+    comments = []
+    for id in controlador_hotel.consultar('comments'):
+        comments.append(list(id))
+    return render_template('comentarios.html', comments_list = comments)
 
 @main.route('/adm/habitaciones/')
 @login_required
