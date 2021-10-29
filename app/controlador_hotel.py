@@ -43,7 +43,25 @@ def consultar(table):
             sql = f"select user_id, nombre,room_id, descriptions, likes, state, fecha from {table} WHERE state = 1"
 # reservas -----
         elif table == "reservas":
-            sql = f"select id, user_id, room_id, descriptions ,solicitado, date_inico, date_final, state from {table} WHERE state = 1"
+            """"
+            ## HAY DOS SQL, YO NECESITO EL PRIMERO Y SE SUPONE QUE TU NECESITAS EL SEGUNDO, PROPONGO CREAR UN IF PARA VALIDAR TU CASO, ES DECIR.
+            # DENTRO DE ESTE ELIF CUANDO LA TABLA ES == RESERVAS, COLOCAR UNA CONDICIONAL CON OTRO PARAMETRO PAPRA QUE EL CODIGO SEPA 
+            # CUANDO DEBE EJCUTAR TU SQL, MI SQL LO METES EN UN ELSE EN CASO DE QUE TU OPCIÓN NO SE CUMPLA, EJEMPLO.
+
+            if (sql_a_ejecutar == 'ricardo'):
+               // asignar tu sql  
+            else:
+               // que se asigne el mio
+
+            """
+            # Este es el mio
+            sql = f"""SELECT r.id, u.nombre, r.solicitado, r.date_inicio, r.date_final, r.state  FROM reservas r
+                        INNER JOIN users u on u.id = r.user_id
+                        WHERE r.state in (0, 1);"""
+
+            # Este es el tuyo
+            # sql = f"select id, user_id, room_id, descriptions ,solicitado, date_inico, date_final, state from {table} WHERE state = 1"
+
 # rooms -----
         elif table == "rooms":
             sql = f"select id, numero, descriptions, calification, image, price, enabled from {table} WHERE state = 1 and enabled = 1"
@@ -54,7 +72,9 @@ def consultar(table):
         if sql != '':
             cursor.execute(sql)
             container = cursor.fetchall()
-            print(f"|R-DB - {table}|: ", container)
+            print(f"\n|R-DB - {table}|:")
+            for item in container:
+                print(item)
         else:
             print("---|SQL NULL|---")
             container = ""
@@ -125,7 +145,7 @@ def eliminar(id, table):
 
     # rooms -----
         elif table == 'rooms':
-            pass # CODIGO DE ESTE CONDICIONAL
+            sql = f"UPDATE {table} SET state = -1 WHERE (id = {id});"
 
     # comments -----
         elif table == 'comments':
@@ -144,6 +164,45 @@ def eliminar(id, table):
                   
     conexion.commit()
     conexion.close()
+
+
+def update(data):
+    sql = ''
+    conexion, cursor = DataBase.connect(d)
+    with cursor:
+    
+        # users -----
+        if data['table'] == 'users':
+            sql = f"""UPDATE users SET 
+            nombre = "{data['nombre']}", 
+            email = "{data['email']}", 
+            rol = "{data['rol']}"
+            WHERE (id = {int(data['id'])})"""
+
+        # ROOMS -----
+        elif data['table'] == 'rooms':
+            sql = f"""UPDATE rooms SET 
+            numero = "{data['number']}", 
+            price = {data['price']}, 
+            descriptions = "{data['descriptions']}"
+
+            WHERE (id = {int(data['id'])})"""
+
+        # RESERVAS -----
+        elif data['table'] == 'reservas':
+            sql = f"""UPDATE reservas SET 
+            state = {data['state']}
+            WHERE (id = {int(data['id'])})"""
+
+        # EJECUCIÓN DE SQL
+        try:
+            cursor.execute(sql)
+            print("\nR-DB: EDICION COMPLETADA!")
+            conexion.commit()
+            conexion.close()
+        except Exception as e:
+            print("\nR-DB: ERROR EN LA EDICIÓN!\n")
+            print(e)
 
 
 # OBTENER UN USUARIO POR EMAIL
