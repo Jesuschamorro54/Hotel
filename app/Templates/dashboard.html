@@ -9,7 +9,7 @@
 {% block btn_exit %}Salir{% endblock %}
 {% block contenido_1 %}
 <v-container fluid>
-    <v-row justify="space-around" no-gutters>
+    <v-row class="d-flex align-center py-4 px-4 mx-0" justify="space-around" no-gutters>
         <v-card class="pa-2" elevation=15>
         <v-card-title>Control de Administración</v-card-title>
 
@@ -18,11 +18,11 @@
                     <v-col class="align-center text-h4 white--text font-weight-bold">
                         {% if g.is_admin or g.is_moder %}
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/habitaciones" title="Administrar Habitaciones">
+                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/habitaciones" title="Administrar Habitaciones">
                                 <v-icon>mdi-bed-empty</v-icon>Habitaciones</v-btn>
                         </v-card-actions>
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/reservas" title="Administrar Reservas">
+                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/reservas" title="Administrar Reservas">
                                 <v-icon>mdi-room-service</v-icon>Reservas</v-btn>
                         </v-card-actions>
                         {% endif %}
@@ -31,13 +31,13 @@
                     <v-col class="align-center text-h4 white--text font-weight-bold">
                         {% if g.is_admin or g.is_moder %}
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/users" title="Administrar Seguridad">
+                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/users" title="Administrar Seguridad">
                                 <v-icon>mdi-account-lock</v-icon>Seguridad</v-btn>
                         </v-card-actions>
                         {% endif %}
                         {% if g.is_admin or g.is_moder or g.is_free %}
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="280" elevation="10" href="/adm/comentarios" title="Administrar Comentarios">
+                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/comentarios" title="Administrar Comentarios">
                                 <v-icon>mdi-comment-text-multiple-outline</v-icon>Comentarios</v-btn>
                         </v-card-actions>
                         {% endif %}

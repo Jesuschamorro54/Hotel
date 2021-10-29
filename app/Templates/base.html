@@ -12,17 +12,17 @@
   <body>
     <v-app id="app_ht">
       <v-container fluid>
-      <v-app-bar app color="#00000" dark elevate-on-scroll elevation=5>
+      <v-app-bar app color="#00000" dark elevate-on-scroll elevation=10> 
         <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
-          <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %}</v-toolbar-title>
+          <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %} {% block tit_usr %} {% endblock %} {{session['usr_name']}} </v-toolbar-title>
           <v-spacer></v-spacer>
           {% if is_login %}
-          <v-btn class="orange pd-2 ml-4" elevation="8" rounded title="DashBoard" href="/dashboard">
+          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="DashBoard" href="/dashboard">
             <v-icon class="md-2" left>mdi-cards-variant</v-icon>
             {% block btn_dashboard %} {% endblock %}     
           </v-btn>
 
-          <v-btn class="orange pd-2 ml-4" elevation="8" rounded title="Acerca de" href="/">
+          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="/">
             <v-icon class="md-2" left>mdi-help-circle</v-icon>
             {% block btn_about %} {% endblock %}     
           </v-btn>
@@ -30,12 +30,6 @@
           <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
             <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
             {% block btn_exit %} {% endblock %}      
-          </v-btn>
-
-          
-          <v-btn class="error pd-2 ml-4" elevation="8" disabled rounded>
-            <v-icon class="md-2" left>mdi-account-circle</v-icon>
-            {{session['usr_name']}}  
           </v-btn>
 
           {% else %}
@@ -57,7 +51,7 @@
         <v-container fluid>
           <v-parallax height="700" src="{{ url_for('static', filename='img/portada.jpg') }}">
           <v-row class="d-flex align-center" justify="center">
-            <v-col class="text-center" cols="12">
+            <v-col class="align-center text-center" cols="12">
               <h1 class="text-h2 font-weight-bold black--text mb-4">
                 Centara Grand Hotel 
               </h1>
@@ -136,18 +130,26 @@
       <script src="{{ url_for('static', filename='js/responses.js') }}"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script>
-        hot = new Vue({
+        hot = new Vue({        
           el: '#app_ht',
-          drawer: null,
           dial_reg: false,
           vuetify: new Vuetify(),
-          data(){
-            return {
-              dialog_delete: false,
-              dialog_edit: false,
-              
-            }
-          },
+          data: () => ({
+            dialog_delete: false,
+            dialog_edit: false,
+            dialog: false,
+            drawer: null,
+            search: '',
+            //Lista_habitaciones : [],
+            headers_rooms: [
+              { text: 'Numero', value: "[1]", align: 'start', sortable: true, filterable: false,  width: '30', class: "amber darken-4"},
+              { text: 'Descripción', value: '[2]', align: 'start', width: '250', class: "amber darken-4" },
+              { text: 'Calificación', value: '[3]', align: 'center', width: '40', class: "amber darken-4" },
+              { text: 'Imagen', value: '[4]', align: 'center', class: "amber darken-4"},
+              { text: 'Precio', value: '[5]', align: 'end', class: "amber darken-4"},
+             ],
+            //Lista_habitaciones: ["{{rooms_list}}"], 
+          }),
         })
       </script>
   </body>
