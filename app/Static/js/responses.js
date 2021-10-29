@@ -5,150 +5,282 @@ function clear_all(){
 }
 
 function eliminar(){
-    // console.log("Ejecutando eliminar")
-    id = document.getElementById("id").value;
-    table = document.getElementById("table").value;
-    root = document.getElementById("route").value;
-    var xml = new XMLHttpRequest();
+    var id = document.getElementById("btn_id").textContent;
+    const table = document.getElementById("table").value;
+    let xml = new XMLHttpRequest();
+
+    console.log("Ejecutando eliminar" + id);
     xml.open("POST", "/eliminar/", true);
     xml.setRequestHeader("Content-type","application/json");
     xml.onload = function(evt){
-        // alert(this.response);
-        // var dataReply = JSON.parse(this.response);
-        location.reload();
-
-        // document.getElementById(id).innerHTML='';
-
-        // alert(dataReply);
-    };
+      if (this.readyState == 4 && this.status == 200){      
+        var dataReply = JSON.parse(this.response);
+        console.log("RESPONSE: ",dataReply.status );
+        switch (table) {
+          case 'users': window.location.href = "/adm/users/"
+            break;
+          case 'rooms': window.location.href = "/adm/habitaciones/"
+            break;
+        
+          default: window.location.href = "/"
+            break;
+        }
+        
+      }
+    }
 
     data = JSON.stringify({
         'id': id, 
-        'table': table,
-        'route': root
+        'table': table
     });
     xml.send(data);
 
 };
 
+
+// FUNCION PARA EDITAR
 function edit(){
+  var formulario=document;
+  const table = formulario.getElementById('table').value;
+  var valid = true;
+
+  if (table == 'users'){
+    var nombre = formulario.getElementById("name").value;
+    var email = formulario.getElementById("email").value;
+    var rol = formulario.getElementById("role").value;
+    if (nombre != '' && email != '' && rol != ''){
+      valid = false;
+    }
+  }else if(table == 'rooms'){
+    var number = formulario.getElementById("number").value;
+    var price = formulario.getElementById("price").value;
+    var description = formulario.getElementById("description").value;
+    if (number != '' && price != '' && description != ''){
+      valid = false;
+    }
+  }
   
-  id = document.getElementById("id").value;
-  nombre = document.getElementById("name").value;
-  email =  document.getElementById("email").value;
-  rol = document.getElementById("rol").value;
-  table = document.getElementById("table").value;
-  root = document.getElementById("route").value;
-  var xml = new XMLHttpRequest();
-  //xml.open("POST", "/eliminar/", true);
-  // xml.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  xml.onload = function(){
-      // var dataReply = JSON.parse(this.responseText)
-      /// alert(dataReply)
-  };
+  
+
+  if (valid){
+    console.log("aquí")
+    let id = formulario.getElementById('btn_id').textContent;
+    
+    switch (table) {
+      case 'users':
+        nombre = nombre != '' ? nombre :  formulario.getElementById('btn_name').textContent;
+        email = email != '' ? email :  formulario.getElementById('btn_email').value;
+        rol = rol != '' ? rol :  formulario.getElementById("btn_rol").textContent;
+
+        data = JSON.stringify({
+          'id': id,
+          'nombre': nombre,
+          'email': email,
+          'rol': rol,
+          'table': table
+        });
+        break;
+
+      case 'rooms':
+        number = number != '' ? number :  formulario.getElementById('btn_number').textContent;
+        price = price != '' ? price :  formulario.getElementById('hidden_price').value;
+        description = description != '' ? description :  formulario.getElementById("hidden_description").value;
+
+        data = JSON.stringify({
+          'id': id,
+          'number': number,
+          'price': price,
+          'descriptions': description,
+          'table': table
+        });
+
+        break;
+    
+      default:
+        break;
+    }
+
+    let xml = new XMLHttpRequest();
+    xml.open("POST", "/update/", true);
+    xml.setRequestHeader("Content-type","application/json");
+    console.log(data);
+    xml.send(data)
+
+    // Cuando se reciba la respuesta
+    xml.onload = function(evt){
+      if (this.readyState == 4 && this.status == 200){      
+        var dataReply = JSON.parse(this.response);
+        console.log("RESPONSE: ",dataReply.status );
+
+        switch (table) {
+          case 'users': window.location.href = "/adm/users/"
+            break;
+          case 'rooms': window.location.href = "/adm/habitaciones/"
+            break;
+        
+          default: window.location.href = "/"
+            break;
+        }
+      }
+    }
+
+  }
+}
+
+//ENVIAR A LA VISTA DE CONFIG
+function config(ide){
+  console.log("Ejecutando configurar");
+  var id = ide
+  var table = document.getElementById("table").value;
+  let xml = new XMLHttpRequest();
+  xml.open("POST", "/adm/config", true);
+  xml.setRequestHeader("Content-type","application/json");
 
   data = JSON.stringify({
-      'id': id,
-      'name': nombre,
-      'email': email,
-      'rol': rol,
+      'id': id, 
       'table': table,
-      'route': root
   });
-  console.log(data);
-  // xml.send(data)
+  console.log("SOLICITUD: ", data);
+  xml.send(data);
+
+  xml.onload = function(evt){
+    if (this.readyState == 4 && this.status == 200){      
+      var dataReply = JSON.parse(this.response);
+      console.log("RESPONSE: ", dataReply.res );
+      switch (table) {
+        case 'users': window.location.href += 'config_u?' + 'data=' + dataReply.res + dataReply.module;
+          break;
+
+        case 'rooms': window.location.href += 'config_r?' + 'data=' + dataReply.res +','+ dataReply.module;
+          break;
+
+        default: window.location.reload()
+          break;
+      }
+    }
+  }
+};
+
+
+//FUNCION PARA INCLUIR PARAMETROS EN LA URL
+function params(){
+  //console.log("Obteniendo datos")
+  const valores = window.location.search;
+  //console.log(valores);
+
+  const urlParams = new URLSearchParams(valores);
+  var url = urlParams.get('data').split(",");
+  index = (url.length -1)
+  module = url[index]
+  console.log(url);
+
+  switch (module) {
+    case 'users':
+      window.document.getElementById('btn_id').textContent = url['0'];
+      window.document.getElementById('btn_name').textContent = url['1'];
+      window.document.getElementById('btn_email').value = url['2'];
+      window.document.getElementById('btn_rol').textContent = url['3']; 
+      break;
+
+    case 'rooms':
+      window.document.getElementById('btn_id').textContent = url['0'];
+      window.document.getElementById('btn_number').textContent = url['1'];
+      window.document.getElementById('btn_enabled').textContent = url['6'];
+      window.document.getElementById('description').value = url['2'];  
+      window.document.getElementById('hidden_price').value = url['5']; 
+      break;
+
+
+    default:
+      break;
+  }
+  
 }
 
-function search(){
-  var seeker = document.getElementById("search").value;
-  var table = document.getElementById("table").value;
+
+// FUNCION PARA BUSCAR USUARIO
+function search(act){
+
   var xml = new XMLHttpRequest();
-  
-  if (!isNaN(parseInt(seeker))){
-    seeker = parseInt(seeker);
-    data = JSON.stringify({
-      'parameter': seeker,
-      'search': 'number',
-      'table': table
-    });
-  }else{
-    data = JSON.stringify({
-      'parameter': seeker,
-      'search': 'str',
-      'table': table
-    });
-  }
-
-  xml.open("POST", "/search/", true);
+  xml.open("POST", "/adm/get_users/", true);
   xml.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  console.log(data);
+  var data = '';
 
+  if(act == 'unique'){
+    var seeker = document.getElementById("search").value;
+    var table = document.getElementById("table").value;
+
+    if (!isNaN(parseInt(seeker))){
+      seeker = parseInt(seeker);
+      data = JSON.stringify({
+        'action': act,
+        'parameter': seeker,
+        'search': 'number',
+        'table': table
+      });
+
+    }else{
+      data = JSON.stringify({
+        'action': act,
+        'parameter': seeker,
+        'search': 'str',
+        'table': table
+      });
+    }
+
+  }else{
+    data = JSON.stringify({'action': act });
+  }
+  console.log(data)
+  xml.send(data);
+
+}
+
+
+function confirm_check(id){
+  var xml = new XMLHttpRequest();
+  const table = document.getElementById("table").value;
+  var data = ''
+  xml.open("POST", "/checked/", true);
+
+
+  data = JSON.stringify({
+    'table': table,
+    'id': id,
+    'state': 1
+  });
+
+  console.log(data)
   xml.send(data)
 
-
-}
-
-/*
-function get_data(data){
-    users_edited =[];
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('GET', '/static/js/users.json', true)
-    xhttp.send();
-    xhttp.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            let datos = JSON.parse(this.responseText)
-            console.log(datos)
-            let res = document.querySelector("#content_users");
-            res.innerHTML="";
-            for (let item of datos){
-                res.innerHTML +=`
-                <div class="col">
-                    <div class="mx-auto v-card v-sheet theme--light" style="max-width: 344px;">
-                        <div class="v-image v-responsive black--text align-end theme--light" style="height: 200px;">
-                            <div class="v-responsive__sizer" style="padding-bottom: 52.0312%;"></div>
-                            <div class="v-image__image v-image__image--cover">
-                                <div>
-                                  <img class="img_logo" src="${item.image}">
-                                </div>
-                                <style>
-                                  .img_logo{
-                                    width: 60%;
-                                    margin-left: 66px;
-                                  }
-                                </style>
-                            </div>
-                        </div>
-                        <div class="v-responsive__content" style="width: 1280px;">
-                            <div>
-                                <input  class="v-card__title name="email" padding = "5px" id="email" type="text" value = "${item.nombre}" style="left: 60px; right: auto; padding-left: 8px;">
-                            </div>
-                        </div>
-                        <div class="v-card__subtitle pb-0">
-                            Id: ${item.id}
-                        </div>
-                        <div class="v-card__text text--primary">
-                          <div>
-                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Email: </label>
-                            <input name="email" padding = "5px" id="email" type="text" value = "${item.email}" style="width: 100% left: 60px; right: auto; padding-left: 8px;">
-                          </div>
-                          <div>
-                            <label for="email" class="v-label v-label--active theme--light" style="left: 15px; right: auto;">Rol: </label>
-                            <input name="email" padding = "5px" id="email" type="text" value = "${item.rol}" style="left: 60px; right: auto; padding-left: 8px;">
-                          </div>  
-                        </div>
-                        <div class="v-card__actions">
-                          <button type="button" class="v-btn v-btn--text theme--light v-size--default green--text" title="Editar" onclick = edit(${item.id})>
-                            <span class="v-btn__content">Editar</span>
-                          </button>
-                          <button type="button" class="v-btn v-btn--text theme--light v-size--default red--text" title="Eliminar" onclick = edit(${item.id})>
-                            <span class="v-btn__content">Eliminar</span>
-                          </button>
-                        </div>
-                    </div>
-                </div>
-                `
-            }
-        }
+  xml.onload = function(evt){
+    if (this.readyState == 4 && this.status == 200){      
+      window.location.reload();
     }
+  }
+
 }
-*/
+
+function delete_check(id){
+  var xml = new XMLHttpRequest();
+  const table = document.getElementById("table").value;
+  var data = ''
+  xml.open("POST", "/checked/", true);
+
+
+  data = JSON.stringify({
+    'table': table,
+    'id': id,
+    'state': -1
+  });
+
+  console.log(data)
+  xml.send(data)
+
+  xml.onload = function(evt){
+    if (this.readyState == 4 && this.status == 200){      
+      window.location.reload();
+    }
+  }
+
+}

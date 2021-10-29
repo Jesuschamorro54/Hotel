@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block titulo %} Admin Usuarios {% endblock %}
 {% block tit_bar %} Centara Grand Hotel {% endblock %}
 {% block btn_login %} Acceso {% endblock %}
 {% block btn_signin %} Registro {% endblock %}
@@ -29,9 +29,9 @@
                                   <v-card-actions>
                                       <input type="hidden" id="table" value="users">
                                       <input type="hidden" id="route" value="/adm/users/">
-                                      <v-btn color="gray" text text title="Buscar" onclick=search()>Buscar</v-btn>
+                                      <v-btn color="gray" text text title="Buscar" onclick="search()">Buscar</v-btn>
                                       <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
-                                      <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
+                                      <v-btn elevation=8 color="green" onclick="search('all')" >Mostrar todos</v-btn>
                                   </v-card-actions>
                               </v-col>
                           </v-row>
@@ -70,8 +70,13 @@
                 <v-divider></v-divider>
                 <v-card-title style="padding: 2px 10px;">{{user[1]}}</v-card-title>
                 <v-divider></v-divider>
-            
-                <v-card-subtitle class="pb-0" style="padding: 2px 15px;">
+
+                <!--Parametros -->
+                <input id="id" type="hidden" value="{{user[0]}}">
+                <input id="table" type="hidden" value="users">
+                <!-- Fin parametros -->
+
+                <v-card-subtitle name = "{{user[0]}}" class="pb-0" style="padding: 2px 15px;">
                   Id: {{user[0]}}
                 </v-card-subtitle>
             
@@ -79,72 +84,8 @@
                   <div><b>Rol: </b>{{user[3]}}</div>
                   <div><b>Email: </b>{{user[2]}}</div>
                 </v-card-text>
-            
-                <v-card-actions  style="padding: 15px">
-                    <form style="margin: 10px 1px;">
-                        <template>
-                            <v-row justify="center">
-                              <v-dialog v-model="dialog_edit" persistent max-width="600px" >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn color="green"dark text v-bind="attrs" v-on="on">Editar</v-btn>
-                                </template>
-                                <v-card>
-                                  <v-card-title>
-                                    <span class="text-h5">Datos</span>
-                                  </v-card-title>
-                                  <v-card-text>
-                                    <v-container>
-                                      <v-row>
-                                        <v-col cols="12">
-                                          <v-text-field id="name{{user[0]}}" label="Name*" required></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                          <v-text-field id="email{{user[0]}}" label="Email*" required ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6">
-                                          <v-autocomplete
-                                            :items="['free', 'moderador', 'admin']"
-                                            label="Rol"
-                                            multiple
-                                            id="rol{{user[0]}}"
-                                          ></v-autocomplete>
-                                        </v-col>
-                                      </v-row>
-                                    </v-container>
-                                    <small>Edicion de usuarios {{user[0]}}</small>
-                                  </v-card-text>
-                                  <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn color="red darken-1" text @click="dialog_edit = false" > Cerrar </v-btn>
-                                    <v-btn color="blue darken-1" text onclick=edit() @click="dialog_edit = false" > Guardar </v-btn>
-                                  </v-card-actions>
-                                </v-card>
-                              </v-dialog>
-                            </v-row>
-                        </template>
-                    </form>
-                    <form style="margin: 10px 15px;">
-                        <template>
-                            <v-row justify="center">
-                              <v-dialog v-model="dialog_delete" persistent max-width="290">
-                                    <template v-slot:activator="{ on, attrs }">
-                                      <v-btn color="red" dark text v-bind="attrs" v-on="on">Eliminar</v-btn>
-                                    </template>
-                                    <v-card>
-                                      <v-card-title class="text-h5"> ELIMINAR USUARIO </v-card-title>
-                                      <v-card-text>¿Está seguro que desea eliminar el usuario?</v-card-text>
-                                      <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="red darken-1" text @click="dialog_delete = false">Cancelar</v-btn>
-                                        <v-btn color="green darken-1" text onclick=eliminar()  @click="dialog_delete = false">Aceptar</v-btn>
-                                      </v-card-actions>
-                                    </v-card>
-                                </v-dialog>
-                            </v-row>
-                        </template>
-                    </form>
-                      <input type="hidden" id="id" value="{{user[0]}}">
-                </v-card-actions>
+
+                <v-btn color="green"dark text  onclick= config({{user[0]}}) >Configurar</v-btn>
             </v-card>
         </v-col>
         {% endfor %}
@@ -158,3 +99,4 @@
 {% endblock %}
 {% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
 {% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
+

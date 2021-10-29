@@ -74,7 +74,7 @@ def admin_required(f):
     @functools.wraps(f)
     def decorated_function(**kwargs):
         if 'usr_rol' in session:
-            #is_rol = session.get('usr_rol')
+            # is_rol = session.get('usr_rol')
             is_rol = 'admin'
             is_admin = True if is_rol=='admin' else False      
         
@@ -122,7 +122,10 @@ def adm_habitaciones():
 @login_required
 @admin_required
 def adm_reservas():
-    return render_template('/adm/reservas.html')
+    reservas =[]  
+    for item in controlador_hotel.consultar('reservas'):
+        reservas.append(list(item))
+    return render_template('/adm/reservas.html', reserva_list = reservas)
 
 @main.route('/adm/comentarios/')
 @login_required
@@ -134,7 +137,13 @@ def adm_comentarios():
 @login_required
 @admin_required
 def admin_users():
-    users = controlador_hotel.consultar('users')
+    users = []
+    for user in controlador_hotel.consultar('users'):
+        users.append(list(user))
+    
+    for user in users:
+        if user[4] == None:
+            user[4] = str('https://www.pngkey.com/png/full/493-4930661_user-icono-mi-cuenta-png.png')
     return render_template('/adm/users.html', users_list=users)
 
 @main.route('/error/')
@@ -152,29 +161,39 @@ def logout():
    session.clear()
    return redirect(url_for('main.index'))
 
-#  -------------------  METODOS DE GESTION --------------------------- #
+
+#  -------------------  METODOS DE GESTION ----------------------------------------- #
+
 @main.route('/eliminar/', methods = ['GET', 'POST'])
 @login_required
 def eliminar():
     data = request.get_json(force=True)
     controlador_hotel.eliminar(int(data["id"]), data["table"] )
 
-    users = controlador_hotel.consultar('users')
-    lista = []
-    for user in users:
-        dic = {
-            'id': user[0] ,
-            'nombre': user[1],
-            'email': user[3]
-        }
-        lista.append(dic)
+    return jsonify({
+        'status': 'OK' 
+    })
 
-    print(lista)
+@main.route('/update/', methods = ['GET', 'POST'])
+@login_required
+def editar():
+    data = request.get_json(force=True)
+    controlador_hotel.update(data)
 
     return jsonify({
-        'status': 'OK',
-        'user': lista   
+        'status': 'OK'   
     })
+
+@main.route('/adm/config',  methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def res():
+    data = request.get_json(force=True)
+    respon = controlador_hotel.find(int(data['id']), 'number', data['table'])
+    return jsonify({
+        'status': 'OK',
+        'module': data['table'],
+        'res': respon})
 
 @main.route('/search/', methods = ['GET', 'POST'])
 @login_required
@@ -186,3 +205,28 @@ def search():
         'status': 'OK',
         'user': 'none'   
     })
+
+@main.route('/checked/', methods = ['GET', 'POST'])
+@login_required
+def checked():
+    data = request.get_json(force=True)
+    controlador_hotel.update(data)
+
+    return jsonify({
+        'status': 'OK',
+        'user': 'none'   
+    })
+
+# ----------------------- Configs ----------------------------------------------------#
+
+@main.route('/adm/users/config_u')
+@login_required
+@admin_required
+def configuracion_usuarios():
+    return render_template('/adm/config_u.html')
+
+@main.route('/adm/habitaciones/config_r')
+@login_required
+@admin_required
+def configuracion_habitaciones():
+    return render_template('/adm/config_r.html')

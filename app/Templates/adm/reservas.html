@@ -53,13 +53,57 @@
     <v-row class="d-flex align-center" justify="space-around"> 
         <h2 class="justify">Reservas</h2> 
     </v-row>
+    <v-row>
+        <v-divider></v-divider>
+    </v-row>
 
     <!--Contenedor de datos-->
     <v-row id= "content_users" class="d-flex align-center" justify="space-around">
+        <template>
+            <v-simple-table>
+              <template v-slot:default>
+                    <thead>
+                        <input id="table" type="hidden" value="reservas">
+                      <tr>
+                        <th class="text-left">ID</th>
+                        <th class="text-left">Usuario que solicita</th>
+                        <th class="text-left">Fecha de solicitud</th>
+                        <th class="text-left">Empieza</th>
+                        <th class="text-left">Termina</th>
+                        <th class="text-left">Estado</th>
+                        <th class="text-left">Lista</th>
+                        <th class="text-left">Cancelar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {%for reserva in reserva_list%}
+                      <tr>
+                        <td>{{ reserva[0]}}</td>
+                        <td>{{ reserva[1]}}</td>
+                        <td>{{ reserva[2]}}</td>
+                        <td>{{ reserva[3]}}</td>
+                        <td>{{ reserva[4]}}</td>
+                        <td>{{ reserva[5]}}</td>
+                        <td>
+                            <v-btn id="{{reserva[0]}}" depressed plain color="green" elevation="0" fab x-small dark onclick="confirm_check( {{reserva[0]}} )">
+                                <v-icon>mdi-checkbox-marked-circle</v-icon>
+                            </v-btn>
+                        </td>
+                        <td>
+                            <v-btn id="{{reserva[0]}}" depressed plain color="red" elevation="0" fab x-small dark onclick="delete_check( {{reserva[0]}} )">
+                                <v-icon>mdi-cancel</v-icon>
+                            </v-btn>
+                        </td>
+                      </tr>
+                        {% endfor %}
+                    </tbody>
+              </template>
+            </v-simple-table>
+          </template>
     </v-row>
-        <v-row>
-            <v-divider></v-divider>
-        </v-row>
+    <v-row>
+        <v-divider></v-divider>
+    </v-row>
 </template> 
 
 {% endblock %}
