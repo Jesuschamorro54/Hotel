@@ -91,6 +91,9 @@ CREATE TABLE IF NOT EXISTS `hotel`.`reservas` (
   `solicitado` DATETIME NULL DEFAULT NULL,
   `date_inicio` DATETIME NULL DEFAULT NULL,
   `date_final` DATETIME NULL DEFAULT NULL,
+  `q_adults` INT NULL DEFAULT 0 AFTER `state`,
+  `q_childrens` INT NULL DEFAULT 0 AFTER `q_adults`,
+  `q_days` INT NULL DEFAULT 0 AFTER `q_childrens`;
   `state` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
@@ -131,6 +134,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+-- -----------------------------------------------------
+-- Views of general comments
+-- -----------------------------------------------------
+
+CREATE ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+	VIEW `hotel`.`general_comments` AS
+    SELECT 
+        `hotel`.`comments`.`user_id` AS `user_id`,
+        `hotel`.`users`.`nombre` AS `nombre`,
+        `hotel`.`comments`.`room_id` AS `room_id`,
+        `hotel`.`comments`.`descriptions` AS `descriptions`,
+        `hotel`.`comments`.`likes` AS `likes`,
+        `hotel`.`comments`.`state` AS `state`,
+        `hotel`.`comments`.`fecha` AS `fecha`
+		FROM (`hotel`.`users` JOIN `hotel`.`comments`) WHERE (`hotel`.`users`.`id` = `hotel`.`comments`.`user_id`);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
