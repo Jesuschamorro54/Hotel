@@ -17,12 +17,12 @@
           <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %} {% block tit_usr %} {% endblock %} {{session['usr_name']}} </v-toolbar-title>
           <v-spacer></v-spacer>
           {% if is_login %}
-          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="DashBoard" href="/dashboard">
+          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="DashBoard" href="{{url_for('main.dashboard')}}">
             <v-icon class="md-2" left>mdi-cards-variant</v-icon>
             {% block btn_dashboard %} {% endblock %}     
           </v-btn>
 
-          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="/">
+          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="{{url_for('main.index')}}">
             <v-icon class="md-2" left>mdi-help-circle</v-icon>
             {% block btn_about %} {% endblock %}     
           </v-btn>
@@ -34,12 +34,12 @@
 
           {% else %}
 
-          <v-btn class="pd-2 ml-4" elevation="8" rounded outlined title="Acceder" href="/usr_login">
+          <v-btn class="pd-2 ml-4" elevation="8" rounded outlined title="Acceder" href="{{url_for('main.login')}}">
             <v-icon class="md-2" left>mdi-account-circle</v-icon>
             {% block btn_login %} {% endblock %}
           </v-btn>
 
-          <v-btn class="success pd-2 ml-4" elevation="8" rounded title="Registrar Usuario" href="/usr_registro">
+          <v-btn class="success pd-2 ml-4" elevation="8" rounded title="Registrar Usuario" href="{{url_for('main.registro')}}">
             <v-icon class="md-2" left>mdi-account-plus</v-icon>
             {% block btn_signin %} {% endblock %}       
           </v-btn>
@@ -148,7 +148,7 @@
               { text: 'Imagen', value: '[4]', align: 'center', class: "amber darken-4"},
               { text: 'Precio', value: '[5]', align: 'end', class: "amber darken-4"},
              ],
-            //Lista_habitaciones: ["{{rooms_list}}"], 
+            //Lista_habitaciones: ["{{rooms_list}}"],
           }),
         })
       </script>

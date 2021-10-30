@@ -1,10 +1,11 @@
 from flask import Flask, render_template, blueprints, request, send_file, redirect, url_for,session, flash, jsonify, abort, g
+from pymysql import DATETIME
 from werkzeug.security import check_password_hash, generate_password_hash
 from markupsafe import escape
 import functools
 import controlador_hotel
 import json
-
+from datetime import datetime, timedelta, date
 main = blueprints.Blueprint('main', __name__)
 
 @main.route('/')
@@ -77,6 +78,29 @@ def registro():
             return redirect(url_for('main.login'))
     
     return render_template('usr_registro.html')
+
+@main.route('/usr_reservas/', methods=['GET', 'POST'])
+def addReserva():
+    if(request.method == 'POST'):
+        user_id = session.get('id')
+        room_id = escape(request.form['room_id'])
+        descriptions = escape(request.form['descriptions'])     
+        solicitado = datetime.today()
+        date_inicio = escape(request.form['date_inicio'])
+        date_final = escape(request.form['date_final'])
+        state = 1 
+        q_adults = escape(request.form['q_adults'])
+        q_childrens = escape(request.form['q_childrens'])
+        d1 = request.form['date_final']
+        d2 = request.form['date_inicio']
+        q_days = abs(((datetime.strptime(d1, '%Y-%m-%d'))-(datetime.strptime(d2, '%Y-%m-%d')))/ timedelta(days=1))
+        #controlador_hotel.addreg('reservas',1,1,'prueba 1','2021-10-31 11:00:00','2021-10-31 11:00:00','2021-11-06 11:00:00',1,2,3,365)
+        controlador_hotel.insertar_reservas(user_id,4,descriptions,solicitado,date_inicio,date_final,1,q_adults,q_childrens,q_days)
+        #controlador_hotel.addreg('reservas',[user_id, room_id, descriptions, solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days])
+        print(room_id)
+        return redirect(url_for('main.index'))
+    return render_template('usr_reservas.html')
+
 
 def admin_required(f):
     @functools.wraps(f)

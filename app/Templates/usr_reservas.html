@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block tit_usr %} - Bienvenido - {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_dashboard %} DashBoard {% endblock %}
+{% block btn_about %} Acerca de {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+{% block contenido_1 %}
+
+<v-container fluid>
+  {% if is_login %}
+  <v-row class="py-2 px-2" justify="center">
+    <v-card class="align-center" elevation=15 loading="loading" height="640" width="670" justify="space-around">
+        <v-card-title class="font-weight-bold ml-0">Realizar tu Reserva</v-card-title>
+        <v-container>
+          <v-form name="formularioreserva" submit="submit" method="POST">
+            <v-combobox
+              name = "room_id"
+              id = "room_id"
+              :items = "[
+                { text: 'Habitacion 1', value: 1},
+                { text: 'Habitacion 2', value: 2},
+                { text: 'Habitacion 4', value: 3},
+                { text: 'Habitacion 5', value: 4},
+                { text: 'Habitacion 6', value: 5},
+              ]"
+              label = "Seleciona tu Habitacion"
+              clearable
+              dense
+              filled
+              solo
+              value="[items.value]"
+            ></v-combobox>
+            <v-text-field
+            name="usr_name"
+            solo
+            type="text"
+            label="Nombre de Usuario"
+            id="usr_name"
+            prepend-inner-icon="mdi-account"
+            title="Nombre del Usuario de la Reserva"
+            disabled
+            value="{{session['usr_name']}}"
+            ></v-text-field>
+            <v-text-field
+            name="descriptions"
+            solo
+            type="text"
+            label="Detalles de la reserva"
+            id="res_descriptions"
+            prepend-inner-icon="mdi-text"
+            title="Digitar datos de la reserva"
+            ></v-text-field>
+            <v-row class="pt-1 mx-0" justify="space-around">
+              <v-col>
+                <v-container fluid>
+                  <v-row justify="space-around" no-gutters>
+                    <v-col cols="12">
+                      <v-toolbar dense floating>
+                        <v-text-field name="date_inicio" type="date" label="Fecha de Inicio" id="date_inicio" title="Fecha Llegada" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
+                      </v-toolbar>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+              <v-col>  
+                <v-container fluid>
+                  <v-row justify="space-around" no-gutters>
+                    <v-col cols="12">
+                        <v-toolbar dense floating>
+                        <v-text-field name="date_final" type="date" label="Fecha Partida" id="date_final" title="Fecha Partida" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
+                        </v-toolbar>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+            </v-row>
+            <v-row class="align-center pt-1 mx-0" justify="space-around">
+              <v-col>
+                <v-container fluid>
+                  <v-row justify="space-around" no-gutters>
+                    <v-col cols="12">
+                      <v-combobox
+                        name="q_adults"
+                        :items=[1,2,3,4,5,6,7]
+                        label="Adultos"
+                        clearable
+                        dense
+                        filled
+                        solo
+                      ></v-combobox>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+              <v-col>  
+                <v-container fluid>
+                  <v-row justify="space-around" no-gutters>
+                    <v-col cols="12">
+                      <v-combobox
+                        name="q_childrens"
+                        :items=[1,2,3,4,5,6]
+                        label="Niños"
+                        clearable
+                        dense
+                        filled
+                        solo
+                      ></v-combobox>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+            </v-row>
+            <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
+              <v-btn class="py-2 px-2" width="200" color="blue" type="submit">Enviar Reserva</v-btn>
+              <v-btn class="py-2 px-2" width="200" color="red" href="{{url_for('main.index')}}">Cancelar</v-btn>
+            </v-row>
+            <v-row>
+              <v-divider></v-divider>
+            </v-row>
+          </v-form>       
+          <v-row class="align-center py-2 px-2">
+          <v-card-text >Digite toda la información relevante a la reserva</v-card-text>
+          </v-row>
+        </v-container>
+    </v-card>
+  </v-row>
+  {% else %}
+  <v-row class="py-2 px-2 pa-2" justify="center">
+    <v-card class="align-center pa-1" elevation=15 width="250" justify="space-around">
+      <v-card-title class="font-weight-bold ml-0">Valida tu Reserva</v-card-title>
+      <v-card-subtitle class="align-center py-2 px-2">Debes de estar registrado o haber entrado a la aplicación</v-card-title>
+        <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
+          <v-btn class="py-2 px-2 white--text" width="200" color="black" href="{{url_for('main.login')}}">Acceso</v-btn>
+        </v-row> 
+        <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
+        <v-btn class="py-2 px-2" width="200" color="green" href="{{url_for('main.registro')}}">Registrarse</v-btn>
+      </v-row> 
+      <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
+        <v-btn class="py-2 px-2" width="200" color="red" href="{{url_for('main.index')}}">Cancelar</v-btn>
+      </v-row> 
+    </v-card>
+  </v-row>
+  {% endif %}
+</v-container>
+
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
