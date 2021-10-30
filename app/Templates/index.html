@@ -133,6 +133,7 @@
 <v-row id="seccion_reservas" class="d-flex align-center pt-5" justify="space-around">
   <h2 class="justify">Los Mejores Precios para tu Descanso</h2>
 </v-row>
+
 <v-card elevation="10" loading="loading" class="mx-auto my-10" max-width="900">
   <template slot="progress">
     <v-progress-linear color="deep-purple" height="10" indeterminate title="Procesando"></v-progress-linear>
@@ -183,7 +184,7 @@
           <v-col class="align-center py-1 px-1 mx-0" max-width="300">
             <v-card class="px-2 py-2" max-width="300">
               <v-card-actions>
-                <v-btn class="align-center" color="amber darken-4" width="220" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
+                <v-btn class="align-center" color="amber darken-4" width="220" href="{{url_for('main.addReserva')}}" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

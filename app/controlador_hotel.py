@@ -7,6 +7,7 @@ d = {
         "host": "localhost",
         "user": "root",
         "password": "20023006",
+        "db": "hotel"
 
 }
 
