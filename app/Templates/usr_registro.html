@@ -5,9 +5,9 @@
 {% block contenido_1 %}
 
 <v-container fluid>
-  <v-row class="align-center pa-2" justify="center">
-    <v-col cols="12" sm="6" md="4" class="px-2 py-2">
-      <v-card class="align-center pa-2" elevation=15 width="350">
+  <v-row class="pa-2" justify="center">
+    <v-col cols="12" sm="6" md="4" class="align-center px-2 py-2">
+      <v-card class="pa-2" elevation=15 width="350">
         <v-card-title>Crear Usuario</v-card-title>    
           <form name="formularioregistro" submit="submit" method="POST">
             <v-text-field
@@ -19,6 +19,7 @@
               id="usr_name"
               required
               prepend-inner-icon="mdi-account"
+              title="Digitar el Nombre del Usuario"
               clearable
             ></v-text-field>
             <v-text-field
@@ -30,8 +31,9 @@
               id="usr_lastname"
               required
               prepend-inner-icon="mdi-account"
+              title="Digitar el Apellido del Usuario"
               clearable
-              ></v-text-field>
+            ></v-text-field>
             <v-text-field
                 name="usr_email"
                 :counter="30"
@@ -41,38 +43,38 @@
                 id="usr_email"
                 required
                 prepend-inner-icon="mdi-account"
+                title="Digitar el Correo del Usuario"
                 clearable
-              ></v-text-field>
-
-              <v-text-field
-                name="usr_password"
-                solo
-                type="password"
-                label="Clave de Acceso"
-                required
-                prepend-inner-icon="mdi-lock"           
-              >
+            ></v-text-field>
+            <v-text-field
+              name="usr_password"
+              solo
+              type="password"
+              label="Clave de Acceso"
+              required
+              prepend-inner-icon="mdi-lock"
+              title="Digitar la clave del Usuario"       
+            >
                 <template v-slot:append-outer>
                   <v-tooltip
                     bottom
                   >
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" onmouseover="verClave_Log();" onmouseout="ocultarClave_Log()">
+                      <v-icon v-on="on" onmouseover="verClave();" onmouseout="ocultarClave()">
                         mdi-eye
                       </v-icon>
                     </template>
                     Ver la Clave
                   </v-tooltip>
                 </template>
-              
-              </v-text-field>
-
-              <v-checkbox
-              name="usr_checkbox"
-              value="1"
-              label="Aceptacion Politicas y Tratamiento de datos"
-              type="checkbox"
-              required
+            </v-text-field>
+            <v-checkbox
+            name="usr_checkbox"
+            value="1"
+            label="Aceptacion Politicas y Tratamiento de Datos"
+            type="checkbox"
+            required
+            title="Aceptacion Politicas y Tratamiento de Datos"
             ></v-checkbox>
 
             <v-divider class="py-3"></v-divider>

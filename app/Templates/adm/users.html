@@ -1,177 +1,160 @@
-<!DOCTYPE html>
-<html itemscope="" itemtype="http://schema.org/WebPage" lang="es-419">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-        <title>Admin users</title>
-    </head>
-    <body>
-        <div id="app_ht">
-          <v-app>
-            <v-app-bar app color="#00000" dark elevate-on-scroll elevation=5>
-                <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
-                <v-toolbar-title class="xs-4" shrink-on-scroll>Administrador de usuarios</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <!--Home-->
-                <v-btn class="pd-2 ml-4 xs" elevation="8" rounded title="Home" href="/" @click="dial_reg = true">
-                  HOME
-                </v-btn>
+{% extends 'base.html' %}
 
-                <!--About-->
-                <v-btn class="pd-2 ml-4 xs" elevation="8" rounded title="About" href="/" @click="dial_reg = true">
-                  About     
-                </v-btn>
+{% block titulo %} Centara Grand Hotel {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_dashboard %} DashBoard {% endblock %}
+{% block btn_about %} Acerca de {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
 
-                <!--About-->
-                <v-btn class="pd-2 ml-4 xs" elevation="8" rounded title="About" href="/dashboard" @click="dial_reg = true">
-                    dashboard    
-                </v-btn>
+{% block contenido_1 %}
+<v-container fluid> 
+  <v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
+      <v-card-text>
+          <v-container>
+              <v-row class="d-flex align-center pt-3" justify="space-around">
+                  <v-col class="px-2 py-2">
+                      <!--Contenerdor interno-->
+                      <v-card class="px-2 py-2" height="100px">
+                          <v-row class="d-flex align-center pt-3" justify="space-around">
+                                <v-col class="text-h4 white--text font-weight-bold">
+                                    <v-text-field
+                                        id="search"
+                                        append-icon="mdi-magnify"
+                                        label="Buscar usuarios"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col class="text-h4 white--text font-weight-bold">
+                                  <v-card-actions>
+                                      <input type="hidden" id="table" value="users">
+                                      <input type="hidden" id="route" value="/adm/users/">
+                                      <v-btn color="gray" text text title="Buscar" onclick=search()>Buscar</v-btn>
+                                      <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
+                                      <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
+                                  </v-card-actions>
+                              </v-col>
+                          </v-row>
+                      </v-card>   
+                  </v-col>
+              </v-row>
+          </v-container>
+      </v-card-text>
+  </v-card>
+</v-container>
+{% endblock %}
+{% block contenido_2 %}
+<template>
+    <!--Linea separador-->
+    <v-row>
+        <v-divider></v-divider> 
+    </v-row>
+    <v-row>
+        <h3><br></h3>
+    </v-row>
 
-                <!--Salir si el usuario está logueado-->
-                <v-btn class="error pd-2 ml-4 xs" elevation="8" title="Salir" rounded @click.prevent="signOut">
-                    <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
-                    {% block btn_exit %} {% endblock %}      
-                  </v-btn>
-            </v-app-bar>
-  
-            <v-main class="pt-0">
-                <v-container fluid>
-                    <v-parallax height="500" src="https://htmlcolorcodes.com/assets/images/colors/light-gray-color-solid-background-1920x1080.png">
-                        <v-row class="d-flex align-center" justify="center">
-                            <v-col class="text-center" cols="12">
-                                <h1 class="text-h2 font-weight-bold black--text mb-4">
-                                  Centara Grand Hotel 
-                                </h1>
-                                <h3 class="subheading white--text">
-                                  <div>
-                                  </div>
-                                </h3>
-                                <h4 class="subheading white--text">
-                                    <!--Contenerdor externo-->
-                                    <v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
-                                        <v-card-text>
-                                          <v-card-actions>
-                                            <v-btn color="gray" title="Añadir nuevo usuario">Añadir +</v-btn>
-                                          </v-card-actions>
-                                             <v-container>
-                                                <v-row class="d-flex align-center pt-3" justify="space-around">
-                                                    <v-col class="px-2 py-2">
-                                                        <!--Contenerdor interno-->
-                                                        <v-card class="px-2 py-2" height="100px">
-                                                            <v-row class="d-flex align-center pt-3" justify="space-around">
-                                                                  <v-col class="text-h4 white--text font-weight-bold">
-                                                                      <v-text-field
-                                                                          id="search"
-                                                                          append-icon="mdi-magnify"
-                                                                          label="Buscar usuarios"
-                                                                      ></v-text-field>
-                                                                  </v-col>
-                                                                  <v-col class="text-h4 white--text font-weight-bold">
-                                                                    <v-card-actions>
-                                                                      <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
-                                                                      <v-btn color="gray" text text title="Buscar" onclick= clear_all()>Clear</v-btn>                                                                      
-                                                                      <v-btn elevation=8 color="green" onclick= get_data() >Mostrar todos</v-btn>
-                                                                    </v-card-actions>
-                                                                </v-col>
-                                                            </v-row>
-                                                        </v-card>   
-                                                    </v-col>
-                                                </v-row>
-                                            </v-container>
-                                        </v-card-text>
-                                    </v-card>
-                                </h4>
-                            </v-col>
-                        </v-row>
-                    </v-parallax>
-                </v-container>
+    <!--Titulo-->
+    <v-row class="d-flex align-center" justify="space-around"> 
+        <h2 class="justify">Usuarios</h2> 
+    </v-row>
 
-                <v-container fluid>
-                    <template>
-                        <!--Linea separador-->
-                        <v-row>
-                            <v-divider></v-divider> 
-                        </v-row>
-                        <v-row>
-                            <h3><br></h3>
-                        </v-row>
-
-                        <!--Titulo-->
-                        <v-row class="d-flex align-center" justify="space-around"> 
-                            <h2 class="justify">Usuarios</h2> 
-                        </v-row>
-
-                        <!--Contenedor de datos-->
-                        <v-row id= "content_users" class="d-flex align-center" justify="space-around">
-                        </v-row>
-                            <v-row>
-                                <v-divider></v-divider>
-                            </v-row>
-                    </template>  
-                </v-container>
-
-
-                <v-container fluid>
-                    {% block contenido_3 %}
-                
-                    {% endblock %}
-                </v-container>
-            
-                <v-container fluid>
-                  {% block contenido_4 %}
-                
-                  {% endblock %}
-                </v-container>
-
-                <v-container fluid>
-                  {% block contenido_5 %}
-                
-                  {% endblock %}
-                </v-container>
-  
-            </v-main>
-            <v-footer dark padless elevation="5">
-              <v-card flat tile class="indigo lighten-1 white--text text-center flex">
-                <v-card-text>
-                  <v-btn href="https://www.facebook.com" title="Facebook" class="mx-4 white--text" icon>
-                    <v-icon size="24px">mdi-facebook</v-icon>
-                  </v-btn>
-                  <v-btn href="https://twitter.com/" title="Twitter" class="mx-4 white--text" icon>
-                    <v-icon size="24px">mdi-twitter</v-icon>
-                  </v-btn>
-                  <v-btn href="https://www.linkedin.com/" title="LinkedIn" class="mx-4 white--text" icon>
-                    <v-icon size="24px">mdi-linkedin</v-icon>
-                  </v-btn>
-                  <v-btn href="https://www.instagram.com/" title="Instagram" class="mx-4 white--text" icon>
-                    <v-icon size="24px">mdi-instagram</v-icon>
-                  </v-btn>
-                </v-card-text>
-          
-                <v-card-text class="white--text pt-0">
-                  {% block text_footer_01 %} {% endblock %}
-                </v-card-text>
-          
+    <!--Contenedor de datos-->
+    <v-row id= "content" class="d-flex align-center" justify="space-around">
+        {% for user in users_list %}
+        <v-col>
+            <v-card class="mx-auto" width="300">
+                <v-card class = "mx-auto" height="250px" style="padding: 5px; block-size: auto;" elevation = 0>
+                    <v-img class="black--text align-end" src="{{user[4]}}">
+                    </v-img>
+                </v-card>
                 <v-divider></v-divider>
-          
-                <v-card-text class="white--text">
-                  2021 — <strong>{% block text_footer_02 %} {% endblock %}</strong>
+                <v-card-title style="padding: 2px 10px;">{{user[1]}}</v-card-title>
+                <v-divider></v-divider>
+            
+                <v-card-subtitle class="pb-0" style="padding: 2px 15px;">
+                  Id: {{user[0]}}
+                </v-card-subtitle>
+            
+                <v-card-text class="text--primary">
+                  <div><b>Rol: </b>{{user[3]}}</div>
+                  <div><b>Email: </b>{{user[2]}}</div>
                 </v-card-text>
-              </v-card>
-            </v-footer>
-          </v-app>
-        </div>
-  
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-        <script src="{{ url_for('static', filename='js/responses.js') }}"></script>
-        <script>
-          new Vue({
-            el: '#app_ht',
-            vuetify: new Vuetify(),
-          })
-        </script>
-    </body>
-</html>
+            
+                <v-card-actions  style="padding: 15px">
+                    <form style="margin: 10px 1px;">
+                        <template>
+                            <v-row justify="center">
+                              <v-dialog v-model="dialog_edit" persistent max-width="600px" >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn color="green"dark text v-bind="attrs" v-on="on">Editar</v-btn>
+                                </template>
+                                <v-card>
+                                  <v-card-title>
+                                    <span class="text-h5">Datos</span>
+                                  </v-card-title>
+                                  <v-card-text>
+                                    <v-container>
+                                      <v-row>
+                                        <v-col cols="12">
+                                          <v-text-field id="name{{user[0]}}" label="Name*" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                          <v-text-field id="email{{user[0]}}" label="Email*" required ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6">
+                                          <v-autocomplete
+                                            :items="['free', 'moderador', 'admin']"
+                                            label="Rol"
+                                            multiple
+                                            id="rol{{user[0]}}"
+                                          ></v-autocomplete>
+                                        </v-col>
+                                      </v-row>
+                                    </v-container>
+                                    <small>Edicion de usuarios {{user[0]}}</small>
+                                  </v-card-text>
+                                  <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="red darken-1" text @click="dialog_edit = false" > Cerrar </v-btn>
+                                    <v-btn color="blue darken-1" text onclick=edit() @click="dialog_edit = false" > Guardar </v-btn>
+                                  </v-card-actions>
+                                </v-card>
+                              </v-dialog>
+                            </v-row>
+                        </template>
+                    </form>
+                    <form style="margin: 10px 15px;">
+                        <template>
+                            <v-row justify="center">
+                              <v-dialog v-model="dialog_delete" persistent max-width="290">
+                                    <template v-slot:activator="{ on, attrs }">
+                                      <v-btn color="red" dark text v-bind="attrs" v-on="on">Eliminar</v-btn>
+                                    </template>
+                                    <v-card>
+                                      <v-card-title class="text-h5"> ELIMINAR USUARIO </v-card-title>
+                                      <v-card-text>¿Está seguro que desea eliminar el usuario?</v-card-text>
+                                      <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="red darken-1" text @click="dialog_delete = false">Cancelar</v-btn>
+                                        <v-btn color="green darken-1" text onclick=eliminar()  @click="dialog_delete = false">Aceptar</v-btn>
+                                      </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-row>
+                        </template>
+                    </form>
+                      <input type="hidden" id="id" value="{{user[0]}}">
+                </v-card-actions>
+            </v-card>
+        </v-col>
+        {% endfor %}
+    </v-row>
+        <v-row>
+            <v-divider></v-divider>
+        </v-row>
+</template>
+
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}

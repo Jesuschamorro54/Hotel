@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Centara Grand Hotel - Administrador de comentarios {% endblock %}
+{% block tit_bar %} Administrar comentarios {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block btn_dashboard %} DashBoard {% endblock %}
+{% block btn_about %} Acerca de {% endblock %}
+{% block btn_exit %} Salir {% endblock %}
+
+{% block contenido_1 %}
+<v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
+    <v-card-text>
+         <v-container>
+            <v-row class="d-flex align-center pt-3" justify="space-around">
+                <v-col class="px-2 py-2">
+                    <!--Contenerdor interno-->
+                    <v-card class="px-2 py-2" height="100px">
+                        <v-row class="d-flex align-center pt-3" justify="space-around">
+                              <v-col class="text-h4 white--text font-weight-bold">
+                                  <v-text-field
+                                      id="search"
+                                      append-icon="mdi-magnify"
+                                      label="Buscar"
+                                  ></v-text-field>
+                              </v-col>
+                              <v-col class="text-h4 white--text font-weight-bold">
+                                <v-card-actions>
+                                  <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
+                                  <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
+                                  <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
+                                </v-card-actions>
+                            </v-col>
+                        </v-row>
+                    </v-card>   
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-card-text>
+</v-card>
+{% endblock %}
+{% block contenido_2 %}
+<template>
+    <!--Linea separador-->
+    <v-row>
+        <v-divider></v-divider> 
+    </v-row>
+    <v-row>
+        <h3><br></h3>
+    </v-row>
+
+    <!--Titulo-->
+    <v-row class="d-flex align-center" justify="space-around"> 
+        <h2 class="justify">Comentarios</h2> 
+    </v-row>
+
+    <!--Contenedor de datos-->
+    <v-row id= "content_users" class="d-flex align-center" justify="space-around">
+    </v-row>
+        <v-row>
+            <v-divider></v-divider>
+        </v-row>
+</template> 
+
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}
