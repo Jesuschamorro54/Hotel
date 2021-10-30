@@ -30,8 +30,8 @@
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
           </v-toolbar>
-            <v-btn class="align-center" color="amber darken-4" width="220" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
-        </v-card>
+            <v-btn class="align-center" color="amber darken-4" width="220" href="{{url_for('main.addReserva')}}" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
+          </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -213,108 +213,6 @@
         <v-divider class="mx-4"></v-divider>
       </v-card-text>
   </v-container>
-
-    <!-- Dialog -->
-    <v-dialog v-model="dialog" width="650" persistent >
-      <v-card class="pa-1" elevation=15 loading="loading">
-        <v-card-title class="align-center font-weight-bold ml-0">Realizar una Reserva</v-card-title>
-        <v-container>
-          <v-form @submit.prevent="addReserva" method="POST">
-            <v-text-field type="text" label="{{session['user_id']}}" disabled name="user_id"></v-text-field>
-            <v-text-field
-            name="usr_name"
-            solo
-            type="text"
-            label="{{session['usr_name']}}"
-            id="usr_name"
-            prepend-inner-icon="mdi-account"
-            title="Nombre del Usuario de la Reserva"
-            disabled
-            ></v-text-field>
-            <v-text-field
-            name="res_descriptions"
-            solo
-            type="text"
-            label="Detalles de la reserva"
-            id="res_descriptions"
-            prepend-inner-icon="mdi-text"
-            title="Digitar datos de la reserva"
-            ></v-text-field>
-            <v-row class="pt-1 mx-0" justify="space-around">
-              <v-col>
-                <v-container fluid>
-                  <v-row justify="space-around" no-gutters>
-                    <v-col cols="12">
-                      <v-toolbar dense floating>
-                        <v-text-field name="fecha_inicio" type="date" label="Fecha de Inicio" id="fecha_inicio" title="Fecha Llegada" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
-                      </v-toolbar>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-              <v-col>  
-                <v-container fluid>
-                  <v-row justify="space-around" no-gutters>
-                    <v-col cols="12">
-                        <v-toolbar dense floating>
-                        <v-text-field name="fecha_fin" type="date" label="Fecha Partida" id="fecha_fin" title="Fecha Partida" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
-                        </v-toolbar>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-            </v-row>
-            <v-row class="align-center pt-1 mx-0" justify="space-around">
-              <v-col>
-                <v-container fluid>
-                  <v-row justify="space-around" no-gutters>
-                    <v-col cols="12">
-                      <v-combobox
-                        name="cantidad_adultos"
-                        :items=[1,2,3,4,5,6,7]
-                        label="Adultos"
-                        clearable
-                        dense
-                        filled
-                        solo
-                      ></v-combobox>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-              <v-col>  
-                <v-container fluid>
-                  <v-row justify="space-around" no-gutters>
-                    <v-col cols="12">
-                      <v-combobox
-                        name="cantidad_menores"
-                        :items=[1,2,3,4,5,6]
-                        label="Niños"
-                        clearable
-                        dense
-                        filled
-                        solo
-                      ></v-combobox>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-            </v-row>
-            <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
-              <v-btn class="py-2 px-2" width="200" color="blue" type="submit" @click.stop="dialog = false">Enviar Reserva</v-btn>
-              <v-btn class="py-2 px-2" width="200" color="red" @click="dialog = false">Cancelar</v-btn>
-            </v-row>
-            <v-row>
-              <v-divider></v-divider>
-            </v-row>
-          </v-form>       
-          <v-row class="align-center py-2 px-2">
-          <v-card-text >Digite toda la información relevante a la reserva</v-card-text>
-          </v-row>
-        </v-container>
-      </v-card>
-    </v-dialog>
-    <!-- Fin Dialog -->
   
 </v-card>
 {% endblock %}
