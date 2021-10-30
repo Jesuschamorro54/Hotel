@@ -7,7 +7,7 @@ d = {
         "host": "localhost",
         "user": "root",
         "password": "20023006",
-        "db": "hotel"
+
 }
 
 def insertar_user(nombre, email, password):

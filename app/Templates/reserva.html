@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Reserva {% endblock %}
+{% block tit_bar %} Centara Grand Hotel {% endblock %}
+{% block btn_login %} Acceso {% endblock %}
+{% block btn_signin %} Registro {% endblock %}
+{% block contenido_1 %}
+
+<v-container fluid>
+  <v-row class="align-center pa-2" justify="center">
+    <v-col cols="12" sm="6" md="4" class="px-2 py-2">
+      <v-card class="align-center pa-2" elevation=15 width="350">
+        <v-col>
+          <v-card-title>Reserva de habitación</v-card-title>
+        </v-col>
+            
+          <form name="formulariologin" submit="submit" method="POST">   
+            <v-text-field
+                name="id"
+                solo
+                label="N° de habitación"
+                type="id"                
+                id="int AI PK"
+                required
+                clearable
+              ></v-text-field>
+              <v-text-field
+              name="id"
+              solo
+              label="Identificador"
+              type="int"                
+              id="int"
+              required
+              clearable
+            ></v-text-field>
+            <v-text-field
+            name="id"
+            solo
+            label="Cuarto"
+            type="int"                
+            id="int"
+            required
+            clearable
+          ></v-text-field>
+          
+              <v-text-field
+              name="Descripción"
+              solo
+              label="Descripción"
+              type="text"                
+              id="text"
+              required
+              clearable
+            ></v-text-field>
+            
+              <v-text-field
+              name="Solicitado"
+              solo
+              label="Solicitado"
+              type="datetime"                
+              id="datetime"
+              required
+              clearable
+            ></v-text-field>
+            
+              <v-text-field
+              name="Desde"
+              solo
+              label="Desde"
+              type="datetime"                
+              id="datetime"
+              required
+              clearable
+            ></v-text-field>
+            
+              <v-text-field
+              name="Hasta"
+              solo
+              label="Hasta"
+              type="datetime"                
+              id="datetime"
+              required
+              clearable
+            ></v-text-field>
+            
+              <v-text-field
+              name="Estado"
+              solo
+              label="Estado"
+              type="int"                
+              id="int"
+              required
+              clearable
+            ></v-text-field>
+              <v-divider class="py-3"></v-divider>
+            <v-btn class="mr-4" type="submit" title="Acceder a la aplicación">Insertar</v-btn>
+            <v-btn title="Salir del modulo" href="/">Cancelar</v-btn>
+          </form>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+
+
+{% endblock %}
+{% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
+{% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}

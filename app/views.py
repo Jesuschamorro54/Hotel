@@ -138,6 +138,15 @@ def dashboard():
 def habitaciones():
     return render_template('habitaciones.html')
 
+@main.route('/habitacion/')
+def habitacion():
+    return render_template('habitacion.html')
+
+@main.route('/reserva/')
+def reserva():
+    return render_template('reserva.html')
+
+
 @main.route('/comments/')
 @login_required
 def comments():
