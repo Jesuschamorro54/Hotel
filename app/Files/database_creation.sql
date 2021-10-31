@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`reservas` (
   `date_final` DATETIME NULL DEFAULT NULL,
   `q_adults` INT NULL DEFAULT 0,
   `q_childrens` INT NULL DEFAULT 0`,
-  `q_days` INT NULL DEFAULT 0;
+  `q_days` INT NULL DEFAULT 0,
   `state` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
