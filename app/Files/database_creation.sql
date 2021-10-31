@@ -64,11 +64,11 @@ CREATE TABLE IF NOT EXISTS `hotel`.`comments` (
   `room_id` INT NULL DEFAULT NULL,
   `descriptions` TEXT NULL DEFAULT NULL,
   `likes` INT NULL DEFAULT NULL,
-  `state` INT NULL DEFAULT NULL,
+  `state` INT NULL DEFAULT 0,
   `fecha` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `user_id` (`user_id` ASC) VISIBLE,
-  INDEX `room_id` (`room_id` ASC) VISIBLE,
+  INDEX `user_id` (`user_id` ASC),
+  INDEX `room_id` (`room_id` ASC),
   CONSTRAINT `comments_ibfk_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `hotel`.`users` (`id`),
@@ -91,10 +91,10 @@ CREATE TABLE IF NOT EXISTS `hotel`.`reservas` (
   `solicitado` DATETIME NULL DEFAULT NULL,
   `date_inicio` DATETIME NULL DEFAULT NULL,
   `date_final` DATETIME NULL DEFAULT NULL,
-  `q_adults` INT NULL DEFAULT 0 AFTER `state`,
-  `q_childrens` INT NULL DEFAULT 0 AFTER `q_adults`,
-  `q_days` INT NULL DEFAULT 0 AFTER `q_childrens`;
-  `state` INT NULL DEFAULT NULL,
+  `q_adults` INT NULL DEFAULT 0,
+  `q_childrens` INT NULL DEFAULT 0`,
+  `q_days` INT NULL DEFAULT 0;
+  `state` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   INDEX `room_id` (`room_id` ASC) VISIBLE,
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`payments` (
   `valor` DOUBLE NULL DEFAULT NULL,
   `request` DATETIME NULL DEFAULT NULL,
   `expiration` DATETIME NULL DEFAULT NULL,
-  `state` INT NULL DEFAULT NULL,
+  `state` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   INDEX `reservation` (`reservation` ASC) VISIBLE,
