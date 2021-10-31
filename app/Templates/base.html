@@ -24,9 +24,12 @@
 
           <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="{{url_for('main.index')}}">
             <v-icon class="md-2" left>mdi-help-circle</v-icon>
-            {% block btn_about %} {% endblock %}     
-          </v-btn>
 
+          </v-btn>
+          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Has tu Reserva" href="{{url_for('main.index')}}">
+            <v-icon class="md-2" left>mdi-bed-empty</v-icon>
+            {% block btn_reserva %} {% endblock %}     
+          </v-btn>
           <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
             <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
             {% block btn_exit %} {% endblock %}      

@@ -1,24 +1,11 @@
 from flask import Flask, render_template, blueprints, request, send_file, redirect, url_for,session, flash, jsonify, abort, g
-from pymysql import DATETIME
 from werkzeug.security import check_password_hash, generate_password_hash
 from markupsafe import escape
 import functools
 import controlador_hotel
-import json
 from datetime import datetime, timedelta, date
-main = blueprints.Blueprint('main', __name__)
 
-@main.route('/')
-def index():
-    comments = []
-    for id in controlador_hotel.consultar('general_comments'):
-        comments.append(list(id))
-    #print(comments) 
-    rooms = []
-    for id in controlador_hotel.consultar('rooms'):
-        rooms.append(list(id))
-    #print(rooms) 
-    return render_template('index.html', rooms_list = rooms, comments_list = comments)
+main = blueprints.Blueprint('main', __name__)
 
 def login_required(view):
     @functools.wraps(view)
@@ -27,6 +14,21 @@ def login_required(view):
             return redirect(url_for('main.login'))
         return view(**kwargs)   
     return wraped_view
+
+@main.route('/', methods=['GET', 'POST'])
+def index():
+    comments = []
+    for id in controlador_hotel.consultar('general_comments'):
+        comments.append(list(id))
+    rooms = []
+    rooms_av = []
+    for id in controlador_hotel.consultar('rooms'):
+        rooms.append(list(id))
+    for i in range(len(rooms)):
+        #rooms_av.append(['value :'+str(rooms[i][0]),'text :'+rooms[i][2]])
+        rooms_av.append([rooms[i][2],rooms[i][0]])
+    print(rooms_av)
+    return render_template('index.html', rooms_list = rooms, rooms_list_av = rooms_av, comments_list = comments)
 
 @main.route('/usr_login/', methods=['GET', 'POST'])
 def login():
@@ -83,7 +85,7 @@ def registro():
 def addReserva():
     if(request.method == 'POST'):
         user_id = session.get('id')
-        room_id = escape(request.form['room_id'])
+        room_id = request.form['room_id']
         descriptions = escape(request.form['descriptions'])     
         solicitado = datetime.today()
         date_inicio = escape(request.form['date_inicio'])
@@ -94,8 +96,7 @@ def addReserva():
         d1 = request.form['date_final']
         d2 = request.form['date_inicio']
         q_days = abs(((datetime.strptime(d1, '%Y-%m-%d'))-(datetime.strptime(d2, '%Y-%m-%d')))/ timedelta(days=1))
-        #controlador_hotel.addreg('reservas',1,1,'prueba 1','2021-10-31 11:00:00','2021-10-31 11:00:00','2021-11-06 11:00:00',1,2,3,365)
-        controlador_hotel.insertar_reservas(user_id,4,descriptions,solicitado,date_inicio,date_final,1,q_adults,q_childrens,q_days)
+        controlador_hotel.insertar_reservas(user_id,4,descriptions,solicitado,date_inicio,date_final,state,q_adults,q_childrens,q_days)
         #controlador_hotel.addreg('reservas',[user_id, room_id, descriptions, solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days])
         print(room_id)
         return redirect(url_for('main.index'))
@@ -133,20 +134,6 @@ def dashboard():
     g.is_free = True if is_rol=='free' else False
     return render_template('dashboard.html')
 
-@main.route('/habitaciones/')
-@login_required
-def habitaciones():
-    return render_template('habitaciones.html')
-
-@main.route('/habitacion/')
-def habitacion():
-    return render_template('habitacion.html')
-
-@main.route('/reserva/')
-def reserva():
-    return render_template('reserva.html')
-
-
 @main.route('/comments/')
 @login_required
 def comments():
@@ -155,6 +142,12 @@ def comments():
         comments.append(list(id))
     return render_template('comentarios.html', comments_list = comments)
 
+@main.route('/adm/comentarios/')
+@login_required
+@admin_required
+def adm_comentarios():
+    return render_template('/adm/comentarios.html')
+    
 @main.route('/adm/habitaciones/')
 @login_required
 @admin_required
@@ -170,12 +163,6 @@ def adm_reservas():
     for item in controlador_hotel.consultar('reservas'):
         reservas.append(list(item))
     return render_template('/adm/reservas.html', reserva_list = reservas)
-
-@main.route('/adm/comentarios/')
-@login_required
-@admin_required
-def adm_comentarios():
-    return render_template('/adm/comentarios.html')
     
 @main.route('/adm/users/')
 @login_required

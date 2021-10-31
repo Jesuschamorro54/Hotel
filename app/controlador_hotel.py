@@ -1,14 +1,11 @@
-from pymysql import NULL
-from werkzeug.wrappers import response
 from db import DataBase
 
 # Variable glogal que contiene la informacion de la base de datos
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "20023006",
+        "password": "Xricagomex0126.",
         "db": "hotel"
-
 }
 
 def insertar_user(nombre, email, password):
@@ -247,7 +244,7 @@ def addreg(table,parameters):
 
         if sql != '':
             cursor.execute(sql)
-            container = cursor.fetchall()
+            container = cursor.fetchone()
             print(f"|R-DB - {table}|: ", container)
             # Enviar un mensaje si la inserción fue exitosa
             print("Inserción exitosa!") if cursor.execute(sql) else ("Error en la inserción")
