@@ -1,14 +1,12 @@
 from flask import Flask, render_template, blueprints, request, send_file, redirect, url_for,session, flash, jsonify, abort, g
-from pymysql import DATETIME
 from werkzeug.security import check_password_hash, generate_password_hash
 from markupsafe import escape
 import functools
 import controlador_hotel
-import json
 from datetime import datetime, timedelta, date
 main = blueprints.Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def index():
     comments = []
     for id in controlador_hotel.consultar('general_comments'):
