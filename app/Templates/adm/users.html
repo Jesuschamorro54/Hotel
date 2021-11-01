@@ -10,40 +10,41 @@
 {% block btn_exit %} Salir {% endblock %}
 
 {% block contenido_1 %}
-<v-container fluid> 
-  <v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
-      <v-card-text>
-          <v-container>
-              <v-row class="d-flex align-center pt-3" justify="space-around">
-                  <v-col class="px-2 py-2">
-                      <!--Contenerdor interno-->
-                      <v-card class="px-2 py-2" height="100px">
-                          <v-row class="d-flex align-center pt-3" justify="space-around">
-                                <v-col class="text-h4 white--text font-weight-bold">
-                                    <v-text-field
-                                        id="search"
-                                        append-icon="mdi-magnify"
-                                        label="Buscar usuarios"
-                                        clearable
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col class="text-h4 white--text font-weight-bold">
-                                  <v-card-actions>
-                                      <input type="hidden" id="table" value="users">
-                                      <input type="hidden" id="route" value="/adm/users/">
-                                      <v-btn color="gray" text text title="Buscar" onclick="search()">Buscar</v-btn>
-                                      <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
-                                      <v-btn elevation=8 color="green" onclick="search('all')" >Mostrar todos</v-btn>
-                                  </v-card-actions>
-                              </v-col>
-                          </v-row>
-                      </v-card>   
-                  </v-col>
-              </v-row>
-          </v-container>
-      </v-card-text>
-  </v-card>
-</v-container>
+<v-row class="mx-auto py-2" justify="center">
+    <v-card class="align-center pt-2" height="250" width="750" elevation=15>
+    <v-card-title>Busqueda de información</v-card-title> 
+    <v-card-text>
+        <v-row class="d-flex align-center pt-2" justify="space-around">
+            <v-col class="align-center px-2 py-2">
+                <v-card class="px-2 py-2" height="100">
+                    <v-row class="align-center pt-2" justify="space-around">
+                        <v-col class="text-h4 white--text font-weight-bold">
+                            <v-text-field
+                                id="search"
+                                append-icon="mdi-magnify"
+                                label="Buscar usuarios"
+                                clearable
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row class="align-center pt-2" justify="space-around">
+                        <v-col class="align-center py-1 px-1 mx-0 text-h4 white--text font-weight-bold">
+                            <v-card-actions>
+                                <input type="hidden" id="table" value="users">
+                                <input type="hidden" id="route" value="/adm/users/">
+                                <v-btn color="orange" elevation=8 text text title="Buscar" onclick="search()">Buscar</v-btn>
+                                <v-btn color="gray" elevation=8 text text title="Limpiar Todo" onclick="clear_all()">Limpiar</v-btn>                                                                      
+                                <v-btn color="green" elevation=8 title="Buscar Todo" onclick="search('all')" >Todos</v-btn>
+                            </v-card-actions>
+                        </v-col>
+                   </v-row>
+                </v-card>   
+            </v-col>
+        </v-row>
+        </v-card-text>
+    </v-card>
+</v-row>
+
 {% endblock %}
 {% block contenido_2 %}
 <template>
@@ -51,23 +52,17 @@
     <v-row>
         <v-divider></v-divider> 
     </v-row>
-    <v-row>
-        <h3><br></h3>
-    </v-row>
-
     <!--Titulo-->
-    <v-row class="d-flex align-center" justify="space-around"> 
+    <v-row class="d-flex align-center px-2 py-2" justify="space-around"> 
         <h2 class="justify">Usuarios</h2> 
     </v-row>
-
     <!--Contenedor de datos-->
-    <v-row id= "content" class="d-flex align-center" justify="space-around">
+    <v-row id="content" class="d-flex align-center" justify="space-around">
         {% for user in users_list %}
         <v-col>
             <v-card class="mx-auto" width="300">
                 <v-card class = "mx-auto" height="250px" style="padding: 5px; block-size: auto;" elevation = 0>
-                    <v-img class="black--text align-end" src="{{user[4]}}">
-                    </v-img>
+                    <v-img class="black--text align-end" src="{{user[4]}}"></v-img>
                 </v-card>
                 <v-divider></v-divider>
                 <v-card-title style="padding: 2px 10px;">{{user[1]}}</v-card-title>
@@ -87,7 +82,7 @@
                   <div><b>Email: </b>{{user[2]}}</div>
                 </v-card-text>
 
-                <v-btn color="green"dark text  onclick= config({{user[0]}}) >Configurar</v-btn>
+                <v-btn color="green"dark text onclick="config( {{user[0]}} )">Configurar</v-btn>
             </v-card>
         </v-col>
         {% endfor %}
