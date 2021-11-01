@@ -229,7 +229,7 @@ function search(act){
     }
 
   }else{
-    data = JSON.stringify({'action': act });
+    window.location.reload();
   }
   console.log(data)
   xml.send(data);

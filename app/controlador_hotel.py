@@ -4,7 +4,7 @@ from db import DataBase
 d = {
         "host": "localhost",
         "user": "root",
-        "password": "Xricagomex0126.",
+        "password": "20023006",
         "db": "hotel"
 }
 
@@ -30,49 +30,36 @@ def consultar(table):
     conexion, cursor = DataBase.connect(d)
     with cursor:
         conexion.begin()
-# users -----
+    # users -----
         if table == "users":
             sql = f"select id, nombre, email, rol, image from {table} WHERE state = 1"
-# comments -----
+    # comments -----
         elif table == "comments":
             sql = f"select id, user_id, room_id, descriptions, likes, state, fecha from {table} WHERE state = 1"
-# comments generales-----
+    # comments generales-----
         elif table == "general_comments":
             sql = f"select user_id, nombre,room_id, descriptions, likes, state, fecha from {table} WHERE state = 1"
-# reservas -----
+    # reservas -----
         elif table == "reservas":
-            """"
-            ## HAY DOS SQL, YO NECESITO EL PRIMERO Y SE SUPONE QUE TU NECESITAS EL SEGUNDO, PROPONGO CREAR UN IF PARA VALIDAR TU CASO, ES DECIR.
-            # DENTRO DE ESTE ELIF CUANDO LA TABLA ES == RESERVAS, COLOCAR UNA CONDICIONAL CON OTRO PARAMETRO PAPRA QUE EL CODIGO SEPA 
-            # CUANDO DEBE EJCUTAR TU SQL, MI SQL LO METES EN UN ELSE EN CASO DE QUE TU OPCIÓN NO SE CUMPLA, EJEMPLO.
 
-            if (sql_a_ejecutar == 'ricardo'):
-               // asignar tu sql  
-            else:
-               // que se asigne el mio
-
-            """
             # Este es el mio
             sql = f"""SELECT r.id, u.nombre, r.solicitado, r.date_inicio, r.date_final, r.state  FROM reservas r
                         INNER JOIN users u on u.id = r.user_id
                         WHERE r.state in (0, 1);"""
 
-            # Este es el tuyo
-            # sql = f"select id, user_id, room_id, descriptions ,solicitado, date_inico, date_final, state from {table} WHERE state = 1"
-
-# rooms -----
+    # rooms -----
         elif table == "rooms":
             sql = f"select id, numero, descriptions, calification, image, price, enabled from {table} WHERE state = 1 and enabled = 1"
-# payments -----
+    # payments -----
         elif table == "payments":
             sql = f"select id, nombre, email, rol, image from {table} WHERE state = 1"
 
         if sql != '':
             cursor.execute(sql)
             container = cursor.fetchall()
-            print(f"\n|R-DB - {table}|:")
-            for item in container:
-                print(item)
+            #print(f"\n|R-DB - {table}|:")
+            #for item in container:
+            #    print(item)
         else:
             print("---|SQL NULL|---")
             container = ""
@@ -123,7 +110,7 @@ def find(parameter, tp, table):
         if sql != '':
             cursor.execute(sql)
             container = cursor.fetchone()
-            print(f"|R-DB - {table}|: ", container)
+            print(f"|R-DB - {table}| ")
         else:
             print("---|SQL NULL|---") # Muestra esto por consola si el sql queda nulo
             container = ""
@@ -221,51 +208,56 @@ def addreg(table,parameters):
     conexion, cursor = DataBase.connect(d)
     with cursor:
         conexion.begin()
-# users -----
+
+    # users -----
         if table == "users":
             sql = f"""INSERT INTO {table}(nombre, email, password, image, fuente, rol, city, state) 
         VALUES ('{parameters}')"""
-# comments -----
+    # comments -----
         elif table == "comments":
             sql = f"""INSERT INTO {table}(user_id, room_id, descriptions, likes, state, fecha) 
         VALUES ('{parameters}')"""
-# reservas -----
+    # reservas -----
         elif table == "reservas":
             sql = f"""INSERT INTO {table}(user_id, room_id, descriptions ,solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days)
-        VALUES ('{parameters}')"""
-# rooms -----
+            VALUES(
+                {parameters['user_id']}, {parameters['room_id']}, '{parameters['descriptions']}', 
+                '{parameters['solicitado']}', '{parameters['date_inicio']}', '{parameters['date_final']}', 
+                {parameters['state']}, {parameters['q_adults']}, {parameters['q_childrens']}, {parameters['q_days']}
+            )"""
+    # rooms -----
         elif table == "rooms":
              sql = f"""INSERT INTO {table}(numero, descriptions, calification, image, price, enabled) 
         VALUES ('{parameters}')"""
-# payments -----
+    # payments -----
         elif table == "payments":
             sql = f"""INSERT INTO {table}(nombre, email, rol, image) 
         VALUES ('{parameters}')"""
 
         if sql != '':
-            cursor.execute(sql)
-            container = cursor.fetchone()
-            print(f"|R-DB - {table}|: ", container)
-            # Enviar un mensaje si la inserción fue exitosa
-            print("Inserción exitosa!") if cursor.execute(sql) else ("Error en la inserción")
+            try:
+                cursor.execute(sql)
+                print("\nR-DB: INSERCIÓN COMPLETADA!")
+                conexion.commit()
+                conexion.close()
+            except Exception as e:
+                print("\nR-DB: ERROR EN LA INSERCIÓN!\n")
+                print(e)
         else:
             print("---|SQL NULL|---")
-            container = ""
-
-    return container
 
 
-def insertar_reservas(user_id, room_id, descriptions ,solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days):
-
-    # Ahora Database devuelve dos valores
-    # *conexion* gestiona la base de datos, mientras que cursor se encarga de las consultas e inserciones
-    conexion, cursor = DataBase.connect(d)
-    with cursor:
-        sql = f"""INSERT INTO reservas(user_id, room_id, descriptions ,solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days) 
-        VALUES ('{user_id}','{room_id}','{descriptions}','{solicitado}','{date_inicio}','{date_final}','{state}','{q_adults}','{q_childrens}','{q_days}')"""
-
-        # Enviar un mensaje si la inserción fue exitosa
-        print("Inserción exitosa!") if cursor.execute(sql) else ("Error en la inserción")
-                    
-    conexion.commit()
-    conexion.close()
+#def insertar_reservas(user_id, room_id, descriptions ,solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days):
+#
+#    # Ahora Database devuelve dos valores
+#    # *conexion* gestiona la base de datos, mientras que cursor se encarga de las consultas e inserciones
+#    conexion, cursor = DataBase.connect(d)
+#    with cursor:
+#        sql = f"""INSERT INTO reservas(user_id, room_id, descriptions ,solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days) 
+#        VALUES ('{user_id}','{room_id}','{descriptions}','{solicitado}','{date_inicio}','{date_final}','{state}','{q_adults}','{q_childrens}','{q_days}')"""
+#
+#        # Enviar un mensaje si la inserción fue exitosa
+#        print("Inserción exitosa!") if cursor.execute(sql) else ("Error en la inserción")
+#                    
+#    conexion.commit()
+#    conexion.close()
