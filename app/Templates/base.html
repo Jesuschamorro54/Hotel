@@ -26,7 +26,7 @@
             <v-icon class="md-2" left>mdi-help-circle</v-icon>
 
           </v-btn>
-          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Has tu Reserva" href="{{url_for('main.index')}}">
+          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Has tu Reserva" href="{{url_for('main.addReserva')}}">
             <v-icon class="md-2" left>mdi-bed-empty</v-icon>
             {% block btn_reserva %} {% endblock %}     
           </v-btn>
@@ -142,20 +142,32 @@
             dialog_edit: false,
             dialog: false,
             drawer: null,
+            formularioreserva: true,
+            checkbox_pol: false,
             search: '',
             //Lista_habitaciones : [],
             headers_rooms: [
-              { text: 'Numero', value: "[1]", align: 'start', sortable: true, filterable: false,  width: '30', class: "amber darken-4"},
-              { text: 'Descripción', value: '[2]', align: 'start', width: '250', class: "amber darken-4" },
-              { text: 'Calificación', value: '[3]', align: 'center', width: '40', class: "amber darken-4" },
+              { text: 'Numero', value: "[1]", align: 'start', sortable: true, filterable: false,  width: 30, class: "amber darken-4"},
+              { text: 'Descripción', value: '[2]', align: 'start', width: 250, class: "amber darken-4" },
+              { text: 'Calificación', value: '[3]', align: 'center', width: 40, class: "amber darken-4" },
               { text: 'Imagen', value: '[4]', align: 'center', class: "amber darken-4"},
-              { text: 'Precio', value: '[5]', align: 'end', class: "amber darken-4"},
+              { text: 'Precio', value: '[5]', align: 'end', class: "amber darken-4"}
              ],
             //Lista_habitaciones: ["{{rooms_list}}"],
           }),
+          methods: {
+            validate () {
+              this.$refs.form.validate()
+            },
+            reset () {
+              this.$refs.form.reset()
+            },
+            resetValidation () {
+              this.$refs.form.resetValidation()
+            },
+          },
         })
       </script>
   </body>
-
 </html>
 

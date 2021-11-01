@@ -32,7 +32,7 @@ function validar()
     if(!correoInput.value.match(formato_email))
     {
         //alert("Por favor escriba un correo válido.");
-        document.getElementById("errorMail").innerHTML="Por favor escriba un correo válido.";
+        document.getElementById("errorMail").innerHTML="Por favor escriba un correo válido, gracias.";
         correoInput.focus();
         swErrores=true;
     }

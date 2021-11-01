@@ -21,28 +21,19 @@ def index():
     for id in controlador_hotel.consultar('general_comments'):
         comments.append(list(id))
     rooms = []
-    rooms_av = []
     for id in controlador_hotel.consultar('rooms'):
         rooms.append(list(id))
-    for i in range(len(rooms)):
-        #rooms_av.append(['value :'+str(rooms[i][0]),'text :'+rooms[i][2]])
-        rooms_av.append([rooms[i][2],rooms[i][0]])
-    print(rooms_av)
-    return render_template('index.html', rooms_list = rooms, rooms_list_av = rooms_av, comments_list = comments)
+    return render_template('index.html', rooms_list = rooms, comments_list = comments)
 
 @main.route('/usr_login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        
         usr_email = escape(request.form['usr_email'])
         usr_password = escape(request.form['usr_password'])
-        
         info_user = controlador_hotel.obtener_user(usr_email)
-
         if info_user is not None:
             usr_password = usr_password + usr_email
             vpw = check_password_hash(info_user[3], usr_password)
-
             if(vpw):
                 session['id'] = info_user[0]
                 session['usr_name'] = info_user[1]
@@ -50,12 +41,9 @@ def login():
                 session['usr_rol'] = info_user[4]
                 session['acc'] = True
                 return redirect(url_for('main.dashboard'))            
-        
         return render_template('usr_login.html')
-
     return render_template('usr_login.html')
     
-
 @main.context_processor
 def login_acc():
     if 'acc' in session:
@@ -71,18 +59,39 @@ def registro():
         usr_email = escape(request.form['usr_email'])
         usr_password = escape(request.form['usr_password'])
         usr_checkbox = escape(request.form['usr_checkbox'])
- 
         if(usr_checkbox =='1'):
             #agregar SLAT
             usr_password = usr_password + usr_email
             usr_password = generate_password_hash(usr_password)
             controlador_hotel.insertar_user(usr_name+' '+usr_lastname, usr_email, usr_password)
             return redirect(url_for('main.login'))
-    
     return render_template('usr_registro.html')
+
+def admin_required(f):
+    @functools.wraps(f)
+    def decorated_function(**kwargs):
+        if 'usr_rol' in session:
+            is_rol = session.get('usr_rol')
+            is_admin = True if is_rol=='admin' else False           
+            if not is_admin:
+                is_moder = True if is_rol=='moderador' else False       
+                #if not is_moder:
+                    #is_free = True if is_rol=='free' else False
+                    #print('es el basico', is_free)
+                if not is_admin or not is_moder:
+                    #abort(401)
+                    return redirect(url_for('main.error', errores = (401)))
+        return f(**kwargs)
+    return decorated_function
 
 @main.route('/usr_reservas/', methods=['GET', 'POST'])
 def addReserva():
+    rooms = []
+    rooms_av = []
+    for id in controlador_hotel.consultar('rooms'):
+        rooms.append(list(id))
+    for i in range(len(rooms)):
+        rooms_av.append([rooms[i][0],rooms[i][2]])
     if(request.method == 'POST'):
         user_id = session.get('id')
         room_id = request.form['room_id']
@@ -90,45 +99,21 @@ def addReserva():
         solicitado = datetime.today()
         date_inicio = escape(request.form['date_inicio'])
         date_final = escape(request.form['date_final'])
-        state = 1 
+        state = 1
         q_adults = escape(request.form['q_adults'])
-        q_childrens = escape(request.form['q_childrens'])
-        d1 = request.form['date_final']
-        d2 = request.form['date_inicio']
-        q_days = abs(((datetime.strptime(d1, '%Y-%m-%d'))-(datetime.strptime(d2, '%Y-%m-%d')))/ timedelta(days=1))
-        controlador_hotel.insertar_reservas(user_id,4,descriptions,solicitado,date_inicio,date_final,state,q_adults,q_childrens,q_days)
+        q_childrens = '' if escape(request.form['q_childrens']) != "" else 0
+        q_days = abs(((datetime.strptime(date_final, '%Y-%m-%d'))-(datetime.strptime(date_inicio, '%Y-%m-%d')))/ timedelta(days=1))
+        controlador_hotel.insertar_reservas(user_id,room_id,descriptions,solicitado,date_inicio,date_final,state,q_adults,q_childrens,q_days)
         #controlador_hotel.addreg('reservas',[user_id, room_id, descriptions, solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days])
-        print(room_id)
         return redirect(url_for('main.index'))
-    return render_template('usr_reservas.html')
+    return render_template('usr_reservas.html', rooms_list_av = rooms_av)
 
-
-def admin_required(f):
-    @functools.wraps(f)
-    def decorated_function(**kwargs):
-        if 'usr_rol' in session:
-            is_rol = session.get('usr_rol')
-            # is_rol = 'admin'
-            is_admin = True if is_rol=='admin' else False      
-        
-            if not is_admin:
-                is_moder = True if is_rol=='moderador' else False
-        
-                #if not is_moder:
-                    #is_free = True if is_rol=='free' else False
-                    #print('es el basico', is_free)
-
-                if not is_admin or not is_moder:
-                    #abort(401)
-                    return redirect(url_for('main.error', errores = (401)))
-        return f(**kwargs)
-    return decorated_function
+# ----------------------- Modules ----------------------------------------------------#
 
 @main.route('/dashboard/')
 @login_required
 def dashboard():
     is_rol = session.get('usr_rol')
-    # is_rol = 'admin'
     g.is_admin = True if is_rol=='admin'else False
     g.is_moder = True if is_rol=='moderador' else False
     g.is_free = True if is_rol=='free' else False
@@ -171,7 +156,6 @@ def admin_users():
     users = []
     for user in controlador_hotel.consultar('users'):
         users.append(list(user))
-    
     for user in users:
         if user[4] == None:
             user[4] = str('https://www.pngkey.com/png/full/493-4930661_user-icono-mi-cuenta-png.png')
@@ -191,7 +175,6 @@ def page_not_found(error):
 def logout():
    session.clear()
    return redirect(url_for('main.index'))
-
 
 #  -------------------  METODOS DE GESTION ----------------------------------------- #
 

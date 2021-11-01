@@ -16,24 +16,30 @@
     <v-card class="align-center" elevation=15 loading="loading" height="640" width="670" justify="space-around">
         <v-card-title class="font-weight-bold ml-0">Realizar tu Reserva</v-card-title>
         <v-container>
-          <v-form name="formularioreserva" submit="submit" method="POST">
-            <v-combobox
-              name = "room_id"
-              id = "room_id"
-              :items = "{{rooms_list_av}}"
-              label = "Seleciona tu Habitacion"
+          <v-form ref="form" name="formualrioreserva" lazy-validation submit="submit" method="POST">
+            <v-select
+              name="room_id"
+              :items="{{rooms_list_av}}"
+              item-value="[0]"
+              item-text=="[1]"
+              :menu-props="{ top: true, offsetY: true }"
+              label="Seleciona tu Habitación"
+              hint="Seleciona tu Habitación"
+              persistent-hint
+              single-line
               clearable
-              dense
-              filled
               solo
-            ></v-combobox>
+              dense
+              prepend-icon="mdi-bed-empty"
+              :rules="[v => !!v || 'Este campo es requerido, escoje tu habitación']"
+            ></v-select>
             <v-text-field
             name="usr_name"
             solo
             type="text"
             label="Nombre de Usuario"
             id="usr_name"
-            prepend-inner-icon="mdi-account"
+            prepend-icon="mdi-account"
             title="Nombre del Usuario de la Reserva"
             disabled
             value="{{session['usr_name']}}"
@@ -44,8 +50,9 @@
             type="text"
             label="Detalles de la reserva"
             id="descriptions"
-            prepend-inner-icon="mdi-text"
+            prepend-icon="mdi-text"
             title="Digitar datos de la reserva"
+            clearable
             ></v-text-field>
             <v-row class="pt-1 mx-0" justify="space-around">
               <v-col>
@@ -53,7 +60,7 @@
                   <v-row justify="space-around" no-gutters>
                     <v-col cols="12">
                       <v-toolbar dense floating>
-                        <v-text-field name="date_inicio" type="date" label="Fecha de Inicio" id="date_inicio" title="Fecha Llegada" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
+                        <v-text-field name="date_inicio" type="date" label="Fecha de Inicio" id="date_inicio" title="Fecha Llegada" prepend-icon="mdi-magnify" :rules="[v => !!v || 'Este campo es requrido, escoje tu fecha de llegada']" required dense clearable></v-text-field>
                       </v-toolbar>
                     </v-col>
                   </v-row>
@@ -64,7 +71,7 @@
                   <v-row justify="space-around" no-gutters>
                     <v-col cols="12">
                         <v-toolbar dense floating>
-                        <v-text-field name="date_final" type="date" label="Fecha Partida" id="date_final" title="Fecha Partida" prepend-icon="mdi-magnify" dense hide-details clearable></v-text-field>
+                        <v-text-field name="date_final" type="date" label="Fecha Partida" id="date_final" title="Fecha Partida" prepend-icon="mdi-magnify" :rules="[v => !!v || 'Este campo es requrido, escoje tu fecha de partida']" required dense clearable></v-text-field>
                         </v-toolbar>
                     </v-col>
                   </v-row>
@@ -84,6 +91,7 @@
                         dense
                         filled
                         solo
+                        :rules="[v => !!v || 'Este campo es requerido, cuantos adultos']"
                       ></v-combobox>
                     </v-col>
                   </v-row>
@@ -107,8 +115,14 @@
                 </v-container>
               </v-col>
             </v-row>
+            <v-checkbox
+            name="checkbox_pol"
+            :rules="[v => !!v || 'You must agree to continue!']"
+            label="Do you agree?"
+            required
+          ></v-checkbox>
             <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
-              <v-btn class="py-2 px-2" width="200" color="blue" type="submit">Enviar Reserva</v-btn>
+              <v-btn class="py-2 px-2" width="200" color="blue" type="submit" disabled="!formularioreserva" click="validate">Enviar Reserva</v-btn>
               <v-btn class="py-2 px-2" width="200" color="red" href="{{url_for('main.index')}}">Cancelar</v-btn>
             </v-row>
             <v-row>
@@ -116,7 +130,7 @@
             </v-row>
           </v-form>       
           <v-row class="align-center py-2 px-2">
-          <v-card-text >Digite toda la información relevante a la reserva</v-card-text>
+          <v-card-text >Digite toda la información relevante a tu reserva</v-card-text>
           </v-row>
         </v-container>
     </v-card>
