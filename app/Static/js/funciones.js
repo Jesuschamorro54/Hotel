@@ -5,6 +5,8 @@ function validar()
     var userNameInput = document.formularioregistro.usr_name;
     var passWordInput = document.formularioregistro.usr_password;
     var correoInput = document.formularioregistro.usr_email;
+    var checkbox_ver = document.formularioreserva.checkbox;
+    var id_ver = document.formularioreserva.id;
 
     var formato_email = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
 
@@ -36,6 +38,15 @@ function validar()
         correoInput.focus();
         swErrores=true;
     }
+
+    if(checkbox_ver.value == false)
+    {
+        //alert("La clave debe tener mínimo 8 caracteres.");
+        document.getElementById("errorReserva").innerHTML="Debe colocar un valor";
+        checkbox_ver.focus();
+        swErrores=true;
+    }
+
 
     if( swErrores==true)
     {

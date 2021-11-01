@@ -143,7 +143,6 @@
             dialog: false,
             drawer: null,
             formularioreserva: true,
-            checkbox_pol: false,
             search: '',
             //Lista_habitaciones : [],
             headers_rooms: [
@@ -157,13 +156,13 @@
           }),
           methods: {
             validate () {
-              this.$refs.form.validate()
+              formularioreserva.form.validate()
             },
             reset () {
-              this.$refs.form.reset()
+              formularioreserva.$refs.form.reset()
             },
             resetValidation () {
-              this.$refs.form.resetValidation()
+              formularioreserva.$refs.form.resetValidation()
             },
           },
         })

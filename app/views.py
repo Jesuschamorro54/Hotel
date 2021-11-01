@@ -100,8 +100,9 @@ def addReserva():
         date_inicio = escape(request.form['date_inicio'])
         date_final = escape(request.form['date_final'])
         state = 1
-        q_adults = escape(request.form['q_adults'])
-        q_childrens = '' if escape(request.form['q_childrens']) != "" else 0
+        q_adults = escape(request.form['q_adults']) if escape(request.form['q_adults']) != '' else 0
+        q_childrens = escape(request.form['q_childrens']) if escape(request.form['q_childrens']) != '' else 0
+        print(q_childrens)
         q_days = abs(((datetime.strptime(date_final, '%Y-%m-%d'))-(datetime.strptime(date_inicio, '%Y-%m-%d')))/ timedelta(days=1))
         controlador_hotel.insertar_reservas(user_id,room_id,descriptions,solicitado,date_inicio,date_final,state,q_adults,q_childrens,q_days)
         #controlador_hotel.addreg('reservas',[user_id, room_id, descriptions, solicitado, date_inicio, date_final, state, q_adults, q_childrens, q_days])

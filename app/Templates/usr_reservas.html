@@ -16,7 +16,7 @@
     <v-card class="align-center" elevation=15 loading="loading" height="640" width="670" justify="space-around">
         <v-card-title class="font-weight-bold ml-0">Realizar tu Reserva</v-card-title>
         <v-container>
-          <v-form ref="form" name="formualrioreserva" lazy-validation submit="submit" method="POST">
+          <v-form name="formualrioreserva" lazy-validation submit="submit" method="POST">
             <v-select
               name="room_id"
               :items="{{rooms_list_av}}"
@@ -115,14 +115,8 @@
                 </v-container>
               </v-col>
             </v-row>
-            <v-checkbox
-            name="checkbox_pol"
-            :rules="[v => !!v || 'You must agree to continue!']"
-            label="Do you agree?"
-            required
-          ></v-checkbox>
             <v-row class="d-flex align-center py-3 px-2 mx-0" justify="space-around">
-              <v-btn class="py-2 px-2" width="200" color="blue" type="submit" disabled="!formularioreserva" click="validate">Enviar Reserva</v-btn>
+              <v-btn class="py-2 px-2" width="200" color="blue" type="submit" :disabled="!formularioreserva">Enviar Reserva</v-btn>
               <v-btn class="py-2 px-2" width="200" color="red" href="{{url_for('main.index')}}">Cancelar</v-btn>
             </v-row>
             <v-row>
