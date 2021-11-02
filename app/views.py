@@ -131,9 +131,10 @@ def dashboard():
 @login_required
 @admin_required
 def adm_comentarios():
+    comments=[]
     for id in controlador_hotel.consultar('comments'):
         comments.append(list(id))
-    return render_template('comentarios.html', comments_list = comments)
+    return render_template('/adm/comentarios.html', comments_list = comments)
     
 @main.route('/adm/habitaciones/')
 @login_required
