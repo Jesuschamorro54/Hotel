@@ -11,92 +11,83 @@
   </head>
   <body>
     <v-app id="app_ht">
-      <v-container fluid>
       <v-app-bar app color="#00000" dark elevate-on-scroll elevation=10> 
-        <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
-          <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %} {% block tit_usr %} {% endblock %} {{session['usr_name']}} </v-toolbar-title>
-          <v-spacer></v-spacer>
-          {% if is_login %}
-          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="DashBoard" href="{{url_for('main.dashboard')}}">
-            <v-icon class="md-2" left>mdi-cards-variant</v-icon>
-            {% block btn_dashboard %} {% endblock %}     
-          </v-btn>
-
-          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="{{url_for('main.index')}}">
-            <v-icon class="md-2" left>mdi-help-circle</v-icon>
-
-          </v-btn>
-          <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Has tu Reserva" href="{{url_for('main.addReserva')}}">
-            <v-icon class="md-2" left>mdi-bed-empty</v-icon>
-            {% block btn_reserva %} {% endblock %}     
-          </v-btn>
-          <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
-            <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
-            {% block btn_exit %} {% endblock %}      
-          </v-btn>
-
-          {% else %}
-
-          <v-btn class="pd-2 ml-4" elevation="8" rounded outlined title="Acceder" href="{{url_for('main.login')}}">
-            <v-icon class="md-2" left>mdi-account-circle</v-icon>
-            {% block btn_login %} {% endblock %}
-          </v-btn>
-
-          <v-btn class="success pd-2 ml-4" elevation="8" rounded title="Registrar Usuario" href="{{url_for('main.registro')}}">
-            <v-icon class="md-2" left>mdi-account-plus</v-icon>
-            {% block btn_signin %} {% endblock %}       
-          </v-btn>
-
-          {% endif %}
+          <v-app-bar-nav-icon @click="drawer = !drawer" title="Menu"></v-app-bar-nav-icon>
+            <v-toolbar-title shrink-on-scroll>{% block tit_bar %} {% endblock %} {% block tit_usr %} {% endblock %} {{session['usr_name']}} </v-toolbar-title>
+            <v-spacer></v-spacer>
+            {% if is_login %}
+            <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="DashBoard" href="{{url_for('main.dashboard')}}">
+              <v-icon class="md-2" left>mdi-cards-variant</v-icon>
+              {% block btn_dashboard %} {% endblock %}      
+            </v-btn>
+            <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Acerca de" href="{{url_for('main.index')}}">
+              <v-icon class="md-2" left>mdi-help-circle</v-icon>
+            </v-btn>
+            <v-btn class="amber darken-4 pd-2 ml-4" elevation="8" rounded title="Has tu Reserva" href="{{url_for('main.addReserva')}}">
+              <v-icon class="md-2" left>mdi-bed-empty</v-icon>
+              {% block btn_reserva %} {% endblock %}     
+            </v-btn>
+            <v-btn class="error pd-2 ml-4" elevation="8" rounded title="Salir" href="{{url_for('main.logout')}}" >
+              <v-icon class="md-2" left>mdi-exit-to-app</v-icon>
+              {% block btn_exit %} {% endblock %}      
+            </v-btn>
+            {% else %}
+            <v-btn class="pd-2 ml-4" elevation="8" rounded outlined title="Acceder" href="{{url_for('main.login')}}">
+              <v-icon class="md-2" left>mdi-account-circle</v-icon>
+              {% block btn_login %} {% endblock %}
+            </v-btn>
+            <v-btn class="success pd-2 ml-4" elevation="8" rounded title="Registrar Usuario" href="{{url_for('main.registro')}}">
+              <v-icon class="md-2" left>mdi-account-plus</v-icon>
+              {% block btn_signin %} {% endblock %}                
+            </v-btn>
+            {% endif %}
       </v-app-bar>
-      </v-container>
-      <v-main class="pt-0">
-        <v-container fluid>
-          <v-parallax height="600" src="{{ url_for('static', filename='img/portada.jpg') }}">
+      <v-main class="pt-8">
+        <v-parallax height="500" src="{{ url_for('static', filename='img/portada.jpg') }}">
           <v-row class="d-flex align-center" justify="center">
-            <v-col class="align-center text-center" cols="12">
+            <v-col class="align-center text-center">
               <h1 class="text-h2 font-weight-bold black--text mb-4">
                 Centara Grand Hotel 
               </h1>
               <h3 class="subheading white--text">
                 <div>
-                  Tu Hotel en la Costa
+                  Tu Hotel en la Costa, Decanso sin Limites
                 </div>
               </h3>
-              <h4 class="subheading white--text">
-                Decanso sin Limites
-              </h4>
               {% block contenido_1 %}
   
               {% endblock %}
             </v-col>
           </v-row>
-          </v-parallax>
-        </v-container>
-        <v-container fluid>
-          {% block contenido_2 %}
-  
-          {% endblock %}
-        </v-container>
-        <v-container fluid>
-          {% block contenido_3 %}
-  
-          {% endblock %}
-        </v-container>
+          <v-row class="d-flex align-center" justify="center">
+            <div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            </div>
+          </v-row>
+        </v-parallax>
+        {% block contenido_2 %}
 
-        <v-container fluid>
-          {% block contenido_4 %}
-  
-          {% endblock %}
-        </v-container>
+        {% endblock %}
 
-        <v-container fluid>
-          {% block contenido_5 %}
-  
-          {% endblock %}
-        </v-container>
+        {% block contenido_3 %}
 
+        {% endblock %}
+
+        {% block contenido_4 %}
+
+        {% endblock %}
+
+        {% block contenido_5 %}
+
+        {% endblock %}
       </v-main>
+
       <v-footer dark padless elevation="5">
         <v-card flat tile class="indigo lighten-1 white--text text-center flex">
           <v-card-text>
@@ -126,47 +117,45 @@
         </v-card>
       </v-footer>
     </v-app>
-
-
-      <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-      <script src="{{ url_for('static', filename='js/responses.js') }}"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script>
-        hot = new Vue({        
-          el: '#app_ht',
-          dial_reg: false,
-          vuetify: new Vuetify(),
-          data: () => ({
-            dialog_delete: false,
-            dialog_edit: false,
-            dialog: false,
-            drawer: null,
-            formularioreserva: true,
-            search: '',
-            //Lista_habitaciones : [],
-            headers_rooms: [
-              { text: 'Numero', value: "[1]", align: 'start', sortable: true, filterable: false,  width: 30, class: "amber darken-4"},
-              { text: 'Descripción', value: '[2]', align: 'start', width: 250, class: "amber darken-4" },
-              { text: 'Calificación', value: '[3]', align: 'center', width: 40, class: "amber darken-4" },
-              { text: 'Imagen', value: '[4]', align: 'center', class: "amber darken-4"},
-              { text: 'Precio', value: '[5]', align: 'end', class: "amber darken-4"}
-             ],
-            //Lista_habitaciones: ["{{rooms_list}}"],
-          }),
-          methods: {
-            validate () {
-              formularioreserva.form.validate()
-            },
-            reset () {
-              formularioreserva.$refs.form.reset()
-            },
-            resetValidation () {
-              formularioreserva.$refs.form.resetValidation()
-            },
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="{{ url_for('static', filename='js/responses.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      hot = new Vue({        
+        el: '#app_ht',
+        dial_reg: false,
+        vuetify: new Vuetify(),
+        data: () => ({
+          dialog_delete: false,
+          dialog_edit: false,
+          dialog: false,
+          drawer: null,
+          formularioreserva: true,
+          search: '',
+          //Lista_habitaciones : [],
+          headers_rooms: [
+            { text: 'Numero', value: "[1]", align: 'start', sortable: true, filterable: false,  width: 30, class: "amber darken-4"},
+            { text: 'Descripción', value: '[2]', align: 'start', width: 250, class: "amber darken-4" },
+            { text: 'Calificación', value: '[3]', align: 'center', width: 40, class: "amber darken-4" },
+            { text: 'Imagen', value: '[4]', align: 'center', class: "amber darken-4"},
+            { text: 'Precio', value: '[5]', align: 'end', class: "amber darken-4"}
+            ],
+          //Lista_habitaciones: ["{{rooms_list}}"],
+        }),
+        methods: {
+          validate () {
+            formularioreserva.form.validate()
           },
-        })
-      </script>
+          reset () {
+            formularioreserva.$refs.form.reset()
+          },
+          resetValidation () {
+            formularioreserva.$refs.form.resetValidation()
+          },
+        },
+      })
+    </script>
   </body>
 </html>
 

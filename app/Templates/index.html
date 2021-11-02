@@ -11,47 +11,53 @@
 {% block btn_exit %} Salir {% endblock %}
 
 {% block contenido_1 %}
-<template>
-  <v-container fluid>
-    <v-row class="d-flex align-center" justify="space-around" no-gutters>
-      <v-col>
-        <p></p>
-      </v-col>
+<v-container fluid>
+  <v-row class="d-flex align-center" justify="center" no-gutters>
+    <v-col>
+    </v-col>
+    <v-col>
       <v-col class="align-center">
         <v-card-text class="text-h4 white--text font-weight-bold">El Mejor Hotel de la Ciudad</v-card-text>
       </v-col>
-      <v-col>
-        <v-card class="align-center pa-2" width="320" elevation=20>
-          <v-card-text align="left">
-            <p class="text-subtitle-1 font-weight-bold">Consulta disponibilidad para tu descanso con nosotros</p>
-          </v-card-text>
-          <v-toolbar dense floating>
-            <v-text-field name="fecha_busqueda" type="date" label="Fecha Busqueda" id="fecha_busqueda" title="Buscar Disponibilidad" hide-details clearable></v-text-field>
-            <v-btn href="#seccion_disponibilidad" icon title="Buscar">
-              <v-icon>mdi-magnify</v-icon>
-            </v-btn>
-          </v-toolbar>
-            <v-btn class="align-center" color="amber darken-4" width="220" href="{{url_for('main.addReserva')}}" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
-          </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-</template>
+    </v-col>
+    <v-col>  
+      <v-card class="align-center pb-2" width="320" elevation=20>
+        <v-card-text class="text-subtitle-1 font-weight-bold">
+          Consulta disponibilidad para tu descanso con nosotros
+        </v-card-text>
+        <v-toolbar dense floating>
+          <v-text-field name="fecha_busqueda" type="date" label="Fecha Busqueda" id="fecha_busqueda" title="Buscar Disponibilidad" hide-details clearable></v-text-field>
+          <v-btn href="#seccion_disponibilidad" icon title="Buscar">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+        </v-toolbar>
+          <v-btn class="align-center" color="amber darken-4" width="220" href="{{url_for('main.addReserva')}}" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
+      </v-card>
+    </v-col>
+  </v-row>
+  <v-row class="d-flex align-center" justify="center">
+    <div>
+    <br>
+    <br>
+    <br>
+    </div>
+  </v-row>
+</v-container>
 {% endblock %}
 
 {% block contenido_2 %}
-<template>
+<v-container fluid>
   <v-row>
     <v-divider></v-divider>
   </v-row>
   
-  <v-row class="d-flex align-center" justify="space-around">
+  <v-row class="align-center text-center px-3 py-3" justify="center">
     <h2 class="justify">Podras Disfrutar de todo esto</h2>
   </v-row>
 
-  <v-row class="d-flex align-center" justify="space-around">
+  <v-row class="align-center py-1 px-1" no-gutters justify="center">
     <v-col cols="12" sm="6" md="4">
-      <v-card class="mx-auto" max-width="344">
+      <v-card class="mx-auto px-1 py-1" max-width="344">
         <v-img class="black--text align-end" height="200px" src="{{ url_for('static', filename='img/centro_convenciones.jpg') }}">
           <v-card-title>Centro de Convenciones</v-card-title>
         </v-img>
@@ -69,37 +75,37 @@
         <v-card-actions>
           <v-btn color="orange" text title="Compartir">Compartir</v-btn>
 
-          <v-btn color="orange" text title="Explorar">Explorar</v-btn>
+          <v-btn color="blue" text title="Explorar">Explorar</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
     <v-col>
-      <v-card class="mx-auto" max-width="344">
+      <v-card class="mx-auto px-1 py-1" max-width="344">
         <v-img class="black--text align-end" height="200px" src="{{ url_for('static', filename='img/habitacion.jpg') }}">
           <v-card-title>Habitaciones</v-card-title>
         </v-img>
 
         <v-card-subtitle class="pb-0">
-          Podras disfrutar de 40 habitaciones, 10 Suites y 2 Platino
+          Cuenta con 40 Habitaciones y 10 Suites
         </v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>Todas las habitaciones poseen todos los servicios</div>
+          <div>Con todos los servicios</div>
 
-          <div>Hay multipes acomodaciones, doble, sencilla, familias, para eventos especiales</div>
+          <div>Multiple acomodación, doble, sencilla, familiar y grupos</div>
         </v-card-text>
 
         <v-card-actions>
           <v-btn color="orange" text title="Compartir">Compartir</v-btn>
 
-          <v-btn color="orange" text title="Explorar">Explorar</v-btn>
+          <v-btn color="blue" text title="Explorar">Explorar</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
     <v-col>
-      <v-card class="mx-auto" max-width="344">
+      <v-card class="mx-auto px-1 py-1" max-width="344">
         <v-img class="white--text align-end" height="200px" src="{{ url_for('static', filename='img/playa-salgar.jpg') }}">
-          <v-card-title>Las PLayas</v-card-title>
+          <v-card-title>Las Playas</v-card-title>
         </v-img>
 
         <v-card-subtitle class="pb-0">
@@ -115,7 +121,7 @@
         <v-card-actions>
           <v-btn color="orange" text title="Compartir">Compartir</v-btn>
 
-          <v-btn color="orange" text title="Explorar">Explorar</v-btn>
+          <v-btn color="blue" text title="Explorar">Explorar</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -123,193 +129,195 @@
   <v-row>
     <v-divider></v-divider>
   </v-row>
-</template>
+</v-container>
 {% endblock %}
 
 {% block contenido_3 %}
-<v-row>
-  <v-divider></v-divider>
-</v-row>
-  
-<v-row id="seccion_reservas" class="d-flex align-center pt-5" justify="space-around">
-  <h2 class="justify">Los Mejores Precios para tu Descanso</h2>
-</v-row>
+<v-container fluid>
+  <v-row>
+    <v-divider></v-divider>
+  </v-row>
 
-<v-card elevation="10" loading="loading" class="mx-auto my-10" max-width="900">
-  <template slot="progress">
-    <v-progress-linear color="deep-purple" height="10" indeterminate title="Procesando"></v-progress-linear>
-  </template>
-  <v-row class="d-flex align-center py-2 pl-3 pr-2" justify="space-around" no-gutters>
-    <v-col>
-      <v-img position="center center" height="250" width="550" src="{{ url_for('static', filename='img/habitacion_01.jpg') }}"></v-img>
-    </v-col>
-    <v-col cols="12" sm="6" md="4">
-      <p class="text-subtitle-1 font-weight-bold pl-2">Quieres buscar una habitación para tu estadia en la ciudad</p>
-        <v-container class="grey lighten-5">
-          <v-row no-gutters>
-            <v-col >
-              <v-card class="pa-2" outlined tile max-width="200">
-                <div class="caption">* Cama doble</div>
-                <div class="caption">* Mini Bar</div>
-                <div class="caption">* Baño / Bañera</div>
-                <div class="caption">* Balcon</div>
-                <div class="caption">* Wifi</div>
+  <v-row id="seccion_reservas" class="align-center text-center px-3 py-3" justify="center">
+    <h2 class="justify">Los Mejores Precios para tu Descanso</h2>
+  </v-row>
+
+  <v-card class="mx-auto my-10" elevation="10" loading="loading" max-width="900">
+    <template slot="progress">
+      <v-progress-linear color="deep-purple" height="10" indeterminate title="Procesando"></v-progress-linear>
+    </template>
+    <v-row class="d-flex align-center py-2 pl-3 pr-2" justify="space-around" no-gutters>
+      <v-col>
+        <v-img position="center center" height="250" width="550" src="{{ url_for('static', filename='img/habitacion_01.jpg') }}"></v-img>
+      </v-col>
+      <v-col cols="12" sm="6" md="4">
+        <p class="text-subtitle-1 font-weight-bold pl-2">Quieres buscar una habitación para tu estadia en la ciudad</p>
+          <v-container class="grey lighten-5">
+            <v-row no-gutters>
+              <v-col >
+                <v-card class="pa-2" outlined tile max-width="200">
+                  <div class="caption">* Cama doble</div>
+                  <div class="caption">* Mini Bar</div>
+                  <div class="caption">* Baño / Bañera</div>
+                  <div class="caption">* Balcon</div>
+                  <div class="caption">* Wifi</div>
+                </v-card>
+              </v-col>
+              <v-col>
+                <v-card class="pa-2" outlined tile max-width="200">
+                  <div class="caption">* Desayuno Incluido</div>
+                  <div class="caption">* Room Service</div>
+                  <div class="caption">* Aire Acondicionado</div>
+                  <div class="caption">* Parqueadero</div>
+                  <div class="caption">* Television</div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
+      </v-col>
+    </v-row>
+
+    <v-container class="grey lighten-4 body-2" fluid>
+      <v-card-title>Reserva Tu Habitación</v-card-title>
+        <v-card-text>  
+          <v-row class="d-flex align-center py-2 px-2" justify="center" no-gutters>
+            <v-col class="align-center py-1 px-1">
+              <v-card class="mx-auto py-2" max-width="300" justify="space-around">
+                <v-rating :value="4.5" color="amber" half-increments readonly size="14"></v-rating>
+                <div class="grey--text ms-4"> Calificación 4.5 (413)</div>
               </v-card>
             </v-col>
-            <v-col>
-              <v-card class="pa-2" outlined tile max-width="200">
-                <div class="caption">* Desayuno Incluido</div>
-                <div class="caption">* Room Service</div>
-                <div class="caption">* Aire Acondicionado</div>
-                <div class="caption">* Parqueadero</div>
-                <div class="caption">* Television</div>
+
+            <v-col class="align-center py-1 px-1">
+              <v-card class="mx-auto py-2" max-width="230" justify="center">
+                <v-card-actions>
+                  <v-btn class="align-center" color="amber darken-4" width="200" href="{{url_for('main.addReserva')}}" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+
+            <v-col class="align-center py-1 px-1">
+              <v-card class="mx-auto py-2" max-width="230" justify="center">
+                <v-card-actions>
+                  <v-btn class="align-center" color="green darken-2 white--text" width="200" href="#seccion_comentarios" title="Bus Comentarios">Comentarios</v-btn>
+                </v-card-actions> 
               </v-card>
             </v-col>
           </v-row>
-        </v-container>
 
-    </v-col>
-  </v-row>
+          <v-row class="d-flex align-center py-2 px-2" justify="space-around" no-gutters>
+            <v-col>
+              <v-card-title class="font-weight-bold">Hay Habitaciones Disponibles</v-card-title>
+              <v-card-subtitle class="my-4 text-subtitle-1 font-weight-bold">$ 160,000 • Habitación, Diario</v-card-subtitle>
 
-  <v-container class="grey lighten-4 body-2" fluid>
-    <v-card-title>Reserva Tu Habitación</v-card-title>
-      <v-card-text>  
-        <v-row class="align-center py-2 px-2 mx-0" justify="space-around" no-gutters>
-          <v-col class="align-center py-1 px-1 mx-0" >
-            <v-card class="px-2 py-2" max-width="300">
-              <v-rating :value="4.5" color="amber" half-increments readonly size="14"></v-rating>
-              <div class="grey--text ms-4"> Calificación 4.5 (413)</div>
-            </v-card>
-          </v-col>
+            </v-col>
+            <v-col class="mx-auto" justify="space-around" no-gutters >
+              <div>La habitación incluye desayuno americano, se reciben varios medios de pago</div>
+            </v-col>
 
-          <v-col class="align-center py-1 px-1 mx-0" max-width="300">
-            <v-card class="px-2 py-2" max-width="300">
-              <v-card-actions>
-                <v-btn class="align-center" color="amber darken-4" width="220" href="{{url_for('main.addReserva')}}" @click="dialog = true" title="Has tu Reserva">Has tu Reserva</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-
-
-          <v-col class="align-center py-1 px-1 mx-0" max-width="300">
-            <v-card class="px-2 py-2" max-width="300">
-              <v-card-actions>
-                <v-btn class="align-center" color="green darken-2 white--text" width="220" href="#seccion_comentarios" title="Bus Comentarios">Comentarios</v-btn>
-              </v-card-actions> 
-            </v-card>
-          </v-col>
-        </v-row>
-
-        <v-row class="d-flex align-center py-2 px-2 mx-0" justify="space-around" no-gutters>
-          <v-col>
-            <v-card-title class="font-weight-bold">Hay Habitaciones Disponibles</v-card-title>
-            <v-card-subtitle class="my-4 text-subtitle-1 font-weight-bold">$ 160,000 • Habitación, Diario</v-card-subtitle>
-
-          </v-col>
-          <v-col class="mx-0" justify="space-around" no-gutters >
-            <div>La habitación incluye desayuno americano, se reciben varios medios de pago</div>
-          </v-col>
-
-        </v-row>
-        <v-divider class="mx-4"></v-divider>
-      </v-card-text>
-  </v-container>
-  
-</v-card>
+          </v-row>
+          <v-divider class="mx-4"></v-divider>
+        </v-card-text>
+    </v-container>
+    
+  </v-card>
+</v-container> 
 {% endblock %}
 
 {% block contenido_4 %}
-<v-row>
-  <v-divider></v-divider>
-</v-row>
-
-<v-row id="seccion_disponibilidad" class="d-flex align-center pt-5" justify="space-around">
-  <h2 class="justify">Aqui encontraras lo que buscas</h2>
-</v-row>
-
-<v-card elevation="10" class="mx-auto my-10">
+<v-container fluid>
   <v-row>
-    <v-container fluid>
-      <v-card class="mx-auto my-6" max-width="800">
-        <v-card-title>
-          Habitaciones Disponibles, Busca por precio o Número de habitación
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            click:prepend
-            label="Consultar Información"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title>
-        <v-data-table
-          :headers = "headers_rooms"
-          :items = "{{rooms_list}}"
-          :search = "search"
-          no-data
-          no-results
-        ></v-data-table>
-      </v-card>
-    </v-container>
+    <v-divider></v-divider>
   </v-row>
-</v-card>
+
+  <v-row id="seccion_disponibilidad" class="align-center text-center px-3 py-3" justify="center">
+    <h2 class="justify">Aqui encontraras lo que buscas</h2>
+  </v-row>
+  <v-row class="mx-auto py-1" justify="center" no-gutters>
+    <v-card class="mx-auto" elevation="10" justify="space-around">
+      <v-row>
+        <v-container fluid>
+          <v-card class="mx-auto my-6" max-width="800">
+            <v-card-title>
+              Habitaciones Disponibles, Busca por precio o Número de habitación
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                click:prepend
+                label="Consultar Información"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
+            <v-data-table
+              :headers = "headers_rooms"
+              :items = "{{rooms_list}}"
+              :search = "search"
+              no-data
+              no-results
+            ></v-data-table>
+          </v-card>
+        </v-container>
+      </v-row>
+    </v-card>
+  </v-row>
+</v-container> 
 {% endblock %}
 
 {% block contenido_5 %}
+<v-container fluid>
 <v-row>
   <v-divider></v-divider>
 </v-row>
 
-<v-row id="seccion_comentarios" class="d-flex align-center pt-5" justify="space-around">
-  <h2 class="justify">Comentarios</h2>
-</v-row>
-<v-row>
-
-<template>
-  {% for id in comments_list %}
-
-  <v-row class="d-flex align-center py-4 px-4 mx-0" no-gutters justify="space-around">
-    <v-divider></v-divider>
-    <v-card class="mx-auto" elevation="10" color="#7CB342" dark width="400">
-      <v-card-title>
-        <v-icon large left>mdi-comment-text-multiple-outline</v-icon>
-        <span class="text-h6 font-weight-light">Comentario del Huesped</span>
-      </v-card-title>
-
-      <v-card-text class="text-h5 font-weight-bold">
-        {{ id[3] }}
-      </v-card-text>
-
-      <v-card-actions>
-        <v-list-item class="grow">
-          <v-list-item-avatar color="grey darken-3">
-            <v-img
-              class="elevation-6"
-              alt=""
-              src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            ></v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ id[1] }}</v-list-item-title>
-          </v-list-item-content>
-
-          <v-row align="center" justify="end">
-            <v-icon class="mr-1" color="#E53935">mdi-heart</v-icon>
-            <span class="subheading mr-2">{{ id[4] }}</span>
-            <span class="mr-1">·</span>
-            <v-icon class="mr-1">mdi-share-variant</v-icon>
-            <span class="subheading">45</span>
-          </v-row>
-        </v-list-item>
-      </v-card-actions>
-    </v-card>
-    <v-divider></v-divider>
+  <v-row id="seccion_comentarios" class="align-center text-center px-3 py-3" justify="space-around">
+    <h2 class="justify">Comentarios</h2>
   </v-row>
+    <v-row no-gutters justify="center">
+      {% for id in comments_list %}
+      <v-row class="align-center py-2 px-2" no-gutters justify="center">
+          <v-divider></v-divider>
+            <v-card class="mx-auto" elevation="10" color="#7CB342" dark max-width="400">
+              <v-card-title>
+                <v-icon large left>mdi-comment-text-multiple-outline</v-icon>
+                <span class="text-h6 font-weight-light">Comentario del Huesped</span>
+              </v-card-title>
 
-  {% endfor %}
-</template> 
+              <v-card-text class="text-h5 font-weight-bold">
+                {{ id[3] }}
+              </v-card-text>
+
+              <v-card-actions>
+                <v-list-item class="grow">
+                  <v-list-item-avatar color="grey darken-3">
+                    <v-img
+                      class="elevation-6"
+                      alt=""
+                      src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                    ></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>{{ id[1] }}</v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-row align="center" justify="end">
+                    <v-icon class="mr-1" color="#E53935">mdi-heart</v-icon>
+                    <span class="subheading mr-2">{{ id[4] }}</span>
+                    <span class="mr-1">·</span>
+                    <v-icon class="mr-1">mdi-share-variant</v-icon>
+                    <span class="subheading">45</span>
+                  </v-row>
+                </v-list-item>
+              </v-card-actions>
+            </v-card>
+      </v-row>
+      <v-divider></v-divider>
+      {% endfor %}
+    </v-row>
+</v-container> 
 {% endblock %}
 
 {% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}

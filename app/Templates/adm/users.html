@@ -11,12 +11,12 @@
 
 {% block contenido_1 %}
 <v-row class="mx-auto py-2" justify="center">
-    <v-card class="align-center pt-2" height="250" width="750" elevation=15>
-    <v-card-title>Busqueda de información</v-card-title> 
+    <v-card class="align-center pt-1" height="250" width="750" elevation=15>
+    <v-card-title>Buscar de información</v-card-title> 
     <v-card-text>
         <v-row class="d-flex align-center pt-2" justify="space-around">
-            <v-col class="align-center px-2 py-2">
-                <v-card class="px-2 py-2" height="100">
+            <v-col class="align-center px-1">
+                <v-card class="px-1 py-1" height="100">
                     <v-row class="align-center pt-2" justify="space-around">
                         <v-col class="text-h4 white--text font-weight-bold">
                             <v-text-field
@@ -27,8 +27,8 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    <v-row class="align-center pt-2" justify="space-around">
-                        <v-col class="align-center py-1 px-1 mx-0 text-h4 white--text font-weight-bold">
+                    <v-row class="align-center pt-1" justify="space-around">
+                        <v-col class="align-center py-1 px-1 text-h4 white--text font-weight-bold">
                             <v-card-actions>
                                 <input type="hidden" id="table" value="users">
                                 <input type="hidden" id="route" value="/adm/users/">
@@ -44,7 +44,6 @@
         </v-card-text>
     </v-card>
 </v-row>
-
 {% endblock %}
 {% block contenido_2 %}
 <template>
@@ -91,8 +90,6 @@
             <v-divider></v-divider>
         </v-row>
 </template>
-
-
 {% endblock %}
 {% block text_footer_01 %} Todas las marcas comerciales y registradas que aparecen aqui, son propiedad de sus respectivos dueños. {% endblock %}
 {% block text_footer_02 %} Hotel Demo - Atencion sin Igual - Todos los derechos reservados.{% endblock %}

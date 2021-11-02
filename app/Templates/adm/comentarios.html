@@ -10,36 +10,40 @@
 {% block btn_exit %} Salir {% endblock %}
 
 {% block contenido_1 %}
-<v-card class="d-flex align-center pa-2" height="250px" width = "720px" elevation=15> 
+<v-row class="mx-auto py-2" justify="center">
+    <v-card class="align-center pt-1" height="250" width="750" elevation=15>
+    <v-card-title>Buscar de información</v-card-title> 
     <v-card-text>
-         <v-container>
-            <v-row class="d-flex align-center pt-3" justify="space-around">
-                <v-col class="px-2 py-2">
-                    <!--Contenerdor interno-->
-                    <v-card class="px-2 py-2" height="100px">
-                        <v-row class="d-flex align-center pt-3" justify="space-around">
-                              <v-col class="text-h4 white--text font-weight-bold">
-                                  <v-text-field
-                                      id="search"
-                                      append-icon="mdi-magnify"
-                                      label="Buscar"
-                                      clearable
-                                  ></v-text-field>
-                              </v-col>
-                              <v-col class="text-h4 white--text font-weight-bold">
-                                <v-card-actions>
-                                  <v-btn color="gray" text text title="Buscar" onclick=get_one() >Buscar</v-btn>
-                                  <v-btn color="gray" text text title="Buscar" onclick=clear_all()>Clear</v-btn>                                                                      
-                                  <v-btn elevation=8 color="green" onclick=get_data() >Mostrar todos</v-btn>
-                                </v-card-actions>
-                            </v-col>
-                        </v-row>
-                    </v-card>   
-                </v-col>
-            </v-row>
-        </v-container>
-    </v-card-text>
-</v-card>
+        <v-row class="d-flex align-center pt-2" justify="space-around">
+            <v-col class="align-center px-1">
+                <v-card class="px-1 py-1" height="100">
+                    <v-row class="align-center pt-2" justify="space-around">
+                        <v-col class="text-h4 white--text font-weight-bold">
+                            <v-text-field
+                                id="search"
+                                append-icon="mdi-magnify"
+                                label="Buscar comentarios"
+                                clearable
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row class="align-center pt-1" justify="space-around">
+                        <v-col class="align-center py-1 px-1 text-h4 white--text font-weight-bold">
+                            <v-card-actions>
+                                <input type="hidden" id="table" value="comments">
+                                <input type="hidden" id="route" value="/adm/comentarios/">
+                                <v-btn color="orange" elevation=8 text text title="Buscar" onclick="search()">Buscar</v-btn>
+                                <v-btn color="gray" elevation=8 text text title="Limpiar Todo" onclick="clear_all()">Limpiar</v-btn>                                                                      
+                                <v-btn color="green" elevation=8 title="Buscar Todo" onclick="search('all')" >Todos</v-btn>
+                            </v-card-actions>
+                        </v-col>
+                   </v-row>
+                </v-card>   
+            </v-col>
+        </v-row>
+        </v-card-text>
+    </v-card>
+</v-row>
 {% endblock %}
 {% block contenido_2 %}
 <template>

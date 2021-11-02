@@ -10,43 +10,50 @@
 {% block btn_exit %}Salir{% endblock %}
 {% block contenido_1 %}
 <v-container fluid>
-    <v-row class="d-flex align-center py-4 px-4 mx-0" justify="space-around" no-gutters>
-        <v-card class="pa-2" elevation=15>
-        <v-card-title>Control de Administración</v-card-title>
-
-            <v-card class="align-center mx-auto">
-                <v-row class="align-center mx-0" no-gutters>
+    <v-row class="mx-auto py-1" justify="center" no-gutters>
+        <v-card class="align-center pt-1" justify="center" elevation=15>
+        <v-card-title>Administración</v-card-title>
+            <v-card class="align-center py-1" justify="center" elevation=10>
+                <v-row class="d-flex align-center mx-0" justify="center" no-gutters>
                     <v-col class="align-center text-h4 white--text font-weight-bold">
                         {% if g.is_admin or g.is_moder %}
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/habitaciones" title="Administrar Habitaciones">
-                                <v-icon>mdi-bed-empty</v-icon>Habitaciones</v-btn>
+                            <v-btn color="indigo" outlined height="60" width="245" elevation="10" href="{{url_for('main.adm_habitaciones')}}" title="Administrar Habitaciones">
+                            <v-icon class="pr-2">mdi-bed-empty</v-icon>Habitaciones</v-btn>
                         </v-card-actions>
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/reservas" title="Administrar Reservas">
-                                <v-icon>mdi-room-service</v-icon>Reservas</v-btn>
+                            <v-btn color="indigo" outlined height="60" width="245" elevation="10" href="{{url_for('main.adm_reservas')}}" title="Administrar Reservas">
+                            <v-icon class="pr-9">mdi-room-service</v-icon>Reservas</v-btn>
                         </v-card-actions>
                         {% endif %}
                     </v-col>
-
                     <v-col class="align-center text-h4 white--text font-weight-bold">
                         {% if g.is_admin or g.is_moder %}
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/users" title="Administrar Seguridad">
-                                <v-icon>mdi-account-lock</v-icon>Seguridad</v-btn>
+                            <v-btn class="pr-2" color="indigo" outlined height="60" width="245" elevation="10" href="{{url_for('main.admin_users')}}" title="Administrar Seguridad">
+                            <v-icon class="pr-8">mdi-account-lock</v-icon>Seguridad</v-btn>
                         </v-card-actions>
                         {% endif %}
                         {% if g.is_admin or g.is_moder or g.is_free %}
                         <v-card-actions>
-                            <v-btn class="ma-2" elevation = "2" color="indigo" outlined height="60" width="270" elevation="10" href="/adm/comentarios" title="Administrar Comentarios">
-                                <v-icon>mdi-comment-text-multiple-outline</v-icon>Comentarios</v-btn>
+                            <v-btn color="indigo" outlined height="60" width="245" elevation="10" href="{{url_for('main.adm_comentarios')}}" title="Administrar Comentarios">
+                            <v-icon class="pr-2">mdi-comment-text-multiple-outline</v-icon>Comentarios</v-btn>
                         </v-card-actions>
                         {% endif %}
                     </v-col>  
                 </v-row>
             </v-card>
-
         </v-card>
+    </v-row>
+    <v-row class="d-flex align-center" justify="center">
+        <div>
+        <br>
+        <br>
+        <br>
+        </div>
+    </v-row>
+    <v-row>
+        <v-divider></v-divider> 
     </v-row>
 </v-container>
 {% endblock %}

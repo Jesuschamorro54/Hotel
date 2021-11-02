@@ -127,19 +127,13 @@ def dashboard():
     g.is_free = True if is_rol=='free' else False
     return render_template('dashboard.html')
 
-@main.route('/comments/')
-@login_required
-def comments():
-    comments = []
-    for id in controlador_hotel.consultar('comments'):
-        comments.append(list(id))
-    return render_template('comentarios.html', comments_list = comments)
-
 @main.route('/adm/comentarios/')
 @login_required
 @admin_required
 def adm_comentarios():
-    return render_template('/adm/comentarios.html')
+    for id in controlador_hotel.consultar('comments'):
+        comments.append(list(id))
+    return render_template('comentarios.html', comments_list = comments)
     
 @main.route('/adm/habitaciones/')
 @login_required
