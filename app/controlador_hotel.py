@@ -58,6 +58,27 @@ def consultar(table):
 
     return container
 
+# HABITACIONES
+def reserva(table):
+    sql = ""
+    conexion, cursor = DataBase.connect(d)
+    with cursor:
+        conexion.begin()
+
+# reservas -----
+        if table == "reservas":
+            sql = f"id, user_id, room_id, descriptions, solicitado, date_inicio, date_final, state, image from {table} WHERE state = 1"
+
+        elif sql != '':
+            cursor.execute(sql)
+            container = cursor.fetchall()
+            print(f"|R-DB - {table}|: ", container)
+        else:
+            print("---|SQL NULL|---")
+            container = ""
+
+    return container
+
 
 # BUSCAR UN REGISTRO UN REGISTRO
 def find(parameter, tp, table):

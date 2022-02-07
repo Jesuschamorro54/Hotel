@@ -15,6 +15,7 @@
         </v-col>
             
           <form name="formulariologin" submit="submit" method="POST">   
+            <v-col>
             <v-text-field
                 name="id"
                 solo
@@ -42,7 +43,7 @@
             required
             clearable
           ></v-text-field>
-          
+        
               <v-text-field
               name="Descripción"
               solo
@@ -92,6 +93,7 @@
               required
               clearable
             ></v-text-field>
+          </v-col>
               <v-divider class="py-3"></v-divider>
             <v-btn class="mr-4" type="submit" title="Acceder a la aplicación">Insertar</v-btn>
             <v-btn title="Salir del modulo" href="/">Cancelar</v-btn>
